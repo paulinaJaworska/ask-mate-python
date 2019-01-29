@@ -17,4 +17,4 @@ def prepate_data_for_questions_data(question_data):
     question_data.update({'id': next_id}, {"submission_time": submission_time})    # we can insert multiple items with update, add date generator
 
 
-def prepate_data_for_answerss_data(question_data)
+#def prepate_data_for_answerss_data(question_data)
