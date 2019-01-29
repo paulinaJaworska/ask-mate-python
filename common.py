@@ -3,7 +3,7 @@ import data_manager
 sample_data_question = 'sample_data/question.csv'
 
 # answer_data = data_manager.import_data(####)
-question_data = import_data(sample_data_question)
+question_data = data_manager.import_data(sample_data_question)
 
 def date_generator():
     time_stamp = time.time()
