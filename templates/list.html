@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<title>AskMate by DarPol</title>
+<body>
+
+<h1>AskMate</h1>
+<h2>by DarPol</h2>
+
+<table style="width:100%">
+    {% for item in questions %}
+  <tr>
+    <td> tutaj
+        <a href="{{ '/question/' + (item['id'] | string) }}">"{{item['title']}}
+     </td>
+    <td>{{item['message']}}</td>
+  </tr>
+  <tr>
+    <td>button</td>
+    <td>button</td>
+    <td>button</td>
+  </tr>
+  {% endfor %}
+</table>
