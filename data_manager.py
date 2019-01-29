@@ -12,28 +12,15 @@ def import_data(filename):
         return None
     else:
         with open(filename, 'r') as f:
-            result = csv.DictReader(f)  # spr co zwraca
+            read_dictionary = csv.DictReader(f)
+            result = []
+            for row in read_dictionary:
+                result.append(dict(row))
             return result
 
 
-def id_generator(filename):
-    exists = os.path.isfile(filename)
-    if not exists:
-        return 1
-    else:
-        with open(filename, 'r') as f:
-            result = csv.DictReader(f)
-            for row in result:
-                result = row["id"]
-            return result + 1
 
-
-def date_generator():
-    time_stamp = time.time()
-    return time_stamp
-
-
-def save_user_stories(filename, labels, some_data_do_add):
+def export_data(filename, labels, some_data_do_add):
     exists = os.path.isfile(filename)
     #next_id = id_generator()
     #story.update({'id': next_id})    # we can insert multiple items with update, add date generator
@@ -44,8 +31,4 @@ def save_user_stories(filename, labels, some_data_do_add):
         writer.writerow(some_data_to_add)
 
 
-def prepate_data_for_questions_data(question_data):
-    next_id = id_generator()
-    submission_time = date_generator()
-
-    question_data.update({'id': next_id}, {"submission_time": submission_time})    # we can insert multiple items with update, add date generator
+#  print(import_data("sample_data/question.csv"))
