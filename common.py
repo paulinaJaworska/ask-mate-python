@@ -90,3 +90,6 @@ def get_answers_by_question_id(_id):
         if item['question_id'] == _id:
             answers.append(item)
     return answers
+
+def save_new_question(form):
+    return None

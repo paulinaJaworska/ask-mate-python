@@ -20,6 +20,19 @@ def question_page(question_id):
     return render_template('question.html', question = question, answers = answers)
 
 
+@app.route("/add-question", methods=['GET'])
+def new_question():
+    return render_template('new_question.html')
+
+
+@app.route("/add-question", methods=['POST'])
+def post_new_question():
+    form = request.form
+    common.save_new_question(form)
+    id = common.last_question_id
+    return redirect("/question/<id>")
+
+
 if __name__ == "__main__":
     app.run(debug=True,
             port = 5000)
