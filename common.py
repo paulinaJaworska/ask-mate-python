@@ -17,7 +17,8 @@ answer_data = data_manager.import_data(sample_data_answer)
 ### SORTING  ###
 def sort_list_of_dict(list_of_dictionaries, sort_by, order):
     '''
-    Sorts list of dictionaies by given parameter in ascending or descending order.
+    Sdef get_row_by_id():
+    passorts list of dictionaies by given parameter in ascending or descending order.
     :param list_of_dictionaries:
     :param sort_by: key by which we want to sort by
     :param order: boolean (True or False)
@@ -28,9 +29,11 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
 
 
 ### Pulling from database  ###
-
-def get_row_by_id():
-    pass
+def get_question_by_id(_id):
+    _id = str(_id)
+    for item in question_data:
+        if item['id'] == _id:
+            return item
 
 
 
