@@ -30,6 +30,7 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
 ### Pulling from database  ###
 
 def get_row_by_id():
+    pass
 
 
 
