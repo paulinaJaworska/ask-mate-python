@@ -5,17 +5,6 @@ question_labels = ["id", "submission_time", "view_number", "vote_number", "title
 answer_labels = ["id", "submission_time", "vote_number", "question_id", "message", "image"]
 # parameters to call the import data: filename = "data/answers.csv" or filename = "data/questions.csv"
 
-
-sample_data_question = 'sample_data/question.csv'
-sample_data_answer = 'sample_data/answer.csv'
-
-###  FUNCTIONS READING CSV FILES AND   ###
-not_sorted_question_data = data_manager.import_data(sample_data_question)
-question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True )
-
-answer_data = data_manager.import_data(sample_data_answer)
-
-
 ### SORTING  ###
 def sort_list_of_dict(list_of_dictionaries, sort_by, order):
     '''
@@ -30,18 +19,36 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
 
 
 
+
+sample_data_question = 'sample_data/question.csv'
+sample_data_answer = 'sample_data/answer.csv'
+
+###  FUNCTIONS READING CSV FILES AND   ###
+not_sorted_question_data = data_manager.import_data(sample_data_question)
+question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True )
+
+answer_data = data_manager.import_data(sample_data_answer)
+
+
+
 ### Pulling from database  ###
-<<<<<<< HEAD
 def get_question_by_id(_id):
     _id = str(_id)
     for item in question_data:
         if item['id'] == _id:
             return item
-=======
 
-def get_row_by_id(list_of_dictionaries, specified_id):
-    for row in list_of_dictionaries:
->>>>>>> 04cd94ae61387fd88cb7bea6fc6da0f249f1fa4d
+
+
+def get_answers_by_question_id(_id):
+    _id = str(_id)
+    answers = []
+    for item in answer_data:
+        if item['question_id'] == _id:
+            answers.append(item)
+    return answers
+
+
 
 
 
