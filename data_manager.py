@@ -1,9 +1,8 @@
 import csv
 import os
-import time
 
-question_labels = ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]
-answer_labels = ["id", "submission_time", "vote_number", "question_id", "message", "image"]
+question_labels = ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]  # delete during refactor
+answer_labels = ["id", "submission_time", "vote_number", "question_id", "message", "image"]   # delete during refactor
 # parameters to call the import data: filename = "data/answers.csv" or filename = "data/questions.csv"
 
 def import_data(filename):
@@ -19,11 +18,8 @@ def import_data(filename):
             return result
 
 
-
 def export_data(filename, labels, some_data_do_add):
     exists = os.path.isfile(filename)
-    #next_id = id_generator()
-    #story.update({'id': next_id})    # we can insert multiple items with update, add date generator
     with open(filename, "a+") as f:
         writer = csv.DictWriter(f, fieldnames=labels, delimiter=',')
         if not exists:
