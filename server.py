@@ -27,7 +27,8 @@ def new_question():
 
 @app.route("/add-question", methods=['POST'])
 def post_new_question():
-    form = request.form
+    #form = request.form
+    form = request.form.to_dict()
     common.save_new_question(form)
     id = common.last_question_id
     return redirect("/question/<id>")

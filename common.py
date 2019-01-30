@@ -1,13 +1,15 @@
 import data_manager
-
+import os
+import csv
+import time
 
 question_labels = ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]
 answer_labels = ["id", "submission_time", "vote_number", "question_id", "message", "image"]
 # parameters to call the import data: filename = "data/answers.csv" or filename = "data/questions.csv"
 
 
-sample_data_question = 'sample_data/question.csv'
-sample_data_answer = 'sample_data/answer.csv'
+question_file = 'sample_data/question.csv'
+answer_file = 'sample_data/answer.csv'
 last_question_id = data_manager.get_last_question_id()
 print (last_question_id)
 
@@ -25,11 +27,11 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
     return sorted(list_of_dictionaries, key=lambda i: i[str(sort_by)], reverse=order)
 
 
-###  FUNCTIONS READING CSV FILES AND   ###
-not_sorted_question_data = data_manager.import_data(sample_data_question)
+###  FUNCTIONS READING CSV FILES AND   ###sample
+not_sorted_question_data = data_manager.import_data(question_file)
 question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True )
 
-answer_data = data_manager.import_data(sample_data_answer)
+answer_data = data_manager.import_data(answer_file)
 
 
 
@@ -48,7 +50,7 @@ def id_generator(filename):
             result = csv.DictReader(f)
             for row in result:
                 result = row["id"]
-            return result + 1
+            return int(result) + 1
 
 def date_generator():
     time_stamp = time.time()
@@ -61,7 +63,8 @@ def prepare_data_for_questions_data(question_data_from_form):
     :param question_data_from_form: dictionary
     :return: dictionary
     """
-    next_id = id_generator()
+
+    next_id = id_generator('sample_data/question.csv')
     submission_time = date_generator()
     view_number = "not implemented"
     vote_number = "not implemented"
@@ -71,11 +74,11 @@ def prepare_data_for_questions_data(question_data_from_form):
     question_data_from_form.update(generated_automatically)
     return question_data_from_form
 
-
+'''
 def prepare_answer_to_be_saved_in_csv(question_data):  # to be finished
     next_id = id_generator()
     submission_time = date_generator()
-
+'''
 def get_question_by_id(_id):
     _id = str(_id)
     for item in question_data:
@@ -91,10 +94,14 @@ def get_answers_by_question_id(_id):
             answers.append(item)
     return answers
 
-def save_new_question(form):
-    return None
+
 
 # !!! Function that should be used to save question in the csv file.
-def save_guestion_to_csv(question_data):
-    some_data_to_add = prepare_answer_to_be_saved_in_csv(question_data)
-    data_manger.export_data(sample_data_question, question_labels, some_data_to_add)
+def save_new_question(question_data):
+    global question_labels
+    global question_file
+    print (question_data)
+    filled_question_data = prepare_data_for_questions_data(question_data)
+    #used to add id and time to dictionary
+    data_manager.export_data(question_file, question_labels, filled_question_data)
+    
