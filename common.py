@@ -10,7 +10,9 @@ sample_data_question = 'sample_data/question.csv'
 sample_data_answer = 'sample_data/answer.csv'
 
 ###  FUNCTIONS READING CSV FILES AND   ###
-question_data = data_manager.import_data(sample_data_question)
+not_sorted_question_data = data_manager.import_data(sample_data_question)
+question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True )
+
 answer_data = data_manager.import_data(sample_data_answer)
 
 
@@ -20,17 +22,17 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
     Sorts list of dictionaies by given parameter in ascending or descending order.
     :param list_of_dictionaries:
     :param sort_by: key by which we want to sort by
-    :param order: boolean (True or False)
+    :param order: boolean (True or False)  True = descending
     :return: sorted list of dicts
     '''
-    sorted(list_of_dictionaries, key=lambda i: i[str(sort_by)], reverse=order)
+    return sorted(list_of_dictionaries, key=lambda i: i[str(sort_by)], reverse=order)
 
 
 
 ### Pulling from database  ###
 
-def get_row_by_id():
-    pass
+def get_row_by_id(list_of_dictionaries, specified_id):
+    for row in list_of_dictionaries:
 
 
 
