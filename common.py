@@ -9,6 +9,7 @@ answer_labels = ["id", "submission_time", "vote_number", "question_id", "message
 sample_data_question = 'sample_data/question.csv'
 sample_data_answer = 'sample_data/answer.csv'
 last_question_id = data_manager.get_last_question_id()
+print (last_question_id)
 
 
 
@@ -89,6 +90,9 @@ def get_answers_by_question_id(_id):
         if item['question_id'] == _id:
             answers.append(item)
     return answers
+
+def save_new_question(form):
+    return None
 
 # !!! Function that should be used to save question in the csv file.
 def save_guestion_to_csv(question_data):
