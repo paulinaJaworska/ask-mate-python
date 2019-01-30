@@ -31,9 +31,6 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
 
 ### Pulling from database  ###
 
-def get_row_by_id(list_of_dictionaries, specified_id):
-    for row in list_of_dictionaries:
-
 
 
 ###   WRITING TO CSV   ###
@@ -54,21 +51,24 @@ def date_generator():
     return int(time_stamp)
 
 
-def prepate_data_for_questions_data(question_data_from_form):
+def prepare_data_for_questions_data(question_data_from_form):
+    """
+    Append necessary data, which is not enter by user, to data from question form filled by user.
+    :param question_data_from_form: dictionary
+    :return: dictionary
+    """
     next_id = id_generator()
     submission_time = date_generator()
-    view_number = "jeszcze_nic"
-    question_data_from_form.update({'id': next_id}, {"submission_time": submission_time}, {"view_number": view_number})
+    view_number = "not implemented"
+    vote_number = "not implemented"
+    image = "no image"
+    generated_automatically = {'id': next_id, "submission_time": submission_time, "view_number": view_number,
+                               "vote_number": vote_number, "image": image}
+    question_data_from_form.update(generated_automatically)
+    return question_data_from_form
 
 
-
-def prepate_data_for_questions_data(question_data):
+def prepare_answer_to_be_saved_in_csv(question_data):
     next_id = id_generator()
     submission_time = date_generator()
 
-    question_data.update({'id': next_id}, {
-        "submission_time": submission_time})  # we can insert multiple items with update, add date generator
-
-def prepate_data_for_answerss_data(question_data):
-    next_id = id_generator()
-    submission_time = date_generator()
