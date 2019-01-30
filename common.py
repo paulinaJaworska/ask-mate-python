@@ -8,12 +8,9 @@ answer_labels = ["id", "submission_time", "vote_number", "question_id", "message
 
 sample_data_question = 'sample_data/question.csv'
 sample_data_answer = 'sample_data/answer.csv'
+last_question_id = data_manager.get_last_question_id()
+print (last_question_id)
 
-###  FUNCTIONS READING CSV FILES AND   ###
-not_sorted_question_data = data_manager.import_data(sample_data_question)
-question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True )
-
-answer_data = data_manager.import_data(sample_data_answer)
 
 
 ### SORTING  ###
@@ -26,6 +23,13 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
     :return: sorted list of dicts
     '''
     return sorted(list_of_dictionaries, key=lambda i: i[str(sort_by)], reverse=order)
+
+
+###  FUNCTIONS READING CSV FILES AND   ###
+not_sorted_question_data = data_manager.import_data(sample_data_question)
+question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True )
+
+answer_data = data_manager.import_data(sample_data_answer)
 
 
 
@@ -72,3 +76,17 @@ def prepare_answer_to_be_saved_in_csv(question_data):
     next_id = id_generator()
     submission_time = date_generator()
 
+def get_question_by_id(_id):
+    _id = str(_id)
+    for item in question_data:
+        if item['id'] == _id:
+            return item
+
+
+def get_answers_by_question_id(_id):
+    _id = str(_id)
+    answers = []
+    for item in answer_data:
+        if item['question_id'] == _id:
+            answers.append(item)
+    return answers

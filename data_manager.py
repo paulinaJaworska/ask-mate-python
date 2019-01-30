@@ -22,3 +22,11 @@ def export_data(filename, labels, some_data_to_add):
         if not exists:
             writer.writeheader()
         writer.writerow(some_data_to_add)
+
+def get_last_question_id():
+    questions = import_data('sample_data/question.csv')
+    for item in questions:
+        a = item['id']
+    return a
+
+
