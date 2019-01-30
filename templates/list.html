@@ -6,17 +6,22 @@
 <h1>AskMate</h1>
 <h2>by DarPol</h2>
 
-
 <form action="/add-question">
     <button>Ask question</button></form>
-    {% for item in questions %}
-  <ul>
-    <li> tutaj
-        <a href="{{ '/question/' + (item['id'] | string) }}">"{{item['title']}}
-        </li>
-    <li>{{item['message']}}</li>
-  </ul>
 
+
+    
+    {% for item in questions %}
+<div id='question'>
+
+  <ul>
+    <br>
+    <li> 
+        <a href="{{ '/question/' + (item['id'] | string) }}">"{{item['title']}}</a>
+        </li>
+    <li>{{ item['message'] }}</li>
+  </ul>
+</div>
 {% endfor %}
 </body>
 </html>
