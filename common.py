@@ -10,10 +10,10 @@ answer_labels = ["id", "submission_time", "vote_number", "question_id", "message
 
 question_file = 'sample_data/question.csv'
 answer_file = 'sample_data/answer.csv'
-last_question_id = data_manager.get_last_question_id()
-print (last_question_id)
 
 
+def last_question_id():
+    return data_manager.get_last_question_id()
 
 ### SORTING  ###
 def sort_list_of_dict(list_of_dictionaries, sort_by, order):
@@ -28,8 +28,9 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
 
 
 ###  FUNCTIONS READING CSV FILES AND   ###sample
+
 not_sorted_question_data = data_manager.import_data(question_file)
-question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True )
+question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True)
 
 answer_data = data_manager.import_data(answer_file)
 
