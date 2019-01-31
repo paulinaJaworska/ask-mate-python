@@ -17,6 +17,8 @@ def index():
 def question_page(question_id):
     question = common.get_question_by_id(str(question_id))
     answers = common.get_answers_by_question_id(str(question_id))
+    print(question)
+    print(answers)
     return render_template('question.html', question=question, answers=answers)
 
 
@@ -33,11 +35,13 @@ def post_new_question():
     return redirect("/question/%s" % identity)
 
 
-@app.route("/question/<question_id>/new-answer")
+@app.route("/<question_id>/new-answer", methods=['GET'])
 def post_new_answer(question_id):
     question = common.get_question_by_id(str(question_id))
     answers = common.get_answers_by_question_id(str(question_id))
-    return render_template('question_add_answer', question=question, answers=answers)
+    return render_template('new_answer.html', question=question, answers=answers)
+
+
 
 
 if __name__ == "__main__":
