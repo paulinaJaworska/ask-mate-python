@@ -10,20 +10,18 @@
         </div>
         <br>
 
-        <form action="/{{ question['id'] }}/new-answer">
-            <button>Answer</button>
+        <form>
+            <textarea name="answer_text" rows="5" cols="20">Your answer here...</textarea>
         </form>
-        <form action="/question/{{ question['id'] }}/delete">
-            <button>Delete</button>
-        </form>
+
         <br>
         {% for answer in answers%}
         <div style="background-color:magenta;color:white;padding:20px;">
-            
+
             <p>{{ answer['message'] }}</p>
         </div>
-        <br>   
+        <br>
             {% endfor%}
-        
+
     </body>
 </html>
