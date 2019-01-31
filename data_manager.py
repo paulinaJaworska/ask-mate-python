@@ -23,10 +23,16 @@ def export_data(filename, labels, some_data_to_add):
             writer.writeheader()
         writer.writerow(some_data_to_add)
 
+
+def update_data(filename, labels, new_data):
+    with open(filename, "w+") as f:
+        writer = csv.DictWriter(f, fieldnames=labels, delimiter=',')
+        writer.writeheader()
+        for item in new_data:
+            writer.writerow(item)
+
 def get_last_question_id():
     questions = import_data('sample_data/question.csv')
     for item in questions:
         a = item['id']
     return a
-
-

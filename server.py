@@ -17,8 +17,6 @@ def index():
 def question_page(question_id):
     question = common.get_question_by_id(str(question_id))
     answers = common.get_answers_by_question_id(str(question_id))
-    print(question)
-    print(answers)
     return render_template('question.html', question=question, answers=answers)
 
 
