@@ -17,8 +17,6 @@ def index():
 def question_page(question_id):
     question = common.get_question_by_id(str(question_id))
     answers = common.get_answers_by_question_id(str(question_id))
-    print(question)
-    print(answers)
     return render_template('question.html', question=question, answers=answers)
 
 
@@ -40,6 +38,17 @@ def post_new_answer(question_id):
     question = common.get_question_by_id(str(question_id))
     answers = common.get_answers_by_question_id(str(question_id))
     return render_template('new_answer.html', question=question, answers=answers)
+
+
+@app.route("/<question_id>/new-answer", methods=['POST'])
+def save_new_answer(question_id):
+    form = request.form.to_dict()
+    print(form)
+    #common.prepare_data_for_answer_data(form, question_id)
+
+    common.save_answer(form)
+    return redirect('/question/%s' % question_id)
+
 
 
 
