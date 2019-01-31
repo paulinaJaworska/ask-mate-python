@@ -104,4 +104,36 @@ def save_new_question(question_data):
     filled_question_data = prepare_data_for_questions_data(question_data)
     #used to add id and time to dictionary
     data_manager.export_data(question_file, question_labels, filled_question_data)
-    
+
+def delete_answers_related_to_question(question_id, filename):
+    '''
+    Deletes answers retated to question from csv
+    :param question_id:
+    :param filename:
+    :return: nothing
+    '''
+    answers = import_data(filename)
+    for answer in answers:
+        if answer["question_id"] == question_id:
+            answers.remove(answer)
+        global answer_labels
+    update_data(filename, answer_data, answers)
+
+
+def delete_question(id_, filename):
+    '''
+    1. Delete question form list of dictionaries
+    2. write it to file
+    3. Delete answers retated to question from csv
+    :param id_: str - id of question record to be deleted
+    :param filename: str
+    :return: nothing
+    '''
+    questions = import_data(filename)
+    for question in questions:
+        if question["id"] in id_:
+            questions.remove(question)
+    global question_labels
+    update_data(filename, question_labels, questions)
+    delete_answers_related_to_question(id_, filename)
+

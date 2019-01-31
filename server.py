@@ -10,7 +10,16 @@ app = Flask(__name__)
 @app.route('/list')
 def index():
     questions= common.question_data
-    return render_template('list.html', questions =questions)
+    return render_template('list.html', questions=questions)
+
+'''
+@app.route('/')
+@app.route('/list')    # Work in progress
+def sorting():
+    select = request.form.get('sort_by')
+    if select == "tiitle
+    return render_template('list.html', sort_by=sort_by)
+'''
 
 
 @app.route('/question/<question_id>')
