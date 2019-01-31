@@ -13,7 +13,9 @@
         <form action="question/{{ question['id'] }}/new-answer">
             <button>Answer</button>
         </form>
-
+        <form action="/question/{{ question['id'] }}/delete">
+            <button>Delete</button>
+        </form>
         <br>
         {% for answer in answers%}
         <div style="background-color:magenta;color:white;padding:20px;">

@@ -39,6 +39,10 @@ def post_new_answer(question_id):
     answers = common.get_answers_by_question_id(str(question_id))
     return render_template('question_add_answer', question=question, answers=answers)
 
+@app.route('/question/<question_id>/delete')
+def delete_question(question_id):
+    common.delete_question(question_id)
+    redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True,

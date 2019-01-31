@@ -102,6 +102,10 @@ def get_answers_by_question_id(_id):
             answers.append(item)
     return answers
 
+def delete_question(_id):
+    data_manager.delete_question(_id)
+    data_manager.delete_answer_by_question_id(_id)
+
 
 
 # !!! Function that should be used to save question in the csv file.
