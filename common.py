@@ -3,13 +3,13 @@ import os
 import csv
 import time
 
-question_labels = ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]
+QUESTION_LABELS = ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]
 answer_labels = ["id", "submission_time", "vote_number", "question_id", "message", "image"]
 # parameters to call the import data: filename = "data/answers.csv" or filename = "data/questions.csv"
 
 
-question_file = 'sample_data/question.csv'
-answer_file = 'sample_data/answer.csv'
+QUESTION_FILE = 'sample_data/question.csv'
+ANSWER_FILE = 'sample_data/answer.csv'
 
 
 def last_question_id():
@@ -29,11 +29,15 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
 
 ###  FUNCTIONS READING CSV FILES AND   ###sample
 
-not_sorted_question_data = data_manager.import_data(question_file)
-question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True)
 
-answer_data = data_manager.import_data(answer_file)
 
+answer_data = data_manager.import_data(ANSWER_FILE)
+
+def get_question_data():
+    global QUESTION_FILE
+    not_sorted_question_data = data_manager.import_data(QUESTION_FILE)
+    question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True)
+    return question_data
 
 
 ### Pulling from database  ###
@@ -80,8 +84,11 @@ def prepare_answer_to_be_saved_in_csv(question_data):  # to be finished
     next_id = id_generator()
     submission_time = date_generator()
 '''
+
+
 def get_question_by_id(_id):
     _id = str(_id)
+    question_data = get_question_data()
     for item in question_data:
         if item['id'] == _id:
             return item
@@ -99,10 +106,10 @@ def get_answers_by_question_id(_id):
 
 # !!! Function that should be used to save question in the csv file.
 def save_new_question(question_data):
-    global question_labels
-    global question_file
+    global QUESTION_LABELS
+    global QUESTION_FILE
     print (question_data)
     filled_question_data = prepare_data_for_questions_data(question_data)
     #used to add id and time to dictionary
-    data_manager.export_data(question_file, question_labels, filled_question_data)
+    data_manager.export_data(QUESTION_FILE, QUESTION_LABELS, filled_question_data)
     
