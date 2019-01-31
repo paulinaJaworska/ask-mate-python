@@ -25,6 +25,11 @@ def sort_questions(sort_by, order):
     :param order: boolean (True or False)  True = descending
     :return: sorted list of dicts
     '''
+    if order == "desc":
+        order = True
+    else: 
+        order = False
+
     global QUESTION_FILE
     list_of_dictionaries = data_manager.import_data(QUESTION_FILE)
     return sorted(list_of_dictionaries, key=lambda i: i[str(sort_by)], reverse=order)
