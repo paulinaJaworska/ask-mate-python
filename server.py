@@ -52,6 +52,19 @@ def save_new_answer(question_id):
 
 
 
+@app.route('/question/<question_id>/delete')
+def delete_question(question_id):
+    common.delete_question(question_id)
+    redirect('/')
+
+
+@app.route("/sorted/")
+def sorted_condition():
+    sort_by = request.args.get('condition')
+    order = request.args.get('order')
+    questions = common.sort_questions(sort_by, order)
+    return render_template('list.html', questions = questions)
+
 
 if __name__ == "__main__":
     app.run(debug=True,
