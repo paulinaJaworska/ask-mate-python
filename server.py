@@ -48,6 +48,15 @@ def delete_question(question_id):
     common.delete_question(question_id)
     redirect('/')
 
+
+@app.route("/sorted/")
+def sorted_condition():
+    sort_by = request.args.get('condition')
+    order = request.args.get('order')
+    questions = sort_questions(sort_by, order)
+    return render_template('list.html', questions = questions)
+
+
 if __name__ == "__main__":
     app.run(debug=True,
             port=5000)
