@@ -31,6 +31,7 @@ def update_data(filename, labels, new_data):
         for item in new_data:
             writer.writerow(item)
 
+
 def get_last_question_id():
     questions = import_data('sample_data/question.csv')
     for item in questions:
