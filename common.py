@@ -83,13 +83,14 @@ def prepare_data_for_questions_data(question_data_from_form):
     return question_data_from_form
 
 
-def prepare_data_for_answer_data(answer_data_form_form, question_id):
+def prepare_data_for_answer_data(answer_data_from_form, question_id):
     # "id", "submission_time", "vote_number", "question_id", "message", "image"
     next_id = id_generator('sample_data/answer.csv')
     submission_time = date_generator()
     vote_number = "not implemented"
     image = "no image"
-    message = list(answer_data_form_form.values())
+    message = list(answer_data_from_form.values())
+    print(message[0])
 
     generated_automatically = {'id': next_id, "submission_time": submission_time,
                                "vote_number": vote_number, "question_id": question_id,
