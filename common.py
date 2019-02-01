@@ -4,7 +4,7 @@ import csv
 import time
 
 QUESTION_LABELS = ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]
-answer_labels = ["id", "submission_time", "vote_number", "question_id", "message", "image"]
+ANSWER_LABELS = ["id", "submission_time", "vote_number", "question_id", "message", "image"]
 # parameters to call the import data: filename = "data/answers.csv" or filename = "data/questions.csv"
 
 
@@ -86,6 +86,18 @@ def prepare_data_for_questions_data(question_data_from_form):
     return question_data_from_form
 
 
+def prepare_data_for_answer_data(answer_data_from_form):
+    next_id = id_generator('sample_data/answer.csv')
+    submission_time = date_generator()
+    view_number = "not implemented"
+    vote_number = "not implemented"
+    image = "no image"
+    generated_automatically = {'id': next_id, "submission_time": submission_time, "view_number": view_number,
+                               "vote_number": vote_number, "image": image}
+    question_data_from_form.update(generated_automatically)
+    return question_data_from_form
+
+
 '''
 def prepare_answer_to_be_saved_in_csv(question_data):  # to be finished
     next_id = id_generator()
@@ -125,6 +137,16 @@ def save_new_question(question_data):
     data_manager.export_data(QUESTION_FILE, QUESTION_LABELS, filled_question_data)
 
  #   data_manager.export_data(question_file, question_labels, filled_question_data)
+
+
+def save_new_answer(question_id, form):
+    global ANSWER_LABELS
+    global ANSWER_FILE
+    filled_answer_data = prepare_data_for_answer_data(form)
+    # used to add id and time to dictionary
+    data_manager.export_data(QUESTION_FILE, QUESTION_LABELS, filled_question_data)
+    
+
 
 
 def delete_answers_related_to_question(question_id):

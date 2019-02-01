@@ -40,7 +40,7 @@ def post_new_answer(question_id):
     return render_template('new_answer.html', question=question, answers=answers)
 
 
-@app.route("/<question_id>/new-answer", methods=['POST'])
+@app.route("/question/<question_id>/new-answer", methods=['POST'])
 def save_new_answer(question_id):
     form = request.form.to_dict()
     print(form)
@@ -55,7 +55,7 @@ def save_new_answer(question_id):
 @app.route('/question/<question_id>/delete')
 def delete_question(question_id):
     common.delete_question(question_id)
-    redirect('/')
+    return redirect('/')
 
 
 @app.route("/sorted/")
