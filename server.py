@@ -62,7 +62,7 @@ def delete_question(question_id):
 def sorted_condition():
     sort_by = request.args.get('condition')
     order = request.args.get('order')
-    questions = common.sort_questions(sort_by, order)
+    questions = sort_questions(sort_by, order)
     return render_template('list.html', questions = questions)
 
 

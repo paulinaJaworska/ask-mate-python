@@ -15,8 +15,9 @@ ANSWER_FILE = 'sample_data/answer.csv'
 def last_question_id():
     return data_manager.get_last_question_id()
 
+
 ### SORTING  ###
-def sort_list_of_dict(list_of_dictionaries, sort_by, order):
+def sort_questions(sort_by, order):
     '''
     Sorts list of dictionaies by given parameter in ascending or descending order.
     :param list_of_dictionaries:
@@ -24,24 +25,23 @@ def sort_list_of_dict(list_of_dictionaries, sort_by, order):
     :param order: boolean (True or False)  True = descending
     :return: sorted list of dicts
     '''
+    global QUESTION_FILE
+    list_of_dictionaries = data_manager.import_data(QUESTION_FILE)
     return sorted(list_of_dictionaries, key=lambda i: i[str(sort_by)], reverse=order)
 
 
 ###  FUNCTIONS READING CSV FILES AND   ###sample
 
 
-
 answer_data = data_manager.import_data(ANSWER_FILE)
 
+
 def get_question_data():
-    global QUESTION_FILE
-    not_sorted_question_data = data_manager.import_data(QUESTION_FILE)
-    question_data = sort_list_of_dict(not_sorted_question_data, "submission_time", True)
+    question_data = sort_questions("submission_time", True)
     return question_data
 
 
 ### Pulling from database  ###
-
 
 
 ###   WRITING TO CSV   ###
@@ -56,6 +56,7 @@ def id_generator(filename):
             for row in result:
                 result = row["id"]
             return int(result) + 1
+
 
 def date_generator():
     time_stamp = time.time()
@@ -78,6 +79,7 @@ def prepare_data_for_questions_data(question_data_from_form):
                                "vote_number": vote_number, "image": image}
     question_data_from_form.update(generated_automatically)
     return question_data_from_form
+
 
 '''
 def prepare_answer_to_be_saved_in_csv(question_data):  # to be finished
@@ -103,6 +105,10 @@ def get_answers_by_question_id(_id):
     return answers
 
 
+def delete_question(_id):
+    data_manager.delete_question(_id)
+    data_manager.delete_answer_by_question_id(_id)
+
 
 # !!! Function that should be used to save question in the csv file.
 def save_new_question(question_data):
@@ -110,6 +116,40 @@ def save_new_question(question_data):
     global QUESTION_FILE
     print (question_data)
     filled_question_data = prepare_data_for_questions_data(question_data)
-    #used to add id and time to dictionary
+    # used to add id and time to dictionary
     data_manager.export_data(QUESTION_FILE, QUESTION_LABELS, filled_question_data)
-    
+
+    data_manager.export_data(question_file, question_labels, filled_question_data)
+
+
+def delete_answers_related_to_question(question_id, filename):
+    '''
+    Deletes answers retated to question from csv
+    :param question_id:
+    :param filename:
+    :return: nothing
+    '''
+    answers = import_data(filename)
+    for answer in answers:
+        if answer["question_id"] == question_id:
+            answers.remove(answer)
+        global answer_labels
+    update_data(filename, answer_data, answers)
+
+
+def delete_question(id_, filename):
+    '''
+    1. Delete question form list of dictionaries
+    2. write it to file
+    3. Delete answers retated to question from csv
+    :param id_: str - id of question record to be deleted
+    :param filename: str
+    :return: nothing
+    '''
+    questions = import_data(filename)
+    for question in questions:
+        if question["id"] in id_:
+            questions.remove(question)
+    global question_labels
+    update_data(filename, question_labels, questions)
+    delete_answers_related_to_question(id_, filename)
