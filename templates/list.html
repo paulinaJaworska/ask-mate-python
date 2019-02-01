@@ -10,16 +10,18 @@
     <button>Ask question</button>
 </form>
     <div>
-    <p>Sort by:</p>
-        <select name="sort_by">
-            <option value="title">Title</option>
-            <option value="time" selected>Upload Time</option>
-        </select>
-
-        <select name="sort_order">
-            <option value="desc">Descending</option>
-            <option value="asc" selected>Ascending</option>
-        </select>
+        <form method="GET" action="/sorted/">
+            <label for="condition">Order by:</label>
+                <select name="condition">
+                        <option selected value="title">Title</option>
+                    <option value="submission_time">Time</option>
+                </select>
+                <select name= "order">
+                    <option selected value="desc">descending</option>
+                    <option value="asc">ascending</option>
+                </select>
+            <button type="submit">GO</button>
+        </form>
     </div>
 
     

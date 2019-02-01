@@ -40,11 +40,31 @@ def post_new_answer(question_id):
     return render_template('new_answer.html', question=question, answers=answers)
 
 
+@app.route("/<question_id>/new-answer", methods=['POST'])
+def save_new_answer(question_id):
+    form = request.form.to_dict()
+    print(form)
+    #common.prepare_data_for_answer_data(form, question_id)
+
+    common.save_answer(form)
+    return redirect('/question/%s' % question_id)
+
+
+
 
 @app.route('/question/<question_id>/delete')
 def delete_question(question_id):
     common.delete_question(question_id)
     redirect('/')
+
+
+@app.route("/sorted/")
+def sorted_condition():
+    sort_by = request.args.get('condition')
+    order = request.args.get('order')
+    questions = common.sort_questions(sort_by, order)
+    return render_template('list.html', questions = questions)
+
 
 if __name__ == "__main__":
     app.run(debug=True,
