@@ -46,7 +46,6 @@ def post_new_answer(question_id):
     form = request.form.to_dict()
     common.save_new_answer(form, question_id)
     return redirect("/question/%s" % question_id)
-############
 
 
 @app.route('/question/<question_id>/delete')

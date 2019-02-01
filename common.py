@@ -83,7 +83,6 @@ def prepare_data_for_questions_data(question_data_from_form):
     return question_data_from_form
 
 
-######
 def prepare_data_for_answer_data(answer_data_form_form, question_id):
     # "id", "submission_time", "vote_number", "question_id", "message", "image"
     next_id = id_generator('sample_data/answer.csv')
@@ -96,7 +95,6 @@ def prepare_data_for_answer_data(answer_data_form_form, question_id):
                                "vote_number": vote_number, "question_id": question_id,
                                "message": message[0], "image": image}
     return generated_automatically
-######
 
 
 def get_question_by_id(_id):
@@ -119,8 +117,8 @@ def get_answers_by_question_id(_id):
 
 
 def delete_question(_id):
-    data_manager.delete_question(_id)
-    data_manager.delete_answer_by_question_id(_id)
+    delete_question(_id)
+    delete_answers_related_to_question(_id)
 
 
 # !!! Function that should be used to save question in the csv file.
@@ -137,7 +135,6 @@ def save_new_answer(answer_data, question_id):
     global ANSWER_FILE
     filled_answer_data = prepare_data_for_answer_data(answer_data, question_id)
     data_manager.export_data(ANSWER_FILE, ANSWER_LABELS, filled_answer_data)
-
 
 
 def delete_answers_related_to_question(question_id):
