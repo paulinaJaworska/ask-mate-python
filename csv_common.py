@@ -1,4 +1,4 @@
-import data_manager
+import csv_data_manager
 import os
 import csv
 import time
@@ -13,7 +13,7 @@ ANSWER_FILE = 'sample_data/answer.csv'
 
 
 def last_question_id():
-    return data_manager.get_last_question_id()
+    return csv_data_manager.get_last_question_id()
 
 
 ### SORTING  ###
@@ -31,7 +31,7 @@ def sort_questions(sort_by, order):
         order = False
 
     global QUESTION_FILE
-    list_of_dictionaries = data_manager.import_data(QUESTION_FILE)
+    list_of_dictionaries = csv_data_manager.import_data(QUESTION_FILE)
     return sorted(list_of_dictionaries, key=lambda i: i[str(sort_by)], reverse=order)
 
 
@@ -108,7 +108,7 @@ def get_question_by_id(_id):
 
 def get_answers_by_question_id(_id):
     global ANSWER_FILE
-    answer_data = data_manager.import_data(ANSWER_FILE)
+    answer_data = csv_data_manager.import_data(ANSWER_FILE)
     _id = str(_id)
     answers = []
     for item in answer_data:
@@ -128,14 +128,14 @@ def save_new_question(question_data):
     global QUESTION_FILE
     filled_question_data = prepare_data_for_questions_data(question_data)
     # used to add id and time to dictionary
-    data_manager.export_data(QUESTION_FILE, QUESTION_LABELS, filled_question_data)
+    csv_data_manager.export_data(QUESTION_FILE, QUESTION_LABELS, filled_question_data)
 
 
 def save_new_answer(answer_data, question_id):
     global ANSWER_LABELS
     global ANSWER_FILE
     filled_answer_data = prepare_data_for_answer_data(answer_data, question_id)
-    data_manager.export_data(ANSWER_FILE, ANSWER_LABELS, filled_answer_data)
+    csv_data_manager.export_data(ANSWER_FILE, ANSWER_LABELS, filled_answer_data)
 
 
 def delete_answers_related_to_question(question_id):
@@ -146,12 +146,12 @@ def delete_answers_related_to_question(question_id):
     :return: nothing
     '''
     filename = 'sample_data/answer.csv'
-    answers = data_manager.import_data(filename)
+    answers = csv_data_manager.import_data(filename)
     for answer in answers:
         if answer["question_id"] == question_id:
             answers.remove(answer)
     global ANSWER_LABELS
-    data_manager.update_data(filename, ANSWER_LABELS, answers)
+    csv_data_manager.update_data(filename, ANSWER_LABELS, answers)
 
 
 def delete_question(id_):
@@ -164,10 +164,10 @@ def delete_question(id_):
     :return: nothing
     '''
     filename = 'sample_data/question.csv'
-    questions = data_manager.import_data(filename)
+    questions = csv_data_manager.import_data(filename)
     for question in questions:
         if question["id"] in id_:
             questions.remove(question)
     global QUESTION_LABELS
-    data_manager.update_data(filename, QUESTION_LABELS, questions)
+    csv_data_manager.update_data(filename, QUESTION_LABELS, questions)
     delete_answers_related_to_question(id_)
