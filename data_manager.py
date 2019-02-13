@@ -39,78 +39,35 @@ def sort_questions(cursor, sort_by: str, order: bool):
     return ordered_table
 
 
-### Pulling from database  ###
+@db_connection.connection_handler
+def get_question_by_id(cursor, question_id: str):
+    cursor.execute("""
+                       SELECT * FROM question
+                       WHERE id=%s""", question_id)
+    question = cursor.fetchall()
+    return question
 
 
-def date_generator():
-    time_stamp = time.time()
-    return int(time_stamp)
+@db_connection.connection_handler
+def get_answers_by_question_id(cursor, question_id: str):
+    cursor.execute("""
+                           SELECT * FROM answer
+                           WHERE question_id=%s""", question_id)
+    answer = cursor.fetchall()
+    return answer
 
 
-def prepare_data_for_questions_data(question_data_from_form):
-    """
-    Append necessary data, which is not enter by user, to data from question form filled by user.
-    :param question_data_from_form: dictionary
-    :return: dictionary
-    """
-
-    next_id = id_generator('sample_data/question.csv')
-    submission_time = date_generator()
-    view_number = "not implemented"
-    vote_number = "not implemented"
-    image = "no image"
-    generated_automatically = {'id': next_id, "submission_time": submission_time, "view_number": view_number,
-                               "vote_number": vote_number, "image": image}
-    question_data_from_form.update(generated_automatically)
-    return question_data_from_form
+@db_connection.connection_handler
+def delete_question(cursor, question_id):
+    cursor.execute("""DELETE * FROM question
+                      WHERE id=%s""", question_id)
 
 
-def prepare_data_for_answer_data(answer_data_from_form, question_id):
-    # "id", "submission_time", "vote_number", "question_id", "message", "image"
-    next_id = id_generator('sample_data/answer.csv')
-    submission_time = date_generator()
-    vote_number = "not implemented"
-    image = "no image"
-    message = list(answer_data_from_form.values())
-    print(message[0])
-
-    generated_automatically = {'id': next_id, "submission_time": submission_time,
-                               "vote_number": vote_number, "question_id": question_id,
-                               "message": message[0], "image": image}
-    return generated_automatically
-
-
-def get_question_by_id(_id):
-    _id = str(_id)
-    question_data = get_question_data()
-    for item in question_data:
-        if item['id'] == _id:
-            return item
-
-
-def get_answers_by_question_id(_id):
-    global ANSWER_FILE
-    answer_data = csv_data_manager.import_data(ANSWER_FILE)
-    _id = str(_id)
-    answers = []
-    for item in answer_data:
-        if item['question_id'] == _id:
-            answers.append(item)
-    return answers
-
-
-def delete_question(_id):
-    delete_question(_id)
-    delete_answers_related_to_question(_id)
-
-
-# !!! Function that should be used to save question in the csv file.
-def save_new_question(question_data):
-    global QUESTION_LABELS
-    global QUESTION_FILE
-    filled_question_data = prepare_data_for_questions_data(question_data)
-    # used to add id and time to dictionary
-    csv_data_manager.export_data(QUESTION_FILE, QUESTION_LABELS, filled_question_data)
+@db_connection.connection_handler
+def save_new_question(cursor, question_data: dict):
+    cursor.execute("""INSERT INTO question
+                      (id, submission_time, view_number, vote_number, title, message, image)
+                      VALUES (%(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s)""", question_data)
 
 
 def save_new_answer(answer_data, question_id):
