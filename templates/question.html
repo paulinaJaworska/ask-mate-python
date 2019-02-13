@@ -21,6 +21,9 @@
         <form action="/question/{{ question['id'] }}/delete">
             <button>Delete</button>
         </form>
+        <form action="'/question/{{ question['id'] }}/edit'">
+            <button> MAIN PAGE </button>
+        </form>
         <br>
         {% for answer in answers%}
         <div style="background-color:magenta;color:white;padding:20px;">
