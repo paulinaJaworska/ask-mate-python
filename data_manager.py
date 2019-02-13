@@ -12,6 +12,14 @@ def last_question_id(cursor):
 
 
 @db_connection.connection_handler
+def last_answer_id(cursor):
+    cursor.execute("""SELECT MAX(id) FROM answer;""")
+    latest_id_dict = cursor.fetchall()
+    latest_id = latest_id_dict[0]['max']
+    return latest_id
+
+
+@db_connection.connection_handler
 def get_question_data(cursor):
     cursor.execute("""SELECT * FROM question""")
     question_data = cursor.fetchall()
@@ -70,11 +78,11 @@ def save_new_question(cursor, question_data: dict):
                       VALUES (%(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s)""", question_data)
 
 
-def save_new_answer(answer_data, question_id):
-    global ANSWER_LABELS
-    global ANSWER_FILE
-    filled_answer_data = prepare_data_for_answer_data(answer_data, question_id)
-    csv_data_manager.export_data(ANSWER_FILE, ANSWER_LABELS, filled_answer_data)
+@db_connection.connection_handler
+def save_new_answer(cursor, answer_data):
+    cursor.execute("""INSERT INTO answer
+                      (id, submission_time, vote_number, question_id, message, image)
+                      VALUES (%(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s)""", answer_data)
 
 
 def delete_answers_related_to_question(question_id):
