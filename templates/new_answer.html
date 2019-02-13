@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <title>AskMate by DarPol</title>
-    <body>
-        <h1>AskMate</h1>
-        <h2>by DarPol</h2>
+{% extends "layout.html" %}
+
+{% block content %}
         <div style="background-color:mediumaquamarine;color:white;padding:20px;">
             <p> {{ question['title'] }} </p>
             <p>{{ question['message'] }}</p>
@@ -26,6 +23,4 @@
         </div>
         {% endfor %}
 
-
-    </body>
-</html>
+{% endblock %}

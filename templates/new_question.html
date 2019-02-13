@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <title>AskMate by DarPol</title>
-    <body>
-        <h1>AskMate</h1>
-        <h2>by DarPol</h2>
-        <div style="background-color:mediumaquamarine;color:white;padding:20px;">
-        
+{% extends "layout.html" %}
+
+{% block content %}
+    <div style="background-color:mediumaquamarine;color:white;padding:20px;">
         <form action="/add-question", method="POST">
-            Title:<br>
+            Title:
+            <br>
             <input type="text" name="title" value="Title">
             </div>
             <br>
@@ -20,6 +17,4 @@
             <input type="submit" value="Submit">
         </form>
 
-    </body>
-</html>
-
+{% endblock %}
