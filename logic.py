@@ -23,7 +23,7 @@ def new_question(title, message, image = None):
     question['id'] = new_question_id()
     question['submission_time'] = date_generator()
     question['title'] = title
-    question['message'] = message
+    question['message'] = messag
     question['image'] = image
     data_manager.save_new_question(question)
 
@@ -32,13 +32,15 @@ def new_question(title, message, image = None):
 #ANSWERS
 
 def new_answer_id()
-    data_manager.
+    last_id = data_manager.last_answer_id()
+    return last_id + 1
 
-def new_answer(title, message, image = None, ):
+
+def new_answer(title, message, question_id ):
     answer = {}
-    answer['id'] = new_question_id()
+    answer['id'] = new_answer_id()
     answer['submission_time'] = date_generator()
     answer['title'] = title
     answer['message'] = message
-    question['question_id'] = image
+    answer['question_id'] = question_id
     data_manager.save_new_answer(answer)
