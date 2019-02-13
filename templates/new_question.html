@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <title>AskMate by DarPol</title>
-    <body>
-        <h1>AskMate</h1>
-        <h2>by DarPol</h2>
-        <div style="background-color:mediumaquamarine;color:white;padding:20px;">
-        {% if {{ edition }} %}
-            <form action="/edit", method="POST">
-             Title:<br>
-            <input type="text" name="title" value={{ question.title }}>
-            </div>
+{% extends "layout.html" %}
+
+{% block content %}
+    <div style="background-color:mediumaquamarine;color:white;padding:20px;">
+        <form action="/add-question", method="POST">
+            Title:
             <br>
-            <div style="background-color:mediumaquamarine;color:white;padding:20px;">
-            Message:<br>
-            <textarea name="message" rows="10" cols="30" >{{ question.message }}</textarea>
-            </div>
-        {% else %}
-            <form action="/add-question", method="POST">
-             Title:<br>
             <input type="text" name="title" value="Title">
             </div>
             <br>
@@ -25,9 +12,9 @@
             Message:<br>
             <textarea name="message" rows="10" cols="30" >What would you like to know?</textarea>
             </div>
-        {% endif %}
+
+            <br><br>
+            <input type="submit" value="Submit">
         </form>
 
-    </body>
-</html>
-
+{% endblock %}
