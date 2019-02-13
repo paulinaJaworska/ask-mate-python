@@ -28,14 +28,6 @@ def get_question_data(cursor):
 
 @db_connection.connection_handler
 def sort_questions(cursor, sort_by: str, order: bool):
-    '''
-    Sorts list of dictionaies by given parameter in ascending or descending order.
-    :param list_of_dictionaries:
-    :param sort_by: key by which we want to sort by
-    :param order: boolean (True or False)  True = descending
-    :return: sorted list of dicts
-    '''
-
     if order:
         order = 'DESC'
     else:

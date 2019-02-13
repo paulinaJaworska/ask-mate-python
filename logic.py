@@ -23,7 +23,7 @@ def new_question(title, message, image = None):
     question['id'] = new_question_id()
     question['submission_time'] = date_generator()
     question['title'] = title
-    question['message'] = messag
+    question['message'] = message
     question['image'] = image
     data_manager.save_new_question(question)
 
