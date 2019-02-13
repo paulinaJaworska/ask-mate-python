@@ -10,25 +10,27 @@
             <a class="button-top" href="/question/{{ question.id }}/new-answer" role="button">Add answer</a>
             <a class="button-top" href="/question/{{ question.id }}/delete" role="button">Delete question</a>
         </div>
-    </div>
-    <br>
+        <br>
 
-    <div class="offset">
-        <table class="table-content">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">date</th>
-                <th scope="col">answer</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-
-            {% for answer in answers %}
+        <div class="offset">
+            <table class="table-content">
+                <thead class="thead-light">
                 <tr>
-                    <td>{{ answer.submission_time }}</td>
-                    <td><a href="/edit-answer/{{ answer.id }}">{{ answer.message }}</a></td>
+                    <th scope="col">date</th>
+                    <th scope="col">answer</th>
+                    <th scope="col"></th>
                 </tr>
-            {% endfor%}
+                </thead>
+
+                {% for answer in answers %}
+                    <tr>
+                        <td>{{ answer.submission_time }}</td>
+                        <td><a href="/edit-answer/{{ answer.id }}">{{ answer.message }}</a></td>
+                    </tr>
+                {% endfor%}
+            </table>
+        </div>
+    </div>
 
     {% include 'footer.html' %}
         
