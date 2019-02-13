@@ -1,8 +1,14 @@
 import db_connection
+import time
 
 
-def last_question_id():
-    return csv_data_manager.get_last_question_id()
+# returns last question id as integer
+@db_connection.connection_handler
+def last_question_id(cursor):
+    cursor.execute("""SELECT MAX(id) FROM question;""")
+    latest_id_dict = cursor.fetchall()
+    latest_id = latest_id_dict[0]['max']
+    return latest_id
 
 
 @db_connection.connection_handler
@@ -34,20 +40,6 @@ def sort_questions(cursor, sort_by: str, order: bool):
 
 
 ### Pulling from database  ###
-
-
-###   WRITING TO CSV   ###
-
-def id_generator(filename):
-    exists = os.path.isfile(filename)
-    if not exists:
-        return 1
-    else:
-        with open(filename, 'r') as f:
-            result = csv.DictReader(f)
-            for row in result:
-                result = row["id"]
-            return int(result) + 1
 
 
 def date_generator():
