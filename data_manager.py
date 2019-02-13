@@ -12,6 +12,14 @@ def last_question_id(cursor):
 
 
 @db_connection.connection_handler
+def last_answer_id(cursor):
+    cursor.execute("""SELECT MAX(id) FROM answer;""")
+    latest_id_dict = cursor.fetchall()
+    latest_id = latest_id_dict[0]['max']
+    return latest_id
+
+
+@db_connection.connection_handler
 def get_question_data(cursor):
     cursor.execute("""SELECT * FROM question""")
     question_data = cursor.fetchall()
