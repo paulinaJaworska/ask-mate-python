@@ -13,7 +13,7 @@ def get_question_data(cursor):
 
 
 @db_connection.connection_handler
-def sort_questions(cursor, sort_by, order):
+def sort_questions(cursor, sort_by: str, order: bool):
     '''
     Sorts list of dictionaies by given parameter in ascending or descending order.
     :param list_of_dictionaries:
@@ -28,12 +28,9 @@ def sort_questions(cursor, sort_by, order):
         order = 'ASC'
     print(order)
     cursor.execute("""SELECT * FROM question
-                      ORDER BY %(sort_by)s  %(order)s """, {'sort_by': sort_by, 'order': order})
+                      ORDER BY """ + sort_by + " " + order)
     ordered_table = cursor.fetchall()
     return ordered_table
-
-
-print(sort_questions('title', True))
 
 
 ### Pulling from database  ###
