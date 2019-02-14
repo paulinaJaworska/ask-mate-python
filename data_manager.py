@@ -57,8 +57,6 @@ def get_answers_by_question_id(cursor, question_id: str):
     return answer
 
 
-
-
 @db_connection.connection_handler
 def delete_question(cursor, question_id):
     cursor.execute("""DELETE * FROM question
@@ -85,40 +83,13 @@ def save_new_answer(cursor, answer_data):
                       VALUES (%(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s)""", answer_data)
 
 
-def delete_answers_related_to_question(cursor, question_id):
-    '''
-    Deletes answers retated to question from csv
-    :param question_id:
-    :param filename:
-    :return: nothing
-    '''
-    filename = 'sample_data/answer.csv'
-    answers = csv_data_manager.import_data(filename)
-    for answer in answers:
-        if answer["question_id"] == question_id:
-            answers.remove(answer)
-    global ANSWER_LABELS
-    csv_data_manager.update_data(filename, ANSWER_LABELS, answers)
-
-
 @db_connection.connection_handler
 def delete_question(cursor, question_id: dict):
-    '''
-    1. Delete question form list of dictionaries
-    2. write it to file
-    3. Delete answers retated to question from csv
-    :param id_: str - id of question record to be deleted
-    :param filename: str
-    :return: nothing
-    '''
-    question_id = {'questionid': question_id}
-    print(question_id)
-    cursor.execute("""DELETE FROM answer
-                      WHERE question_id=%(questionid)s;
-                      DELETE FROM question
-                      WHERE id=%(questionid)s;
-                      DELETE FROM comment
-                      WHERE question_id=%(questionid)s;""", question_id)
-
-
-delete_question('1')
+    cursor.execute("""
+                        DELETE from COMMENT
+                        WHERE question_id = %(id)s;
+                        DELETE from ANSWER
+                        WHERE question_id = %(id)s;
+                        DELETE from QUESTION
+                        WHERE id = %(id)s;
+                        """, question_id)
