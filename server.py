@@ -7,6 +7,11 @@ app = Flask(__name__)
 
 
 @app.route('/')
+def route_latest_questions():
+    latest_questions = logic.get_latest_questions()
+    return render_template('list.html', questions=latest_questions)
+
+
 @app.route('/list')
 def index():
     questions = logic.get_questions()
@@ -43,7 +48,6 @@ def new_question():
     form = request.form.to_dict()
     question = logic.new_question(form)
     question_id = question[id]
-    print(question_id)
     return redirect("/question/%s" % question_id)
 
 

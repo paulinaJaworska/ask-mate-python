@@ -57,6 +57,11 @@ def new_question(form: dict, image=None):
     return question
 
 
+def get_latest_questions():
+    latest_five_questions = data_manager.get_latest_five_questions()
+    return latest_five_questions
+
+
 # ANSWERS
 
 

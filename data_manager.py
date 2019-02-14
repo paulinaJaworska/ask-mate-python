@@ -71,7 +71,6 @@ def delete_answer(cursor,_id):
 
 @db_connection.connection_handler
 def save_new_question(cursor, question_data: dict):
-    print(question_data)
     cursor.execute("""INSERT INTO question
                       (id, submission_time, view_number, vote_number, title, message, image)
                       VALUES (%(id)s, %(submission_time)s, %(view_number)s,
@@ -113,3 +112,10 @@ def delete_question(cursor, question_id: dict):
                         DELETE from QUESTION
                         WHERE id = %(id)s;
                         """, question_id)
+
+
+@db_connection.connection_handler
+def get_latest_five_questions(cursor):
+    cursor.execute("""SELECT * FROM question
+                    ORDER BY submission_time DESC
+                    LIMIT 5;""")

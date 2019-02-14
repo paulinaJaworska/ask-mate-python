@@ -7,8 +7,8 @@
         <div class="card-body">
             {{ question.message }}
             <p class="time">{{ question.time }}</p>
-            <a class="button-top" href="/question/{{ question.id }}/new-answer" role="button">Add answer</a>
-            <a class="button-top" href="/question/{{ question.id }}/delete" role="button">Delete question</a>
+            <a class="button" href="/question/{{ question.id }}/delete" role="button">delete question</a>
+            <a class="button" href="/question/{{ question.id }}/new-answer" role="button">add answer</a>
         </div>
         <br>
 
@@ -26,6 +26,7 @@
                     <tr>
                         <td>{{ answer.submission_time }}</td>
                         <td><a href="/edit-answer/{{ answer.id }}">{{ answer.message }}</a></td>
+                        <td><a href="/delete-answer/{{ answer.id }}">delete</a></td>
                     </tr>
                 {% endfor%}
             </table>

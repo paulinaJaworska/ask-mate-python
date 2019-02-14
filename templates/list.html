@@ -1,39 +1,50 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <form action="/add-question">
-        <button>Ask question</button>
-    </form>
 
-    <div>
-        <form method="GET" action="/sorted/">
+    <div class="card">
+        <div class="card-body">
+            <a class="button" href="/question/{{ question.id }}/new-question" role="button">ask question</a>
+        </div>
+        <br>
 
-            <label for="condition">Order by:</label>
-
-            <select name="condition">
-                <option selected value="title">Title</option>
-                <option value="submission_time">Time</option>
+        <form action="/list/sorted" method="GET">sort by:
+            <label for="attribute">name</label>
+            <select id="attribute" name="attribute">
+                <option value="submission_time">time</option>
+                <option value="title">title</option>
             </select>
-
-            <select name= "order">
-                <option selected value="desc">descending</option>
+            <label for="order">order</label>
+            <select id="order" name="order">
                 <option value="asc">ascending</option>
+                <option value="desc">descending</option>
             </select>
-
-            <button type="submit">GO</button>
+            <button class="button" type="submit" value="Submit">sort</button>
         </form>
+        <div class="offset">
+            <table class="table-content">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">date</th>
+                    <th scope="col">question</th>
+                    <th scope="col">message</th>
+                    <th scope="col">image</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                {% for question in questions %}
+                    <tr>
+                        <td>{{ question.submission_time }}</td>
+                        <td><a href="/edit-question/{{ question.id }}">{{ question.title }}</a></td>
+                        <td>{{ question.message }}</td>
+                        <td><img src="{{ question.image }}" alt="image.jpg" height="30"></td>
+                        <td><a class="button" href="/question/{{ question.id }}/delete" role="button">delete</a></td>
+                    </tr>
+                {% endfor%}
+            </table>
+        </div>
     </div>
 
-    {% for item in questions %}
-    <div id='question'>
-        <ul>
-            <br>
-            <li>
-                <a href="{{ '/question/' + (item['id'] | string) }}">"{{item['title']}}</a>
-            </li>
-            <li>{{ item['message'] }}</li>
-        </ul>
-        </div>
-    {% endfor %}
+    {% include 'footer.html' %}
 
 {% endblock %}
