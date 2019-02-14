@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/list')
 def index():
     questions = data_manager.get_question_data()
-    return render_template('list.html', questions=questions)
+    return render_template('list-old.html', questions=questions)
 
 
 @app.route('/question/<question_id>')
@@ -71,7 +71,7 @@ def sorted_condition():
     sort_by = request.args.get('condition')
     order = request.args.get('order')
     questions = data_manager.sort_questions(sort_by, order)
-    return render_template('list.html', questions=questions)
+    return render_template('list-old.html', questions=questions)
 
 
 if __name__ == "__main__":
