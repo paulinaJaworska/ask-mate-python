@@ -73,14 +73,16 @@ def delete_answer(cursor,_id):
 def save_new_question(cursor, question_data: dict):
     cursor.execute("""INSERT INTO question
                       (id, submission_time, view_number, vote_number, title, message, image)
-                      VALUES (%(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s)""", question_data)
+                      VALUES (%(id)s, %(submission_time)s, %(view_number)s,
+                       %(vote_number)s, %(title)s, %(message)s, %(image)s)""", question_data)
 
 
 @db_connection.connection_handler
 def save_new_answer(cursor, answer_data):
     cursor.execute("""INSERT INTO answer
                       (id, submission_time, vote_number, question_id, message, image)
-                      VALUES (%(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s)""", answer_data)
+                      VALUES (%(id)s, %(submission_time)s, %(vote_number)s, %(question_id)s,
+                       %(message)s, %(image)s)""", answer_data)
 
 
 @db_connection.connection_handler
