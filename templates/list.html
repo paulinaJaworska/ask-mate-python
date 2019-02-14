@@ -1,42 +1,39 @@
-<!DOCTYPE html>
-<html>
-<title>AskMate by DarPol</title>
-<body>
+{% extends "layout.html" %}
 
-<h1>AskMate</h1>
-<h2>by DarPol</h2>
+{% block content %}
+    <form action="/add-question">
+        <button>Ask question</button>
+    </form>
 
-<form action="/add-question">
-    <button>Ask question</button>
-</form>
     <div>
         <form method="GET" action="/sorted/">
+
             <label for="condition">Order by:</label>
-                <select name="condition">
-                        <option selected value="title">Title</option>
-                    <option value="submission_time">Time</option>
-                </select>
-                <select name= "order">
-                    <option selected value="desc">descending</option>
-                    <option value="asc">ascending</option>
-                </select>
+
+            <select name="condition">
+                <option selected value="title">Title</option>
+                <option value="submission_time">Time</option>
+            </select>
+
+            <select name= "order">
+                <option selected value="desc">descending</option>
+                <option value="asc">ascending</option>
+            </select>
+
             <button type="submit">GO</button>
         </form>
     </div>
 
-
-    
     {% for item in questions %}
-<div id='question'>
+    <div id='question'>
+        <ul>
+            <br>
+            <li>
+                <a href="{{ '/question/' + (item['id'] | string) }}">"{{item['title']}}</a>
+            </li>
+            <li>{{ item['message'] }}</li>
+        </ul>
+        </div>
+    {% endfor %}
 
-  <ul>
-    <br>
-    <li> 
-        <a href="{{ '/question/' + (item['id'] | string) }}">"{{item['title']}}</a>
-        </li>
-    <li>{{ item['message'] }}</li>
-  </ul>
-</div>
-{% endfor %}
-</body>
-</html>
+{% endblock %}
