@@ -122,3 +122,9 @@ def delete_question(cursor, question_id: dict):
 
 
 delete_question('1')
+
+@db_connection.connection_handler
+def get_latest_five_questions():
+    cursor.execute("""SELECT * FROM question
+                    ORDER BY submission_time DESC
+                    LIMIT 5;""")
