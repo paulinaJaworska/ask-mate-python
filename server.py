@@ -28,7 +28,8 @@ def route_edit_question(question_id):
 
 @app.route('/question/<question_id>/edit', methods=['POST'])
 def edit_question(question_id):
-    #logic.edit_question(question_id)  # to do
+    new_data = request.form.to_dict()
+    logic.edit_question(new_data)
     return redirect('/question/<question_id>')
 
 
@@ -40,7 +41,6 @@ def route_new_question():
 @app.route("/add-question", methods=['POST'])
 def new_question():
     form = request.form.to_dict()
-    #form == {'title': 'dupsko', 'message': 'dupsko'}
     question = logic.new_question(form)
     question_id = question[id]
     print(question_id)

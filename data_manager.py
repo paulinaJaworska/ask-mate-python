@@ -87,6 +87,23 @@ def save_new_answer(cursor, answer_data):
 
 
 @db_connection.connection_handler
+def edit_question(cursor, question_data: dict):
+    cursor.execute("""UPDATE question
+                      SET message =%(message)s, title =%(title)s
+                      WHERE id=%(id)s""", question_data)
+
+print(get_question_by_id('3'))
+edit_question({'id': 3, 'submission_time': (2019, 2, 14, 14, 23, 2), 'view_number': 0, 'vote_number': 0, 'title': 'kaka', 'message': 'dupsko', 'image': None})
+
+
+
+@db_connection.connection_handler
+def delete_answer(cursor,_id):
+    cursor.execute("""DELETE * FROM answer
+                      WHERE id=%s""", _id)
+
+
+@db_connection.connection_handler
 def delete_question(cursor, question_id: dict):
     cursor.execute("""
                         DELETE from COMMENT
