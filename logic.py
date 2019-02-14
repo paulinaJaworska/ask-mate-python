@@ -4,6 +4,7 @@ import datetime
 
 # questions
 
+
 def get_question_by_id(_id):
     question = data_manager.get_question_by_id(_id)
     return question
@@ -11,7 +12,6 @@ def get_question_by_id(_id):
 
 def delete_question(_id: str):
     data_manager.delete_question(_id)
-    data_manager.delete_answers_related_to_question(_id)
     return None
 
 
@@ -43,23 +43,21 @@ def date_generator():
     st = datetime.datetime.fromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
     return str(st)
 
-print(date_generator())
 
 def new_question(form: dict, image=None):
-    # {'title': 'dupsko', 'message': 'dupsko'}
     question = {}
     question['id'] = new_question_id()
     question['submission_time'] = date_generator()
     question['title'] = form['title']
     question['message'] = form['message']
     question['image'] = image
+    question['view_number'] = 0
+    question['vote_number'] = 0
     data_manager.save_new_question(question)
     return question
 
 
-new_question('testowy', 'powinno byc ok')
 # ANSWERS
-
 
 
 def new_answer_id():
