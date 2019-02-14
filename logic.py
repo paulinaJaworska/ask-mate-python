@@ -31,6 +31,10 @@ def new_question(title, message, image=None):
     question['image'] = image
     data_manager.save_new_question(question)
 
+def get_latest_questions():    ###
+    latest_five_questions = data_manager.get_latest_five_questions()
+    return latest_five_questions
+
 
 # ANSWERS
 
