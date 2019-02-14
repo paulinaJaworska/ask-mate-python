@@ -57,10 +57,18 @@ def get_answers_by_question_id(cursor, question_id: str):
     return answer
 
 
+
+
 @db_connection.connection_handler
 def delete_question(cursor, question_id):
     cursor.execute("""DELETE * FROM question
                       WHERE id=%s""", question_id)
+
+
+@db_connection.connection_handler
+def delete_answer(cursor,_id):
+    cursor.execute("""DELETE * FROM anser
+                      WHERE id=%s""", _id)
 
 
 @db_connection.connection_handler
