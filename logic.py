@@ -70,6 +70,11 @@ def new_answer_id():
     return last_id + 1
 
 
+def get_answer_by_id(_id):
+    answer = data_manager.get_answer_by_id
+    return answer
+
+
 def new_answer(title, message, question_id: str):
     answer = {}
     answer['id'] = new_answer_id()

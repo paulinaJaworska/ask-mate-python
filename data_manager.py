@@ -49,6 +49,15 @@ def get_question_by_id(cursor, question_id: str):
 
 
 @db_connection.connection_handler
+def get_answer_by_id(cursor, _id: str):
+    cursor.execute("""
+                       SELECT * FROM answer
+                       WHERE id=%s""", _id)
+    answer = cursor.fetchall()
+    return answer
+
+
+@db_connection.connection_handler
 def get_answers_by_question_id(cursor, question_id: str):
     cursor.execute("""
                            SELECT * FROM answer
@@ -91,7 +100,7 @@ def edit_question(cursor, question_data: dict):
                       SET message =%(message)s, title =%(title)s
                       WHERE id=%(id)s""", question_data)
 
-print(get_question_by_id('3'))
+
 edit_question({'id': 3, 'submission_time': (2019, 2, 14, 14, 23, 2), 'view_number': 0, 'vote_number': 0, 'title': 'kaka', 'message': 'dupsko', 'image': None})
 
 
