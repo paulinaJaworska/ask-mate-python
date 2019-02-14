@@ -31,7 +31,7 @@ def route_edit_question(question_id):
     return render_template('new_question.html', question=question_details, edition=True)
 
 
-@app.route('/question/<question_id>/edit', methods=['POST'])  # dopisac logic
+@app.route('/question/<question_id>/edit', methods=['POST'])
 def edit_question(question_id):
     logic.edit_question(question_id)
     return redirect('/question/<question_id>')
