@@ -35,7 +35,7 @@ def edit_question(_id, message, title):
     for i in item:
         i['message'] = message
         i['title'] = title
-    return i
+    data_manager.edit_question(i)
 
 
 def date_generator():
