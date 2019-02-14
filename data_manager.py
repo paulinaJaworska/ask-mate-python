@@ -77,7 +77,7 @@ def save_new_answer(cursor, answer_data):
                       VALUES (%(id)s, %(id)s, %(id)s, %(id)s, %(id)s, %(id)s)""", answer_data)
 
 
-def delete_answers_related_to_question(question_id):
+def delete_answers_related_to_question(cursor, question_id):
     '''
     Deletes answers retated to question from csv
     :param question_id:
@@ -93,7 +93,8 @@ def delete_answers_related_to_question(question_id):
     csv_data_manager.update_data(filename, ANSWER_LABELS, answers)
 
 
-def delete_question(id_):
+@db_connection.connection_handler
+def delete_question(cursor, question_id: dict):
     '''
     1. Delete question form list of dictionaries
     2. write it to file
@@ -102,11 +103,14 @@ def delete_question(id_):
     :param filename: str
     :return: nothing
     '''
-    filename = 'sample_data/question.csv'
-    questions = csv_data_manager.import_data(filename)
-    for question in questions:
-        if question["id"] in id_:
-            questions.remove(question)
-    global QUESTION_LABELS
-    csv_data_manager.update_data(filename, QUESTION_LABELS, questions)
-    delete_answers_related_to_question(id_)
+    question_id = {'questionid': question_id}
+    print(question_id)
+    cursor.execute("""DELETE FROM answer
+                      WHERE question_id=%(questionid)s;
+                      DELETE FROM question
+                      WHERE id=%(questionid)s;
+                      DELETE FROM comment
+                      WHERE question_id=%(questionid)s;""", question_id)
+
+
+delete_question('1')

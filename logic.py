@@ -1,13 +1,16 @@
 import data_manager
 import time
 
+
 def sort_questios(sort_by, order):
     question_data = data_manager.sort_questions(sort_by, order)
     return question_data
 
+
 def get_questions():
     questions = data_manager.get_question_data()
     return questions
+
 
 def new_question_id():
     last_id = data_manager.last_question_id()
@@ -17,6 +20,7 @@ def new_question_id():
 def date_generator():
     time_stamp = time.time()
     return int(time_stamp)
+
 
 def new_question(title, message, image = None):
     question = {}
@@ -28,10 +32,10 @@ def new_question(title, message, image = None):
     data_manager.save_new_question(question)
 
 
+# ANSWERS
 
-#ANSWERS
 
-def new_answer_id()
+def new_answer_id():
     last_id = data_manager.last_answer_id()
     return last_id + 1
 
