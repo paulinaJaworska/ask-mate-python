@@ -61,7 +61,7 @@ def route_new_answer(question_id):
 def new_answer(question_id):
     # save it to file
     form = request.form.to_dict()
-    logic.save_new_answer(form, question_id)
+    logic.new_answer(form, question_id)
     return redirect("/question/%s" % question_id)
 
 

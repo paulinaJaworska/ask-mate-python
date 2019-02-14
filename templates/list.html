@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-body">
-            <a class="button" href="/question/{{ question.id }}/new-question" role="button">ask question</a>
+            <a class="button" href="/add-question" role="button">ask question</a>
         </div>
         <br>
 
@@ -35,10 +35,10 @@
                 {% for question in questions %}
                     <tr>
                         <td>{{ question.submission_time }}</td>
-                        <td><a href="/edit-question/{{ question.id }}">{{ question.title }}</a></td>
+                        <td><a href="/question/{{ questions[0]['id'] }}">{{ question.title }}</a></td>
                         <td>{{ question.message }}</td>
                         <td><img src="{{ question.image }}" alt="image.jpg" height="30"></td>
-                        <td><a class="button" href="/question/{{ question.id }}/delete" role="button">delete</a></td>
+                        <td><a class="button" href="/question/{{ questions[0]['id'] }}/delete" role="button">delete</a></td>
                     </tr>
                 {% endfor%}
             </table>

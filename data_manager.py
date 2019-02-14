@@ -102,3 +102,5 @@ def get_latest_five_questions(cursor):
     cursor.execute("""SELECT * FROM question
                     ORDER BY submission_time DESC
                     LIMIT 5;""")
+    five_quest = cursor.fetchall()
+    return five_quest
