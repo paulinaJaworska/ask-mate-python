@@ -2,7 +2,7 @@ import data_manager
 import time
 
 
-def sort_questios(sort_by, order):
+def sort_questions(sort_by, order):
     question_data = data_manager.sort_questions(sort_by, order)
     return question_data
 
@@ -22,14 +22,16 @@ def date_generator():
     return int(time_stamp)
 
 
-def new_question(title, message, image=None):
+def new_question(form: dict, image=None):
+    # {'title': 'dupsko', 'message': 'dupsko'}
     question = {}
     question['id'] = new_question_id()
     question['submission_time'] = date_generator()
-    question['title'] = title
-    question['message'] = message
+    question['title'] = form['title']
+    question['message'] = form['message']
     question['image'] = image
     data_manager.save_new_question(question)
+    return question
 
 
 # ANSWERS
@@ -43,6 +45,7 @@ def delete_question(_id: str):
     data_manager.delete_question(_id)
     data_manager.delete_answers_related_to_question(_id)
     return None
+
 
 def new_answer_id():
     last_id = data_manager.last_answer_id()
@@ -59,8 +62,8 @@ def new_answer(title, message, question_id: str):
     data_manager.save_new_answer(answer)
 
 
-def get_answer_by_question_id(_id: str):
-    answer = data_manager.get_answers_by_question_id(_id)
+def get_answer_by_question_id(question_id: str):
+    answer = data_manager.get_answers_by_question_id(question_id)
     return answer
 
 def delete_answer(_id):
