@@ -1,5 +1,18 @@
 import data_manager
 import time
+import datetime
+
+# questions
+
+def get_question_by_id(_id):
+    question = data_manager.get_question_by_id(_id)
+    return question
+
+
+def delete_question(_id: str):
+    data_manager.delete_question(_id)
+    data_manager.delete_answers_related_to_question(_id)
+    return None
 
 
 def sort_questios(sort_by, order):
@@ -17,10 +30,20 @@ def new_question_id():
     return last_id + 1
 
 
+def edit_question(_id, message, title):
+    item = get_question_by_id(_id)
+    for i in item:
+        i['message'] = message
+        i['title'] = title
+    return i
+
+
 def date_generator():
     time_stamp = time.time()
-    return int(time_stamp)
+    st = datetime.datetime.fromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
+    return str(st)
 
+print(date_generator())
 
 def new_question(title, message, image=None):
     question = {}
@@ -32,17 +55,9 @@ def new_question(title, message, image=None):
     data_manager.save_new_question(question)
 
 
+new_question('testowy', 'powinno byc ok')
 # ANSWERS
 
-def get_question_by_id(_id):
-    question = data_manager.get_question_by_id(_id)
-    return question
-
-
-def delete_question(_id: str):
-    data_manager.delete_question(_id)
-    data_manager.delete_answers_related_to_question(_id)
-    return None
 
 def new_answer_id():
     last_id = data_manager.last_answer_id()
@@ -62,6 +77,7 @@ def new_answer(title, message, question_id: str):
 def get_answer_by_question_id(_id: str):
     answer = data_manager.get_answers_by_question_id(_id)
     return answer
+
 
 def delete_answer(_id):
     data_manager.delete_answer(_id)
