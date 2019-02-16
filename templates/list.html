@@ -8,9 +8,9 @@
         </div>
         <br>
 
-        <form action="/list/sorted" method="GET">sort by:
-            <label for="attribute">name</label>
-            <select id="attribute" name="attribute">
+        <form action="/sorted/" method="GET">sort by:
+            <label for="sort_by">name</label>
+            <select id="sort_by" name="sort_by">
                 <option value="submission_time">time</option>
                 <option value="title">title</option>
             </select>
@@ -21,6 +21,7 @@
             </select>
             <button class="button" type="submit" value="Submit">sort</button>
         </form>
+
         <div class="offset">
             <table class="table-content">
                 <thead class="thead-light">
