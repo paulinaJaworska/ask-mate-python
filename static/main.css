@@ -1,44 +1,94 @@
 body {
-  background: #eafaed;
-  color: #333333;
-  margin-top: 3rem;
+    background: #ebebeb;
+    color: #333333;
+    margin: 3rem;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+    color: #444444;
+    font-family: 'Frank Ruhl Libre', serif;
 }
 
-.bg-steel {
-  background-color: #4f6266;
+
+#logo {
+    margin-bottom: 2rem;
+    font: 40px 'Coiny', 'Frank Ruhl Libre', serif;
+    color: rgb(110, 110, 110);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    text-shadow: 3px 3px 0 rgb(238,238,238) , 5px 5px 0 rgb(112,112,112);
 }
 
-.site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+
+#ask-button {
+    padding-left: 4.8rem;
+    padding-right: 4.8rem;
+    letter-spacing: 0.4rem;
 }
 
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+
+#footer-button {
+    margin-top: 3rem;
 }
 
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+
+.card-header {
+    margin-top: 2rem;
 }
 
-.logo {
-  font-family: 'Coiny', cursive;
-  font-size: xx-large;
+
+.time {
+    font-size: 12px;
+    color: #4b4b4b;
 }
+
+
+.content {
+    font-family: 'Frank Ruhl Libre', serif;
+}
+
+
+/*.table {*/
+    /*font-family: 'Frank Ruhl Libre', serif;*/
+/*}*/
+
 
 .content-section {
-  background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
 }
 
 
-.table{
-    font-weight: normal;
-    font-size: smaller;
+.button {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0 1.5em;
+    border: 1px solid rgb(195, 195, 195);
+    font: 1em/2em 'Frank Ruhl Libre', Helvetica, sans-serif;
+    color: rgba(114,114,114,1);
+    background: rgba(234,234,234,1);
+}
+
+
+.button:hover {
+    cursor: pointer;
+    border: 1px solid rgba(178,178,178,1);
+    color: rgba(76,76,76,1);
+    background: rgb(245, 245, 245);
+}
+
+
+.button:active {
+    position: relative;
+    cursor: default;
+    top: 1px;
+    border: 1px solid rgba(211,211,211,1);
+    color: rgba(114,114,114,1);
+    background: rgba(247,247,247,1);
+    transition: none;
 }
