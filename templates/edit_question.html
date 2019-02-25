@@ -3,10 +3,14 @@
 {% block content %}
 
     <form action="/question/{{ question['id'] }}/edit" method="POST" id="edit_form">
-        <textarea name="edit" rows="2" cols="40">{{ question['title'] }}</textarea><br>
-        <textarea name="edit" rows="10" cols="40">{{ question['message'] }}</textarea>
+        {% for question in question %}
+            <textarea name="title" rows="2" cols="40">{{ question.title }}</textarea><br>
+            <textarea name="message" rows="10" cols="40">{{ question.message }}</textarea>
+        {% endfor %}
     </form>
 
-    <button type="submit" form="edit_form" value="Submit">Save</button>
+    <button class="button" type="submit" form="edit_form" value="Submit">edit</button>
+
+    {% include 'footer.html' %}
 
 {% endblock %}
