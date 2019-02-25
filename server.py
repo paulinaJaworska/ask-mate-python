@@ -68,14 +68,14 @@ def new_question():
 @app.route("/<question_id>/new-answer", methods=['GET'])
 def route_new_answer(question_id):
     question = logic.get_question_by_id(str(question_id))[0]
-
+    print(question)
     return render_template('new_answer.html',
                            question=question,
                           )
 
 
 @app.route("/<question_id>/new-answer", methods=['POST'])
-def new_answer(question_id : str):
+def new_answer(question_id):
     # save it to file
     form = request.form.to_dict()
     logic.new_answer(form, question_id)

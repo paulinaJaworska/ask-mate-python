@@ -76,13 +76,14 @@ def get_answer_by_id(_id):
     return answer
 
 
-def new_answer(title, message, question_id: str):
+def new_answer(message, question_id: str, image=None):
     answer = {}
     answer['id'] = new_answer_id()
     answer['submission_time'] = date_generator()
-    answer['title'] = title
-    answer['message'] = message
+    answer['message'] = message['message']
     answer['question_id'] = question_id
+    answer['vote_number'] = 0
+    answer['image'] = image
     data_manager.save_new_answer(answer)
 
 
