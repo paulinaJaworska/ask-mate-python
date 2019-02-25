@@ -5,23 +5,22 @@
 
     <div class="card">
         <div class="card-body">
-            <a class="button" href="/add-question" role="button">ask question</a>
-        </div>
-        <br>
+            <button class="button" href="/add-question" role="button">dżast ask!</button><br>
 
-        <form action="/sorted/" method="GET">sort by:
-            <label for="sort_by">name</label>
-            <select id="sort_by" name="sort_by">
-                <option value="submission_time">time</option>
-                <option value="title">title</option>
-            </select>
-            <label for="order">order</label>
-            <select id="order" name="order">
-                <option value="asc">ascending</option>
-                <option value="desc">descending</option>
-            </select>
-            <button class="button" type="submit" value="Submit">sort</button>
-        </form>
+            <form action="/sorted/" method="GET">sort by:
+                <label for="sort_by">name</label>
+                <select id="sort_by" name="sort_by">
+                    <option value="submission_time">time</option>
+                    <option value="title">title</option>
+                </select>
+                <label for="order">order</label>
+                <select id="order" name="order">
+                    <option value="asc">ascending</option>
+                    <option value="desc">descending</option>
+                </select>
+                <button class="button" type="submit" value="Submit">sort</button>
+            </form>
+        </div>
 
         <div class="offset">
             <table class="table-content">
