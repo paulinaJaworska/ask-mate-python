@@ -25,7 +25,7 @@ def index():
 
 @app.route('/question/<question_id>')
 def question_page(question_id):
-    question = logic.get_question_by_id(str(question_id))
+    question = logic.get_question_by_id(str(question_id))[0]
     answers = logic.get_answer_by_question_id(str(question_id))
 
     return render_template('question.html',
@@ -60,7 +60,7 @@ def route_new_question():
 def new_question():
     form = request.form.to_dict()
     question = logic.new_question(form)
-    question_id = question[id]
+    question_id = question['id']
 
     return redirect("/question/%s" % question_id)
 
@@ -93,7 +93,7 @@ def delete_question(question_id):
 
 @app.route("/sorted/")
 def sorted_condition():
-    sort_by = request.args.get('condition')
+    sort_by = request.args.get('sort_by')
     order = request.args.get('order')
     questions = logic.sort_questions(sort_by, order)
 
