@@ -1,14 +1,15 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
     <div class="form">
-        <form action="/question/add-question/" method="POST" id="add_form">
-            <textarea name="add" rows="2" cols="40" placeholder="Your question here"></textarea><br>
-            <textarea name="add" rows="10" cols="40" placeholder="Add continuation here"></textarea>
+        <form action="/add-question" method="POST" id="add_form">
+            <textarea name="title" rows="2" cols="40" placeholder="Your question here"></textarea><br>
+            <textarea name="message" rows="10" cols="40" placeholder="Add continuation here"></textarea>
         </form>
     </div>
 
-    <button type="submit" form="add_form" value="Submit">Add</button>
+    <button class="button" type="submit" form="add_form" value="Submit">Add</button>
+
+    {% include 'footer.html' %}
 
 {% endblock %}
