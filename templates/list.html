@@ -36,7 +36,7 @@
                 </thead>
                 {% for question in questions %}
                     <tr>
-                        <td>{{ question.submission_time }}</td>
+                        <td>{{ question['submission_time'] }}</td>
                         <td><a href="/question/{{ question['id'] }}">{{ question['title'] }}</a></td>
                         <td>{{ question['message'] }}</td>
                         <td><img src="{{ question['image'] }}" alt="image.jpg" height="30"></td>
@@ -45,7 +45,7 @@
                             </form>
                         </td>
                     </tr>
-                {% endfor%}
+                {% endfor %}
             </table>
         </div>
     </div>

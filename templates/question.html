@@ -3,12 +3,12 @@
 {% block content %}
 
     <div class="card">
-        <h6 class="card-header"><a href="/question/{{ question.id }}/edit">Question: {{ question.title }}</a></h6><br>
+        <h6 class="card-header"><a href="/question/{{ question["id"] }}/edit">Question: {{ question["title"] }}</a></h6><br>
         <div class="card-body">
-            {{ question.message }}
-            <p class="time">{{ question.time }}</p>
-            <a class="button" href="/question/{{ question.id }}/delete" role="button">delete question</a>
-            <a class="button" href="/{{ question.id }}/new-answer" role="button">add answer</a>
+            {{ question["message"] }}
+            <p class="time">{{ question["time"] }}</p>
+            <a class="button" href="/question/{{ question['id'] }}/delete" role="button">delete question</a>
+            <a class="button" href="/{{ question['id'] }}/new-answer" role="button">add answer</a>
         </div>
         <br>
 
@@ -24,9 +24,9 @@
 
                 {% for answer in answers %}
                     <tr>
-                        <td>{{ answer.submission_time }}</td>
-                        <td><a href="/answer/{{ answer.id }}/edit">{{ answer.message }}</a></td>
-                        <td><a href="/answer/{{ answer.id }}/delete">delete</a></td>
+                        <td>{{ answer["submission_time"] }}</td>
+                        <td><a href="/answer/{{ answer["id"] }}/edit">{{ answer["message"] }}</a></td>
+                        <td><a href="/answer/{{ answer["id"] }}/delete">delete</a></td>
                     </tr>
                 {% endfor%}
             </table>

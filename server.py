@@ -9,7 +9,8 @@ app.static_folder = 'static'
 
 @app.route('/')
 def route_latest_questions():
-    latest_questions = logic.get_latest_questions()
+    #latest_questions = logic.get_latest_questions() nie pobiera nic
+    latest_questions = logic.get_questions()
     return render_template('list.html', questions=latest_questions)
 
 
