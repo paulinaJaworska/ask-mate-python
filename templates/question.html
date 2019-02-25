@@ -27,7 +27,8 @@
                     <tr>
                         <td class="time">{{ answer.submission_time }}</td>
                         <td><a href="/answer/{{ answer.id }}/edit">{{ answer.message }}</a></td>
-                        <td><a href="/answer/{{ answer.id }}/delete">delete</a></td>
+                        <td><button class="button" id="delete-button"\
+                        onclick="window.location.href='/answer/{{ answer.id }}/delete';">delete</button></td>
                     </tr>
                 {% endfor%}
             </table>
