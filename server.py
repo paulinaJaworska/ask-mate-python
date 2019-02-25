@@ -4,6 +4,7 @@ import logic
 
 
 app = Flask(__name__)
+app.static_folder = 'static'
 
 
 @app.route('/')

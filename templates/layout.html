@@ -2,12 +2,20 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Ask Mate</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <title>Ask----Mate</title>
+        <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+        <link href="{{ url_for('static' , filename='main.css') }}" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div class="content-wrapper">
-            {% block content %} {% endblock %}
+        <div class="site-wrapper">
+            <div class="header">
+                <div class="logo"><span style="color: #1587c9">ASK</span>MATEEEE</div>
+            </div>
+
+            <div class="content">
+                {% block content %} {% endblock %}
+            </div>
         </div>
+
     </body>
 </html>

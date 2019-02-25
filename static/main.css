@@ -1,0 +1,36 @@
+body
+{
+    background-color: darkorange;
+    font-family: 'Neucha', cursive;
+    font-size: 26px;
+}
+
+.site-wrapper
+{
+    width: 100%;
+}
+
+.header
+{
+    width: 100% !important;
+    height: 160px;
+    background-color: #1b1b1b;
+}
+
+.logo
+{
+    color: white;
+    width: 650px;
+    border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 35px;
+    font-style: inherit;
+}
+
+.content
+{
+    width: 80%;
+    height: 1500px;
+}
