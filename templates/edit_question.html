@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <form action="/question/{{ question['id'] }}/edit" method="POST" id="edit_form">
+        <textarea name="edit" rows="2" cols="40">{{ question['title'] }}</textarea><br>
+        <textarea name="edit" rows="10" cols="40">{{ question['message'] }}</textarea>
+    </form>
+
+    <button type="submit" form="edit_form" value="Submit">Save</button>
+
+{% endblock %}

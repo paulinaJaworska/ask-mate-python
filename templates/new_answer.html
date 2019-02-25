@@ -8,19 +8,12 @@
 
         <br>
 
-        <form action="/{{ question['id'] }}/new-answer" , method="POST">
+        <form action="/{{ question['id'] }}/new-answer" method="POST">
             <textarea name="text_answer" rows="5" cols="20">Your answer here...</textarea>
             <br>
             <input type="submit" value="Submit"></input>
         </form>
 
         <br>
-
-        {% for answer in answers %}
-        <div style="background-color:magenta;color:white;padding:20px;">
-
-            <p>{{ answer['message'] }}</p>
-        </div>
-        {% endfor %}
 
 {% endblock %}
