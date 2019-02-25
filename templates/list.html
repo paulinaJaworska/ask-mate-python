@@ -1,11 +1,10 @@
 {% extends "layout.html" %}
 
-
 {% block content %}
 
     <div class="card">
         <div class="card-body">
-            <button class="button" href="/add-question" role="button">dżast ask!</button><br>
+            <button class="button" href="question/add-question" role="button">dżast ask!</button><br>
 
             <form action="/sorted/" method="GET">sort by:
                 <label for="sort_by">name</label>
@@ -26,25 +25,27 @@
             <table class="table-content">
                 <thead class="thead-light">
                 <tr>
-                    <th scope="col">date</th>
-                    <th scope="col">question</th>
-                    <th scope="col">message</th>
-                    <th scope="col">image</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
+
                 {% for question in questions %}
                     <tr>
                         <td>{{ question.submission_time }}</td>
                         <td><a href="/question/{{ question['id'] }}">{{ question['title'] }}</a></td>
                         <td>{{ question['message'] }}</td>
-                        <td><img src="{{ question['image'] }}" alt="image.jpg" height="30"></td>
-                        <td><form action="/question/{{ question['id'] }}/delete">
-                                <input type="submit" Value="Delete">
-                            </form>
+                        <td><img src="https://goo.gl/cSNGBU" alt="image" height="50"></td>
+                        <td>
+                            <button class="button" href="/question/{{ question['id'] }}/delete" role="button">meow
+                            </button>
                         </td>
                     </tr>
                 {% endfor%}
+
             </table>
         </div>
     </div>
