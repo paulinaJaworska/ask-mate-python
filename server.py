@@ -59,6 +59,8 @@ def route_new_question():
 @app.route("/add-question", methods=['POST'])
 def new_question():
     form = request.form.to_dict()
+    print(form)
+
     question = logic.new_question(form)
     question_id = question['id']
 

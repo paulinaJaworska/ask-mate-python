@@ -6,6 +6,8 @@
             <h6 class="card-header"><a href="/question/{{ question['id'] }}/edit">Question: {{ question['title'] }}</a></h6><br>
             <div class="card-body">
                 {{ question['message'] }}
+                <br>
+                <img src = {{ question['image'] }}>
                 <p class="time">{{ question['time'] }}</p>
                 <a class="button" href="/question/{{ question['id'] }}/delete" role="button">delete question</a>
                 <a class="button" href="/{{ question['id'] }}/new-answer" role="button">add answer</a>

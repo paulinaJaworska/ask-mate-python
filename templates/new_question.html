@@ -3,11 +3,11 @@
 {% block content %}
 
     <div class="form">
-        <form action="/question/add-question/" method="POST" id="add_form">
-            <textarea name="add" rows="2" cols="40" placeholder="Your question here"></textarea><br>
-            <textarea name="add" rows="10" cols="40" placeholder="Add continuation here"></textarea>
+        <form action="/add-question" method="POST" id="add_form">
+            <textarea name="title" rows="2" cols="40" placeholder="Your question here"></textarea><br>
+            <textarea name="message" rows="10" cols="40" placeholder="Add continuation here"></textarea>
             <p>Add link to image here:</p>
-            <textarea name="add" rows="1"></textarea>
+            <textarea name="image" rows="1"></textarea>
         </form>
     </div>
 
