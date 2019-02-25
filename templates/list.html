@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 
+
 {% block content %}
 
     <div class="card">
@@ -36,10 +37,13 @@
                 {% for question in questions %}
                     <tr>
                         <td>{{ question.submission_time }}</td>
-                        <td><a href="/question/{{ questions[0]['id'] }}">{{ question.title }}</a></td>
-                        <td>{{ question.message }}</td>
-                        <td><img src="{{ question.image }}" alt="image.jpg" height="30"></td>
-                        <td><a class="button" href="/question/{{ questions[0]['id'] }}/delete" role="button">delete</a></td>
+                        <td><a href="/question/{{ question['id'] }}">{{ question['title'] }}</a></td>
+                        <td>{{ question['message'] }}</td>
+                        <td><img src="{{ question['image'] }}" alt="image.jpg" height="30"></td>
+                        <td><form action="/question/{{ question['id'] }}/delete">
+                                <input type="submit" Value="Delete">
+                            </form>
+                        </td>
                     </tr>
                 {% endfor%}
             </table>

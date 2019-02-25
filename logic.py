@@ -11,8 +11,9 @@ def get_question_by_id(_id):
 
 
 def delete_question(_id: str):
-    data_manager.delete_question(_id)
-    return None
+    _id = str(_id)
+    dicified_id = {'question_id': _id}
+    data_manager.delete_question(dicified_id)
 
 
 def sort_questions(sort_by, order):
