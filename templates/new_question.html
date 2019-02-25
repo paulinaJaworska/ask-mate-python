@@ -3,18 +3,20 @@
 {% block content %}
     <div style="background-color:mediumaquamarine;color:white;padding:20px;">
         <form action="/add-question", method="POST">
-            Title:
-            <br>
-            <input type="text" name="title" value="Title">
-            </div>
+                Title:
+                <br>
+                <input type="text" name="title" value="Title">
+
             <br>
             <div style="background-color:mediumaquamarine;color:white;padding:20px;">
-            Message:<br>
-            <textarea name="message" rows="10" cols="30" >What would you like to know?</textarea>
+                Message:<br>
+                <textarea name="message" rows="10" cols="30" >What would you like to know?</textarea>
             </div>
 
             <br><br>
             <input type="submit" value="Submit">
         </form>
+    </div>
+
 
 {% endblock %}
