@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
 
 {% block content %}
+    {% for question in question %}
+        <form action="/question/{{ question.id }}/edit" method="POST" id="edit_form">
+            <textarea name="title" rows="2" cols="40">{{ question.title }}</textarea><br>
+            <textarea name="message" rows="10" cols="40">{{ question.message }}</textarea>
+        </form>
+    {% endfor %}
+    <button class="button" type="submit" form="edit_form" value="Submit">edit</button>
 
-    <form action="/question/{{ question['id'] }}/edit" method="POST" id="edit_form">
-        <textarea name="edit" rows="2" cols="40">{{ question['title'] }}</textarea><br>
-        <textarea name="edit" rows="10" cols="40">{{ question['message'] }}</textarea>
-    </form>
-
-    <button type="submit" form="edit_form" value="Submit">Save</button>
+    {% include 'footer.html' %}
 
 {% endblock %}

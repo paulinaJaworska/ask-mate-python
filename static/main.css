@@ -1,36 +1,103 @@
-body
-{
-    background-color: darkorange;
-    font-family: 'Neucha', cursive;
-    font-size: 26px;
+body {
+    background: #ebebeb;
+    color: #333333;
+    margin: 3rem;
 }
 
-.site-wrapper
-{
-    width: 100%;
+
+h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+    font-family: 'Frank Ruhl Libre', serif;
 }
 
-.header
-{
-    width: 100% !important;
-    height: 160px;
-    background-color: #1b1b1b;
+
+#logo {
+    margin-bottom: 2rem;
+    font: 40px 'Coiny', 'Frank Ruhl Libre', serif;
+    color: rgb(110, 110, 110);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    text-shadow: 3px 3px 0 rgb(238,238,238) , 5px 5px 0 rgb(112,112,112);
 }
 
-.logo
-{
-    color: white;
-    width: 650px;
-    border-style: solid;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    font-size: 35px;
-    font-style: inherit;
+
+.card-header {
+    margin-top: 2rem;
 }
 
-.content
-{
-    width: 80%;
-    height: 1500px;
+
+.time {
+    font-size: 12px;
+    color: #4b4b4b;
+}
+
+
+.content {
+    font-family: 'Frank Ruhl Libre', serif;
+}
+
+
+/*.table {*/
+    /*font-family: 'Frank Ruhl Libre', serif;*/
+/*}*/
+
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+
+.button {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0 1.5em;
+    border: 1px solid rgb(195, 195, 195);
+    font: 1em/2em 'Frank Ruhl Libre', Helvetica, sans-serif;
+    color: rgba(114,114,114,1);
+    background: rgba(234,234,234,1);
+}
+
+
+.button:hover {
+    cursor: pointer;
+    border: 1px solid rgba(178,178,178,1);
+    color: rgba(76,76,76,1);
+    background: rgb(245, 245, 245);
+}
+
+
+.button:active {
+    position: relative;
+    cursor: default;
+    top: 1px;
+    border: 1px solid rgba(211,211,211,1);
+    color: rgba(114,114,114,1);
+    background: rgba(247,247,247,1);
+    transition: none;
+}
+
+#ask-button {
+    padding-left: 4.8rem;
+    padding-right: 4.8rem;
+    letter-spacing: 0.4rem;
+}
+
+
+#footer-button {
+    margin-top: 3rem;
+}
+
+
+#delete-button {
+    background: rgb(234, 206, 209);
+}
+
+
+#delete-button:hover {
+    background: rgb(234, 158, 157);
 }

@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
-        <div style="background-color:mediumaquamarine;color:white;padding:20px;">
-            <p> {{ question['title'] }} </p>
-            <p>{{ question['message'] }}</p>
+
+
+        <h3 class="card-header">{{ question.title }}</h3>
+        <div class="card-body">
+            <p>{{ question.message }}</p>
         </div>
 
         <br>
@@ -16,14 +18,8 @@
 
             <input type="submit" value="Submit"></input>
         </form>
+    </div>
+    <button class="button" type="submit" form="add_form" value="Submit">Add</button>
 
-        <br>
-
-        {% for answer in answers %}
-        <div style="background-color:magenta;color:white;padding:20px;">
-
-            <p>{{ answer['message'] }}</p>
-        </div>
-        {% endfor %}
-
+    {% include 'footer.html' %}
 {% endblock %}

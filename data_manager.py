@@ -47,7 +47,6 @@ def get_question_by_id(cursor, _id: str):
     question = cursor.fetchall()
     return question
 
-print(get_question_by_id('10'))
 
 @db_connection.connection_handler
 def get_answer_by_id(cursor, _id: str):
@@ -59,10 +58,21 @@ def get_answer_by_id(cursor, _id: str):
 
 
 @db_connection.connection_handler
+def get_question_id_by_answer_id(cursor, answer_id: str):
+    cursor.execute("""
+                    SELECT question_id FROM answer
+                     WHERE id=%s""", answer_id)
+    question_id = cursor.fetchall()
+    print(question_id)
+    return question_id
+
+
+@db_connection.connection_handler
 def get_answers_by_question_id(cursor, question_id: str):
+    quest_id = {'question_id': question_id}
     cursor.execute("""
                            SELECT * FROM answer
-                           WHERE question_id=%s""", question_id)
+                           WHERE question_id=%(question_id)s""", quest_id)
     answer = cursor.fetchall()
     return answer
 
@@ -74,14 +84,13 @@ def delete_question(cursor, question_id):
 
 
 @db_connection.connection_handler
-def delete_answer(cursor,_id):
-    cursor.execute("""DELETE * FROM anser
+def delete_answer(cursor, _id: str):
+    cursor.execute("""DELETE FROM answer
                       WHERE id=%s""", _id)
 
 
 @db_connection.connection_handler
 def save_new_question(cursor, question_data: dict):
-    print(question_data)
     cursor.execute("""INSERT INTO question
                       (id, submission_time, view_number, vote_number, title, message, image)
                       VALUES (%(id)s, %(submission_time)s, %(view_number)s,
@@ -103,10 +112,6 @@ def edit_question(cursor, question_data: dict):
                       WHERE id=%(id)s""", question_data)
 
 
-@db_connection.connection_handler
-def delete_answer(cursor, _id):
-    cursor.execute("""DELETE * FROM answer
-                      WHERE id=%s""", _id)
 
 
 @db_connection.connection_handler
@@ -122,5 +127,3 @@ def get_latest_five_questions(cursor):
     cursor.execute("""SELECT * FROM question
                     ORDER BY submission_time DESC
                     LIMIT 5;""")
-    five_quest = cursor.fetchall()
-    return five_quest

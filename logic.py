@@ -5,11 +5,10 @@ import datetime
 # questions
 
 
-def get_question_by_id(_id):
+def get_question_by_id(_id: str):
     question = data_manager.get_question_by_id(_id)
     return question[0]
 
-print(get_question_by_id('1'))
 
 def delete_question(_id: str):
     _id = str(_id)
@@ -77,13 +76,14 @@ def get_answer_by_id(_id):
     return answer
 
 
-def new_answer( form, question_id: str):
+def new_answer(message, question_id: str, image=None):
     answer = {}
     answer['id'] = new_answer_id()
     answer['submission_time'] = date_generator()
-    answer['image'] = form['image']
-    answer['message'] = form['message']
+    answer['message'] = message['message']
     answer['question_id'] = question_id
+    answer['vote_number'] = 0
+    answer['image'] = image
     data_manager.save_new_answer(answer)
 
 
@@ -94,3 +94,9 @@ def get_answer_by_question_id(question_id: str):
 
 def delete_answer(_id):
     data_manager.delete_answer(_id)
+
+
+def get_question_by_answer_id(answer_id):
+    question_id_dict = data_manager.get_question_id_by_answer_id(answer_id)
+    question_id = question_id_dict[0]['question_id']
+    return question_id
