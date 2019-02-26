@@ -133,3 +133,22 @@ def edit_answer(cursor, answer_data: dict):
     cursor.execute("""UPDATE answer
                       SET message =%(message)s
                       WHERE id=%(id)s""", answer_data)
+
+
+@db_connection.connection_handler
+def search_in_questions(cursor, data):
+    cursor.execute("""SELECT * FROM question
+                    WHERE title LIKE""" "'%" + data + "%' or message LIKE '%"+ data + "%';")
+    questions = cursor.fetchall()
+    return questions
+
+
+@db_connection.connection_handler
+def search_in_answers(cursor, data):
+    cursor.execute("""SELECT * FROM answer
+                    WHERE message LIKE """+"'%"+ data + "%';")
+    answers = cursor.fetchall()
+    return answers
+
+
+
