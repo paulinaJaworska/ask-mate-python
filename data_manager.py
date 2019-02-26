@@ -126,3 +126,10 @@ def get_latest_five_questions(cursor):
     cursor.execute("""SELECT * FROM question
                     ORDER BY submission_time DESC
                     LIMIT 5;""")
+
+
+@db_connection.connection_handler
+def edit_answer(cursor, answer_data: dict):
+    cursor.execute("""UPDATE answer
+                      SET message =%(message)s
+                      WHERE id=%(id)s""", answer_data)
