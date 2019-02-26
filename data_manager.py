@@ -39,13 +39,15 @@ def sort_questions(cursor, sort_by: str, order: bool):
 
 
 @db_connection.connection_handler
-def get_question_by_id(cursor, question_id: str):
+def get_question_by_id(cursor, _id: str):
+    question_id = {'question_id': _id}
     cursor.execute("""
                        SELECT * FROM question
-                       WHERE id=%s""", question_id)
+                       WHERE id=%(question_id)s""", question_id)
     question = cursor.fetchall()
     return question
 
+print(get_question_by_id('10'))
 
 @db_connection.connection_handler
 def get_answer_by_id(cursor, _id: str):

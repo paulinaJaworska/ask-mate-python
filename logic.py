@@ -7,8 +7,9 @@ import datetime
 
 def get_question_by_id(_id):
     question = data_manager.get_question_by_id(_id)
-    return question
+    return question[0]
 
+print(get_question_by_id('1'))
 
 def delete_question(_id: str):
     _id = str(_id)
@@ -76,12 +77,12 @@ def get_answer_by_id(_id):
     return answer
 
 
-def new_answer(title, message, question_id: str):
+def new_answer( form, question_id: str):
     answer = {}
     answer['id'] = new_answer_id()
     answer['submission_time'] = date_generator()
-    answer['title'] = title
-    answer['message'] = message
+    answer['image'] = form['image']
+    answer['message'] = form['message']
     answer['question_id'] = question_id
     data_manager.save_new_answer(answer)
 

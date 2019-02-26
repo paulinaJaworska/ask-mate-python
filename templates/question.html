@@ -28,6 +28,7 @@
                         <td>{{ answer[submission_time] }}</td>
                         <td><a href="/answer/{{ answer[id] }}/edit">{{ answer[message] }}</a></td>
                         <td><a href="/answer/{{ answer[id] }}/delete">delete</a></td>
+                        <td><img src = {{ answer['image'] }}></td>
                     </tr>
                 {% endfor%}
             </table>
