@@ -136,3 +136,20 @@ input[type=submit] {
     color: rgba(114,114,114,1);
     background: rgba(234,234,234,1);
 }
+
+input[type=submit]:hover {
+    cursor: pointer;
+    border: 1px solid rgba(178,178,178,1);
+    color: rgba(76,76,76,1);
+    background: rgb(245, 245, 245);
+}
+
+input[type=submit]:active {
+    position: relative;
+    cursor: default;
+    top: 1px;
+    border: 1px solid rgba(211,211,211,1);
+    color: rgba(114,114,114,1);
+    background: rgba(247,247,247,1);
+    transition: none;
+}
