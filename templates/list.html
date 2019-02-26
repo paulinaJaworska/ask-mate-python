@@ -4,6 +4,18 @@
 
     <div class="card">
         <div class="card-body">
+            <button class="button" id="ask-button" style="float: left"\
+                    onclick="window.location.href='/add-question';">just ask!</button>
+
+        <div class="searchbar">
+            <form  class="search" action="/search/" method="POST">
+                <input name="phrase" type="text" placeholder="search...">
+                <input type="submit">
+            </form>
+
+        </div>
+            <div style="clear: both"></div>
+
             <button class="button" id="ask-button"\
                     onclick="window.location.href='/add-question';">just ask!</button>
 

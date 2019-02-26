@@ -101,3 +101,55 @@ h1, h2, h3, h4, h5, h6 {
 #delete-button:hover {
     background: rgb(234, 158, 157);
 }
+
+.searchbar{
+    width: 900px;
+    float: left;
+    margin-left: 50px;
+}
+
+input[type=text]{
+    box-sizing: border-box;
+    height: 35px;
+    width: 700px;
+    border-radius: 1px;
+    border:1px solid rgb(195, 195, 195);
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0 1.5em;
+    font: 1em/2em 'Frank Ruhl Libre', Helvetica, sans-serif;
+    color: rgba(114,114,114,1);
+    background-color: rgba(234,234,234,1);
+
+}
+
+input[type=text]:focus {
+    background-color: rgb(245, 245, 245);
+}
+
+input[type=submit] {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0 1.5em;
+    border: 1px solid rgb(195, 195, 195);
+    font: 1em/2em 'Frank Ruhl Libre', Helvetica, sans-serif;
+    color: rgba(114,114,114,1);
+    background: rgba(234,234,234,1);
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+    border: 1px solid rgba(178,178,178,1);
+    color: rgba(76,76,76,1);
+    background: rgb(245, 245, 245);
+}
+
+input[type=submit]:active {
+    position: relative;
+    cursor: default;
+    top: 1px;
+    border: 1px solid rgba(211,211,211,1);
+    color: rgba(114,114,114,1);
+    background: rgba(247,247,247,1);
+    transition: none;
+}
