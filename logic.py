@@ -107,3 +107,17 @@ def edit_answer(_id, message):
     for i in item:
         i['message'] = message
     data_manager.edit_answer(i)
+
+
+def search(data: str):
+    questions = []
+    questions.append(data_manager.search_in_questions(data))
+    answers = data_manager.search_in_answers(data)
+    for i in answers:
+        answer_id = i['id']
+        questions.append(get_question_by_id(answer_id))
+    return questions
+
+
+
+

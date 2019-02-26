@@ -138,7 +138,7 @@ def edit_answer(cursor, answer_data: dict):
 @db_connection.connection_handler
 def search_in_questions(cursor, data):
     cursor.execute("""SELECT * FROM question
-                    WHERE title LIKE""" "'%" + data + "%' or message LIKE '%"+ data + "%';")
+                    WHERE title ILIKE""" "'%" + data + "%' or message ILIKE '%"+ data + "%';")
     questions = cursor.fetchall()
     return questions
 
@@ -146,7 +146,7 @@ def search_in_questions(cursor, data):
 @db_connection.connection_handler
 def search_in_answers(cursor, data):
     cursor.execute("""SELECT * FROM answer
-                    WHERE message LIKE """+"'%"+ data + "%';")
+                    WHERE message ILIKE """+"'%"+ data + "%';")
     answers = cursor.fetchall()
     return answers
 
