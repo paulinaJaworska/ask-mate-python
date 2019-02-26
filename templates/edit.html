@@ -2,35 +2,44 @@
 {% block content %}
 
     <div class="form">
-        <form action="{{ form_url }}" method="POST" name="form">
-            <textarea id="title" name="title"\
-                      placeholder="Make it short and concrete!"\
-                      rows="2" cols="60" required="required">
-                {% if edit_question %}
-                    {{ edit_question['title'] }}
-                {% endif %}</textarea><br>
+        <form action="{{ form_url }}" method="POST">
+{#            {% if button_title == 'Add Question' %}#}
+                <label for="title" class="edit-labels">Add New Question</label><br>
+                <textarea id="title" name="title" rows="2" cols="60" placeholder="Make it short and concrete!">
+                    {%- if edit_question -%}
+                        {{ edit_question['title'] }}
+                    {%- else -%}
+                        {{ '' }}
+                    {%- endif -%}
+                </textarea>
+                <br><br>
+{#            {% endif %}#}
 
-            <textarea id="message" name="message"\
-                      placeholder="Your message here"\
-                      rows="5" cols="60" required="required">
-                {% if edit_question %}
+            <label for="message" class="edit-labels">Message</label><br>
+            <textarea id="message" name="message" rows="5" cols="60" placeholder="Your message here">
+                {%- if edit_question -%}
                     {{ edit_question['message'] }}
-                {% elif edit %}
+                {%- elif edit -%}
                     {{ edit['message'] }}
-                {% endif %}</textarea><br>
+                {%- else -%}
+                    {{ '' }}
+                {%- endif -%}
+            </textarea>
+            <br><br>
 
-            <textarea id="image" name="image"\
-                      placeholder="Add link to image here"\
-                      rows="1" cols="60">
-                {% if edit_question %}
+            <label for="image" class="edit-labels">Add link to the image (optional)</label><br>
+            <textarea id="image" name="image" rows="1" cols="60">
+                {%- if edit_question -%}
                     {{ edit_question['image'] }}
-                {% elif edit %}
+                {%- elif edit -%}
                     {{ edit['image'] }}
-                {% endif %}</textarea><br>
+                {%- else -%}
+                    {{ '' }}
+                {%- endif -%}
+            </textarea>
+            <br><br>
 
-            <button type="submit" class="button">
-                {{ button_title }}
-            </button>
+            <button type="submit" class="button">{{ button_title }}</button>
         </form>
     </div>
 
