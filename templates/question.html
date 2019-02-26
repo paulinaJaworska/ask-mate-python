@@ -3,30 +3,32 @@
 {% block content %}
 
     <div class="card">
-            <h6 class="card-header"><a href="/question/{{ question['id'] }}/edit">Question: {{ question['title'] }}</a></h6><br>
-            <div class="card-body">
-                {{ question['message'] }}
-                <p class="time">{{ question['time'] }}</p>
-                <a class="button" href="/question/{{ question['id'] }}/delete" role="button">delete question</a>
-                <a class="button" href="/{{ question['id'] }}/new-answer" role="button">add answer</a>
+        <h3 class="card-header"><a href="/question/{{ question.id }}/edit">{{ question.title }}</a></h3>
+        <div class="card-body">
+            <p class="time">{{ question.submission_time }}</p>
+            <p>{{ question.message }}</p>
+            <button class="button"\
+                    onclick="window.location.href='/{{ question.id }}/new-answer';">add answer</button>
+            <button class="button" id="delete-button"\
+                    onclick="window.location.href='/question/{{ question.id }}/delete';">delete question</button>
         </div>
-        <br>
 
-        <div class="offset">
-            <table class="table-content">
-                <thead class="thead-light">
+        <div class="table">
+            <table>
+                <thead>
                 <tr>
-                    <th scope="col">date</th>
-                    <th scope="col">answer</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
 
                 {% for answer in answers %}
                     <tr>
-                        <td>{{ answer['submission_time'] }}</td>
-                        <td><a href="/answer/{{ answer['id'] }}/edit">{{ answer['message'] }}</a></td>
-                        <td><a href="/answer/{{ answer['id'] }}/delete">delete</a></td>
+                        <td class="time">{{ answer.submission_time }}</td>
+                        <td><a href="/answer/{{ answer.id }}/edit">{{ answer.message }}</a></td>
+                        <td><button class="button" id="delete-button"\
+                        onclick="window.location.href='/answer/{{ answer.id }}/delete';">delete</button></td>
                     </tr>
                 {% endfor%}
             </table>
@@ -34,5 +36,4 @@
     </div>
 
     {% include 'footer.html' %}
-        
 {% endblock %}

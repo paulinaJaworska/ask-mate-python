@@ -35,10 +35,10 @@ def question_page(question_id):
 
 @app.route('/question/<question_id>/edit', methods=['GET'])
 def route_edit_question(question_id):
-    question_details = logic.get_question_by_id(question_id)
+    question = logic.get_question_by_id(question_id)
 
-    return render_template('new_question.html',
-                           question=question_details,
+    return render_template('edit_question.html',
+                           question=question,
                            edition=True)
 
 
@@ -98,7 +98,9 @@ def sorted_condition():
     questions = logic.sort_questions(sort_by, order)
 
     return render_template('list.html',
-                           questions=questions)
+                           questions=questions,
+                           sort_by=sort_by,
+                           order=order)
 
 
 if __name__ == "__main__":
