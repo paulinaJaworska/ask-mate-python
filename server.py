@@ -130,6 +130,14 @@ def sorted_condition():
                            order=order)
 
 
+@app.route("/search/", methods=['POST'])
+def search():
+    phrase = request.form['phrase']
+    question_list = logic.search(phrase)
+    return render_template('list.html', questions = question_list)
+
+
+
 ### comment
 
 @app.route('/question/<question_id>/new-comment', methods=['GET'])
