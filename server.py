@@ -91,10 +91,10 @@ def delete_question(question_id):
 @app.route('/answer/<answer_id>/delete')
 def delete_answer(answer_id: str):
     question_id = logic.get_question_by_answer_id(answer_id)
-    print(question_id)
     logic.delete_answer(answer_id)
 
     return redirect('/question/%s'% question_id)
+
 
 @app.route("/sorted/")
 def sorted_condition():

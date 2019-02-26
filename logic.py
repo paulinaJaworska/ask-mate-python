@@ -7,7 +7,7 @@ import datetime
 
 def get_question_by_id(_id: str):
     question = data_manager.get_question_by_id(_id)
-    return question
+    return question[0]
 
 
 def delete_question(_id: str):
@@ -45,13 +45,13 @@ def date_generator():
     return str(st)
 
 
-def new_question(form: dict, image=None):
+def new_question(form: dict):
     question = {}
     question['id'] = new_question_id()
     question['submission_time'] = date_generator()
     question['title'] = form['title']
     question['message'] = form['message']
-    question['image'] = image
+    question['image'] = form['image']
     question['view_number'] = 0
     question['vote_number'] = 0
     data_manager.save_new_question(question)

@@ -28,6 +28,10 @@ def get_question_data(cursor):
 
 @db_connection.connection_handler
 def sort_questions(cursor, sort_by: str, order: bool):
+    if order:
+        order = 'DESC'
+    else:
+        order = 'ASC'
     cursor.execute("""SELECT * FROM question
                       ORDER BY """ + sort_by + " " + order)
     ordered_table = cursor.fetchall()
@@ -59,7 +63,6 @@ def get_question_id_by_answer_id(cursor, answer_id: str):
                     SELECT question_id FROM answer
                      WHERE id=%s""", answer_id)
     question_id = cursor.fetchall()
-    print(question_id)
     return question_id
 
 
@@ -106,8 +109,6 @@ def edit_question(cursor, question_data: dict):
     cursor.execute("""UPDATE question
                       SET message =%(message)s, title =%(title)s
                       WHERE id=%(id)s""", question_data)
-
-
 
 
 @db_connection.connection_handler
