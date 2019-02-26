@@ -186,14 +186,14 @@ def edit_comment(comment_id):
 
 # TAGS
 
-@app.route('/question/<question_id>/new-tag', methods='GET')
+@app.route('/question/<question_id>/new-tag', methods=['GET'])
 def route_new_tag(question_id):
     tags = logic.get_question_tags_by_question_id(question_id)
 
     return render_template('new_tag.html',
                            tags=tags)
 
-@app.route('/question/<question_id>/new-tag', methods='POST')
+@app.route('/question/<question_id>/new-tag', methods=['POST'])
 def new_tag(question_id):
     tag = request.form.to_dict()
     logic.add_new_tag(tag, question_id)
@@ -205,7 +205,7 @@ def new_tag(question_id):
 def delete_question_tag(question_id):
     logic.delete_question_tag_by_question_id(question_id)
 
-    return return redirect("/question/%s" % question_id)
+    return redirect("/question/%s" % question_id)
 
 if __name__ == "__main__":
     app.run(debug=True,
