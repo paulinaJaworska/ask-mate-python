@@ -95,7 +95,15 @@ def get_answer_by_question_id(question_id: str):
 def delete_answer(_id):
     data_manager.delete_answer(_id)
 
+
 def get_question_by_answer_id(answer_id):
     question_id_dict = data_manager.get_question_id_by_answer_id(answer_id)
     question_id = question_id_dict[0]['question_id']
     return question_id
+
+
+def edit_answer(_id, message):
+    item = get_answer_by_id(_id)
+    for i in item:
+        i['message'] = message
+    data_manager.edit_answer(i)

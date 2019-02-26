@@ -45,9 +45,29 @@ def route_edit_question(question_id):
 @app.route('/question/<question_id>/edit', methods=['POST'])
 def edit_question(question_id):
     new_data = request.form.to_dict()
-    logic.edit_question(new_data)
+    message = new_data["message"]
+    title = new_data["title"]
+    logic.edit_question(question_id, message, title)
 
-    return redirect('/question/<question_id>')
+    return redirect('/question/%s' % question_id)
+
+
+@app.route('/answer/<answer_id>/edit', methods=['GET'])
+def route_edit_answer(answer_id):
+    answer = logic.get_answer_by_id(answer_id)
+
+    return render_template('edit_answer.html',
+                           answer=answer,
+                           edition=True)
+
+
+@app.route('/answer/<answer_id>/edit', methods=['POST'])
+def edit_answer(answer_id):
+    new_data = request.form.to_dict()
+    message = new_data["message"]
+    logic.edit_answer(message)
+
+    return redirect('/answer/%s' % answer_id)
 
 
 @app.route("/add-question", methods=['GET'])
