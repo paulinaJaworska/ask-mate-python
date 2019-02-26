@@ -63,7 +63,6 @@ def get_question_id_by_answer_id(cursor, answer_id: str):
                     SELECT question_id FROM answer
                      WHERE id=%s""", answer_id)
     question_id = cursor.fetchall()
-    print(question_id)
     return question_id
 
 
@@ -110,8 +109,6 @@ def edit_question(cursor, question_data: dict):
     cursor.execute("""UPDATE question
                       SET message =%(message)s, title =%(title)s
                       WHERE id=%(id)s""", question_data)
-
-
 
 
 @db_connection.connection_handler
