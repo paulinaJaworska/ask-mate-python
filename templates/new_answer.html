@@ -2,16 +2,16 @@
 
 {% block content %}
 
-    {% for question in question %}
+
         <h3 class="card-header">{{ question.title }}</h3>
         <div class="card-body">
             <p>{{ question.message }}</p>
         </div>
-    {% endfor %}
+
 
     <div class="form">
         <form action="/{{ question.id }}/new-answer" method="POST" id="add_form">
-            <textarea name="form" rows="10" cols="40" placeholder="Add comment here"></textarea>
+            <textarea name="message" rows="10" cols="40" placeholder="Add comment here"></textarea>
         </form>
     </div>
     <button class="button" type="submit" form="add_form" value="Submit">Add</button>
