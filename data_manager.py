@@ -28,11 +28,6 @@ def get_question_data(cursor):
 
 @db_connection.connection_handler
 def sort_questions(cursor, sort_by: str, order: bool):
-    if order:
-        order = 'DESC'
-    else:
-        order = 'ASC'
-    print(order)
     cursor.execute("""SELECT * FROM question
                       ORDER BY """ + sort_by + " " + order)
     ordered_table = cursor.fetchall()
