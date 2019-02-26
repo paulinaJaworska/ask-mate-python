@@ -98,7 +98,7 @@ def route_new_answer(question_id: str):
 def new_answer(question_id):
     # save it to file
     form = request.form.to_dict()
-    logic.new_answer(question_id, form)
+    logic.new_answer(form, question_id)
 
     return redirect("/question/%s" % question_id)
 
@@ -112,7 +112,7 @@ def delete_question(question_id):
 
 @app.route('/answer/<answer_id>/delete')
 def delete_answer(answer_id: str):
-    question_id = logic.get_question_by_answer_id(answer_id)
+    question_id = logic.get_question_id_by_answer_id(answer_id)
     logic.delete_answer(answer_id)
 
     return redirect('/question/%s'% question_id)

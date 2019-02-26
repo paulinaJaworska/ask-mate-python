@@ -76,7 +76,7 @@ def get_answer_by_id(_id):
     return answer[0]
 
 
-def new_answer(question_id, form: dict):
+def new_answer(form, question_id: str, image=None):
     answer = {}
     answer['id'] = new_answer_id()
     answer['submission_time'] = date_generator()
@@ -104,7 +104,6 @@ def get_question_id_by_answer_id(answer_id):
 
 def edit_answer(_id, message, image=None):
     item = get_answer_by_id(_id)
-
     item['message'] = message
     item['image'] = image
     data_manager.edit_answer(item)
