@@ -37,8 +37,10 @@ def question_page(question_id: str):
 def route_edit_question(question_id):
     question = logic.get_question_by_id(question_id)
 
-    return render_template('edit_question.html',
-                           question=question,
+    return render_template('edit.html',
+                           form_url=url_for('route_edit_question'),
+                           edit_question=question,
+                           button_title='Save Changes',
                            edition=True)
 
 
@@ -75,7 +77,10 @@ def edit_answer(answer_id):
 @app.route("/add-question", methods=['GET'])
 def route_new_question():
 
-    return render_template('new_question.html')
+    return render_template('edit.html',
+                           form_url=url_for('route_new_question'),
+                           button_title='Add Question',
+                           )
 
 
 @app.route("/add-question", methods=['POST'])
