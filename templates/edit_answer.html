@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% for answer in answers %}
+        <form action="/answer/{{ answer.id }}/edit" method="POST" id="edit_form">
+            <textarea name="message" rows="12" cols="40">{{ answer.message }}</textarea>
+        </form>
+    {% endfor %}
+    <button class="button" type="submit" form="edit_form" value="Submit">edit</button>
+
+    {% include 'footer.html' %}
+
+{% endblock %}

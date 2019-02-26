@@ -19,6 +19,21 @@
                 <button class="button" type="submit" value="submit">sort</button>
             </form>
         </div>
+        <form action="/sorted/" method="GET">
+            <label for="sort_by">Sort by:</label>
+            <select id="sort_by" name="sort_by">
+                <option value="submission_time">time</option>
+                <option value="title">title</option>
+                <option value="vote_number">votes</option>
+                <option value="view_number">views</option>
+            </select>
+            <label for="order">order</label>
+            <select id="order" name="order">
+                <option value="False">ascending</option>
+                <option value="True">descending</option>
+            </select>
+            <button class="button" type="submit" value="Submit">sort</button>
+        </form>
 
         <div class="table">
             <table>
