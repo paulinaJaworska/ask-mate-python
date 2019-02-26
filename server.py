@@ -128,6 +128,14 @@ def sorted_condition():
                            order=order)
 
 
+@app.route("/search/", methods=['POST'])
+def search():
+    phrase = request.form['phrase']
+    question_list = logic.search(phrase)
+    return render_template('list.html', questions = question_list)
+
+
+
 if __name__ == "__main__":
     app.run(debug=True,
             port=5000)

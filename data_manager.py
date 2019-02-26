@@ -33,7 +33,6 @@ def sort_questions(cursor, sort_by: str, order: bool):
         order = 'DESC'
     else:
         order = 'ASC'
-    print(order)
     cursor.execute("""SELECT * FROM question
                       ORDER BY """ + sort_by + " " + order)
     ordered_table = cursor.fetchall()
