@@ -56,6 +56,14 @@ def get_answer_by_id(cursor, _id: str):
     answer = cursor.fetchall()
     return answer
 
+@db_connection.connection_handler
+def get_question_id_by_answer_id(cursor, answer_id: str):
+    cursor.execute("""
+                    SELECT question_id FROM answer
+                     WHERE id=%s""", answer_id)
+    question_id = cursor.fetchall()
+    print(question_id)
+    return question_id
 
 @db_connection.connection_handler
 def get_answers_by_question_id(cursor, question_id: str):
@@ -73,8 +81,8 @@ def delete_question(cursor, question_id):
 
 
 @db_connection.connection_handler
-def delete_answer(cursor,_id):
-    cursor.execute("""DELETE * FROM anser
+def delete_answer(cursor, _id: str):
+    cursor.execute("""DELETE FROM answer
                       WHERE id=%s""", _id)
 
 
@@ -101,10 +109,6 @@ def edit_question(cursor, question_data: dict):
                       WHERE id=%(id)s""", question_data)
 
 
-@db_connection.connection_handler
-def delete_answer(cursor, _id):
-    cursor.execute("""DELETE * FROM answer
-                      WHERE id=%s""", _id)
 
 
 @db_connection.connection_handler
