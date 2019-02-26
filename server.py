@@ -65,9 +65,11 @@ def route_edit_answer(answer_id):
 def edit_answer(answer_id):
     new_data = request.form.to_dict()
     message = new_data["message"]
-    logic.edit_answer(message)
+    question_id = logic.get_question_id_by_answer_id(answer_id)
+    # image = new_data["image"]  # can be enabled when image will be implemented in form
+    logic.edit_answer(answer_id, message)   # image
 
-    return redirect('/answer/%s' % answer_id)
+    return redirect('/question/%s' % question_id)
 
 
 @app.route("/add-question", methods=['GET'])
@@ -86,8 +88,8 @@ def new_question():
 
 
 @app.route("/<question_id>/new-answer", methods=['GET'])
-def route_new_answer(question_id):
-    question = logic.get_question_by_id(str(question_id))[0]
+def route_new_answer(question_id: str):
+    question = logic.get_question_by_id(question_id)
     return render_template('new_answer.html',
                            question=question)
 
@@ -96,7 +98,7 @@ def route_new_answer(question_id):
 def new_answer(question_id):
     # save it to file
     form = request.form.to_dict()
-    logic.new_answer(form, question_id)
+    logic.new_answer(question_id, form)
 
     return redirect("/question/%s" % question_id)
 

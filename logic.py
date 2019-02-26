@@ -72,18 +72,18 @@ def new_answer_id():
 
 
 def get_answer_by_id(_id):
-    answer = data_manager.get_answer_by_id
-    return answer
+    answer = data_manager.get_answer_by_id(_id)
+    return answer[0]
 
 
-def new_answer(message, question_id: str, image=None):
+def new_answer(question_id, form: dict):
     answer = {}
     answer['id'] = new_answer_id()
     answer['submission_time'] = date_generator()
-    answer['message'] = message['message']
+    answer['message'] = form['message']
     answer['question_id'] = question_id
     answer['vote_number'] = 0
-    answer['image'] = image
+    answer['image'] = form['image']
     data_manager.save_new_answer(answer)
 
 
@@ -96,14 +96,15 @@ def delete_answer(_id):
     data_manager.delete_answer(_id)
 
 
-def get_question_by_answer_id(answer_id):
+def get_question_id_by_answer_id(answer_id):
     question_id_dict = data_manager.get_question_id_by_answer_id(answer_id)
     question_id = question_id_dict[0]['question_id']
     return question_id
 
 
-def edit_answer(_id, message):
+def edit_answer(_id, message, image=None):
     item = get_answer_by_id(_id)
-    for i in item:
-        i['message'] = message
-    data_manager.edit_answer(i)
+
+    item['message'] = message
+    item['image'] = image
+    data_manager.edit_answer(item)

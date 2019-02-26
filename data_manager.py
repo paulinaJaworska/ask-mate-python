@@ -99,7 +99,7 @@ def save_new_question(cursor, question_data: dict):
 
 
 @db_connection.connection_handler
-def save_new_answer(cursor, answer_data):
+def save_new_answer(cursor, answer_data: dict):
     cursor.execute("""INSERT INTO answer
                       (id, submission_time, vote_number, question_id, message, image)
                       VALUES (%(id)s, %(submission_time)s, %(vote_number)s, %(question_id)s,
