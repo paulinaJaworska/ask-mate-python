@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="form">
+        <form action="{{ form_url }}" method="post">
+            <textarea id="title" name="title"\
+                      placeholder="Make it short and concrete!"\
+                      rows="2" cols="60" required="required">
+                {% if edit_question %}
+                    {{ edit_question['title'] }}
+                {% endif %}
+            </textarea><br>
+
+            <textarea id="message" name="message"\
+                      placeholder="Your message here"\
+                      rows="5" cols="60" required="required">
+                {% if edit %}
+                    {{ edit['message'] }}
+                {% endif %}
+            </textarea>
+            <textarea id="image" name="image"\
+                      placeholder="Add link to image here"\
+                      rows="1" cols="60">
+                {% if edit %}
+                    {{ edit['image'] }}
+                {% endif %}
+            </textarea>
+            <button type="submit" class="button">
+                {{ button_title }}
+            </button>
+        </form>
+    </div>
+
+    {% include 'footer.html' %}
+{% endblock %}
