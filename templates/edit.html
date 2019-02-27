@@ -3,17 +3,13 @@
 
     <div class="form">
         <form action="{{ form_url }}" method="POST">
-{#            {% if button_title == 'Add Question' %}#}
-                <label for="title" class="edit-labels">Add New Question</label><br>
+            {% if edit_question %}
+                <label for="title" class="edit-labels">Question</label><br>
                 <textarea id="title" name="title" rows="2" cols="60" placeholder="Make it short and concrete!">
-                    {%- if edit_question -%}
-                        {{ edit_question['title'] }}
-                    {%- else -%}
-                        {{ '' }}
-                    {%- endif -%}
+                    {{- edit_question['title'] -}}
                 </textarea>
                 <br><br>
-{#            {% endif %}#}
+            {% endif %}
 
             <label for="message" class="edit-labels">Message</label><br>
             <textarea id="message" name="message" rows="5" cols="60" placeholder="Your message here">
@@ -21,8 +17,6 @@
                     {{ edit_question['message'] }}
                 {%- elif edit -%}
                     {{ edit['message'] }}
-                {%- else -%}
-                    {{ '' }}
                 {%- endif -%}
             </textarea>
             <br><br>
@@ -33,8 +27,6 @@
                     {{ edit_question['image'] }}
                 {%- elif edit -%}
                     {{ edit['image'] }}
-                {%- else -%}
-                    {{ '' }}
                 {%- endif -%}
             </textarea>
             <br><br>

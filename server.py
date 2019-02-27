@@ -29,6 +29,7 @@ def route_new_question():
 
     return render_template('edit.html',
                            form_url=url_for('route_new_question'),
+                           edit_question={'title': ''},
                            button_title='Add Question',
                            )
 
@@ -91,8 +92,8 @@ def edit_answer(answer_id):
     new_data = request.form.to_dict()
     message = new_data["message"]
     question_id = logic.get_question_id_by_answer_id(answer_id)
-    # image = new_data["image"]  # can be enabled when image will be implemented in form
-    logic.edit_answer(answer_id, message)   # image
+    image = new_data["image"]
+    logic.edit_answer(answer_id, message, image)
 
     return redirect('/question/%s' % question_id)
 
@@ -174,7 +175,7 @@ def route_new_answer_comment():
 def new_answer_comment(answer_id):
     comment = request.form.to_dict()
     question_id = logic.get_question_id_by_answer_id(answer_id)
-    logic.add_new_answer_comment(comment, answer_id)
+    logic.add_new_answer_comment(comment, answer_id, question_id)
 
     return redirect("/question/%s" % question_id)
 
