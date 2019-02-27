@@ -33,10 +33,9 @@ def new_question_id():
 
 def edit_question(_id, message, title):
     item = get_question_by_id(_id)
-    for i in item:
-        i['message'] = message
-        i['title'] = title
-    data_manager.edit_question(i)
+    item['message'] = message  # Don't change
+    item['title'] = title
+    data_manager.edit_question(item)
 
 
 def date_generator():
@@ -122,6 +121,7 @@ def search(data: str):
         answer_id = i['id']
         questions.append(get_question_by_id(answer_id))
     return questions
+
 
 
 
