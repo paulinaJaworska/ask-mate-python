@@ -4,8 +4,8 @@
 
     <div class="card">
         <div class="card-body">
+            <div class="question-title">{{ question['title'] }}</div>
             <div class="time">{{ question['submission_time'] }}</div>
-            <h2>{{ question['title'] }}</h2>
             <p>{{ question['message'] }}</p>
             <img class="images" src={{ question['image'] }}><br>
             {% for comment in comments %}
@@ -28,23 +28,38 @@
                     onclick="window.location.href='/question/{{ question['id'] }}/edit';">edit question</button>
             <button class="button" id="delete-button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>
-        </div>
-        <br>
+            <br><br><br>
 
-        <h3>Answers</h3>
-        {% for answer in answers %}
-            <div class="table">
-                <table>
-                    <tr>
-                        <td class="time">{{ answer['submission_time'] }}</td>
-                        <td>{{ answer['message'] }}<br>
-                            <img class="images" src={{ answer['image'] }}></td>
-                        <td><button class="button" id="delete-button"\
-                            onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button></td>
-                    </tr>
-                </table>
-            </div>
-        {% endfor%}
+
+            {% if answers %}
+                <div class="answers-header">Answers</div>
+            {% endif %}
+            {% for answer in answers %}
+                <br>
+                <div class="time">{{ answer['submission_time'] }}</div>
+                <div>{{ answer['message'] }}</div>
+                <img class="images" src={{ answer['image'] }}><br>
+                <button class="button"\
+                        onclick="window.location.href='/answer/{{ answer['id'] }}/edit';">edit</button>
+                <button class="button" id="delete-button"\
+                        onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button>
+                <button class="button"\
+                    onclick="window.location.href='/answer/{{ answer['id'] }}/new-comment';">add comment</button>
+                <br><br>
+                {% for comment in comments %}
+                    <div class="table">
+                        <table>
+                            <tr>
+                                <td class="time">{{ comment['submission_time'] }}</td>
+                                <td>{{ comment['message'] }}</td>
+                                <td><button class="button" id="delete-button"\
+                                            onclick="window.location.href='/question/{{ comment['id'] }}/delete';">delete</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor%}
+            {% endfor%}
+        </div>
     </div>
 
     {% include 'footer.html' %}

@@ -25,8 +25,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.card-header {
-    margin-top: 2rem;
+.question-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.answers-header {
+    font-size: 22px;
+    font-weight: bold;
 }
 
 
