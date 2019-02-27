@@ -108,7 +108,7 @@ def save_new_answer(cursor, answer_data: dict):
 @db_connection.connection_handler
 def edit_question(cursor, question_data: dict):
     cursor.execute("""UPDATE question
-                      SET message =%(message)s, title =%(title)s
+                      SET message = %(message)s, title = %(title)s, image = %(image)s
                       WHERE id=%(id)s""", question_data)
 
 
@@ -150,6 +150,36 @@ def search_in_answers(cursor, data):
                     WHERE message ILIKE """+"'%"+ data + "%';")
     answers = cursor.fetchall()
     return answers
+
+# COMMENT
+@db_connection.connection_handler
+def delete_comment(cursor, comment_id):
+    cursor.execute("""DELETE FROM comment 
+                    WHERE id =%s;""", comment_id)
+
+
+@db_connection.connection_handler
+def add_comment(cursor, data: dict):
+    cursor.execute("""INSERT INTO comment
+                      ( question_id, answer_id, message, submission_time, edited_count)
+                      VALUES ( %(question_id)s, %(answer_id)s, %(message)s,
+                       %(submission_time)s, %(edited_count)s)""", data)
+
+@db_connection.connection_handler
+def get_comment_by_id(cursor, _id: str):
+        cursor.execute("""SELECT * FROM comment 
+                        WHERE id =%s;""", _id)
+        comment = cursor.fetchall()
+        return comment
+
+@db_connection.connection_handler
+def edit_comment(cursor, data):
+    cursor.execute("""UPDATE comment
+                      SET message =%(message)s, 
+                      edited_count = +1,
+                      submission_time = %(submission_time)s
+                      WHERE id=%(id)s""", data)
+
 
 
 ## TAGS

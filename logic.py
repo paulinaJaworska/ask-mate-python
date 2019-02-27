@@ -31,10 +31,11 @@ def new_question_id():
     return last_id + 1
 
 
-def edit_question(_id, message, title):
+def edit_question(_id, message, title, image):
     item = get_question_by_id(_id)
     item['message'] = message  # Don't change
     item['title'] = title
+    item['image'] = image
     data_manager.edit_question(item)
 
 
@@ -122,6 +123,35 @@ def search(data: str):
         questions.append(get_question_by_id(answer_id))
     return questions
 
+# COMMENT
+
+def add_comment(message : str, question_id = None, answer_id = None):
+    comment = {}
+    comment['submission_time'] = date_generator()
+    comment['message'] = message
+    comment['question_id'] = question_id
+    comment['answer_id'] = answer_id
+    comment['vote_number'] = 0
+    comment['edited_count'] = 0
+    print(comment)
+    data_manager.add_comment(comment)
+
+def delete_comment(comment_id):
+    data_manager.delete_comment(comment_id)
+
+
+def get_comment_by_id(_id):
+    data = data_manager.get_comment_by_id(_id)
+    return data
+
+
+def edit_comment(_id: str, message: str):
+    data = {}
+    data['id'] = _id
+    data['message']= message
+    data['submission_time'] = date_generator()
+    print(data)
+    data_manager.edit_comment(data)
 
 ### TAGS
 def new_tag_id():

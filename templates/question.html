@@ -3,38 +3,62 @@
 {% block content %}
 
     <div class="card">
-        <h3 class="card-header"><a href="/question/{{ question['id'] }}/edit">{{ question['title'] }}</a></h3>
         <div class="card-body">
-            <br>
-{#              <img src = {{ question['image'] }}>#}
-                <p class="time">{{ question['submission_time'] }}</p>
+            <div class="question-title">{{ question['title'] }}</div>
+            <div class="time">{{ question['submission_time'] }}</div>
             <p>{{ question['message'] }}</p>
+            <img class="images" src={{ question['image'] }}><br>
+            {% for comment in comments %}
+                <div class="table">
+                    <table>
+                        <tr>
+                            <td class="time">{{ comment['submission_time'] }}</td>
+                            <td>{{ comment['message'] }}</td>
+                            <td><button class="button" id="delete-button"\
+                            onclick="window.location.href='/question/{{ comment['id'] }}/delete';">delete</button></td>
+                        </tr>
+                    </table>
+                </div>
+            {% endfor%}
             <button class="button"\
                     onclick="window.location.href='/{{ question['id'] }}/new-answer';">add answer</button>
+            <button class="button"\
+                    onclick="window.location.href='/question/{{ question['id'] }}/new-comment';">add comment</button>
+            <button class="button"\
+                    onclick="window.location.href='/question/{{ question['id'] }}/edit';">edit question</button>
             <button class="button" id="delete-button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>
-        </div>
+            <br><br><br>
 
-        <div class="table">
-            <table>
-                <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
 
-                {% for answer in answers %}
-                    <tr>
-                        <td class="time">{{ answer.submission_time }}</td>
-                        <td><a href="/answer/{{ answer['id'] }}/edit">{{ answer['message'] }}</a></td>
-                        <td><button class="button" id="delete-button"\
-                        onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button></td>
-                        <td><img src = {{ answer['image'] }}></td>
-                    </tr>
+            {% if answers %}
+                <div class="answers-header">Answers</div>
+            {% endif %}
+            {% for answer in answers %}
+                <br>
+                <div class="time">{{ answer['submission_time'] }}</div>
+                <div>{{ answer['message'] }}</div>
+                <img class="images" src={{ answer['image'] }}><br>
+                <button class="button"\
+                        onclick="window.location.href='/answer/{{ answer['id'] }}/edit';">edit</button>
+                <button class="button" id="delete-button"\
+                        onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button>
+                <button class="button"\
+                    onclick="window.location.href='/answer/{{ answer['id'] }}/new-comment';">add comment</button>
+                <br><br>
+                {% for comment in comments %}
+                    <div class="table">
+                        <table>
+                            <tr>
+                                <td class="time">{{ comment['submission_time'] }}</td>
+                                <td>{{ comment['message'] }}</td>
+                                <td><button class="button" id="delete-button"\
+                                            onclick="window.location.href='/question/{{ comment['id'] }}/delete';">delete</button></td>
+                            </tr>
+                        </table>
+                    </div>
                 {% endfor%}
-            </table>
+            {% endfor%}
         </div>
     </div>
 

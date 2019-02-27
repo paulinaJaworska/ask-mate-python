@@ -2,6 +2,8 @@ body {
     background: #ebebeb;
     color: #333333;
     margin: 3rem;
+    position: relative;
+    padding-bottom: 6rem;
 }
 
 
@@ -12,6 +14,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 #logo {
+    cursor: pointer;
     margin-bottom: 2rem;
     font: 40px 'Coiny', 'Frank Ruhl Libre', serif;
     color: rgb(110, 110, 110);
@@ -22,8 +25,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.card-header {
-    margin-top: 2rem;
+.question-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.answers-header {
+    font-size: 22px;
+    font-weight: bold;
 }
 
 
@@ -38,9 +48,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/*.table {*/
-    /*font-family: 'Frank Ruhl Libre', serif;*/
-/*}*/
+.images {
+    max-width: 400px;
+}
 
 
 .content-section {
@@ -94,8 +104,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-#footer-button {
-    margin-top: 3rem;
+#footer {
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0 1.5em;
+    border: 1px solid rgb(195, 195, 195);
+    font: 1em/2em 'Frank Ruhl Libre', Helvetica, sans-serif;
+    color: rgba(114,114,114,1);
+    background-color: #c0c0c0;
+}
+
+
+#footer:hover {
+    background: #dddddd;
 }
 
 
