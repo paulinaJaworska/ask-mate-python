@@ -174,7 +174,7 @@ def route_new_answer_comment():
 def new_answer_comment(answer_id):
     comment = request.form.to_dict()
     question_id = logic.get_question_id_by_answer_id(answer_id)
-    logic.add_new_answer_comment(comment, answer_id)
+    logic.add_new_answer_comment(comment, answer_id, question_id)
 
     return redirect("/question/%s" % question_id)
 
