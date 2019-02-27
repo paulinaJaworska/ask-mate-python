@@ -106,9 +106,9 @@ def edit_answer(_id, message, image=None):
     item['message'] = message
     item['image'] = image
     data_manager.edit_answer(item)
-    for i in item:
-        i['message'] = message
-    data_manager.edit_answer(i)
+    #for i in item:
+    item['message'] = message
+    data_manager.edit_answer(item)
 
 
 def search(data: str):
@@ -123,6 +123,31 @@ def search(data: str):
     return questions
 
 
+### TAGS
+def new_tag_id():
+    last_id = data_manager.last_tag_id()
+    return last_id + 1
+
+def get_question_tags_by_question_id(question_id):
+    tags_data = data_manager.get_guestion_tags_by_question_id(question_id)
+
+    return tags_data
+
+def add_new_tag(form, question_id):
+    tag_data = {}
+    tag_data['id'] = new_tag_id()
+    tag_names_dict = get_unique_tag_names(cursor)
+    # dla listy słowników
+    names = []
+    for i in tag_names_dict:
+        names.append(i['name'])
+    if form['name'] in names:
+        data_manager.save_new_question_tag(question_id)
+    else:
+        tag_data['name'] = form['name']
+        data_manager.save_new_tag_and_question_tag(tag_data, question_id)
 
 
+def delete_question_tag_by_question_id(question_id, tag_id):
+    data_manager.delete_question_tag(question_id, tag_id)
 
