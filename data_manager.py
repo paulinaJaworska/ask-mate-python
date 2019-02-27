@@ -224,8 +224,8 @@ def save_new_question_tag(cursor, tag_data: dict, question_id):
 
 
 # delete from tag and question
+#
 def delete_question_tag(cursor, question_id, tag_id):
     cursor.execute("""DELETE FROM qestion_tag
-                      WHERE id = %(question_id)s;
-                      """, question_id
-            """)
+                      WHERE question_id = %(question_id)s 
+                        AND tag_id = %(tag_id)s;""", question_id, tag_id)

@@ -125,7 +125,7 @@ def search(data: str):
 
 # COMMENT
 
-def add_comment(message : str, question_id = None, answer_id = None):
+def add_comment_to_answer(message : str, question_id = None, answer_id = None):
     comment = {}
     comment['submission_time'] = date_generator()
     comment['message'] = message
@@ -166,8 +166,8 @@ def get_question_tags_by_question_id(question_id):
 def add_new_tag(form, question_id):
     tag_data = {}
     tag_data['id'] = new_tag_id()
-    tag_names_dict = get_unique_tag_names(cursor)
-    # dla listy słowników
+    tag_names_dict = data_manager.get_unique_tag_names()
+
     names = []
     for i in tag_names_dict:
         names.append(i['name'])

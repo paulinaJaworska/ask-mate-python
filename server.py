@@ -225,12 +225,11 @@ def new_tag(question_id):
     return redirect("/question/%s" % question_id)
 
 
-@app.route('/question/<question_id>/tag/<tag_id>/delete')
+@app.route('/question/<question_id>/tag/<tag_id>/delete', methods=['POST'])
 def delete_question_tag(question_id, tag_id):
     logic.delete_question_tag_by_question_id(question_id, tag_id)
 
     return redirect("/question/%s" % question_id)
-
 
 
 if __name__ == "__main__":
