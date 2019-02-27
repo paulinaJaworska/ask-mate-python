@@ -38,9 +38,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/*.table {*/
-    /*font-family: 'Frank Ruhl Libre', serif;*/
-/*}*/
+.images {
+    max-width: 400px;
+}
 
 
 .content-section {
