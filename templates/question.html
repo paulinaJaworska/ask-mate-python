@@ -11,28 +11,20 @@
             <button class="button"\
                     onclick="window.location.href='/{{ question['id'] }}/new-answer';">add answer</button>
             <button class="button"\
-                    onclick="window.location.href='/{{ question['id'] }}/edit';">edit question</button>
+                    onclick="window.location.href='/question/{{ question['id'] }}/edit';">edit question</button>
             <button class="button" id="delete-button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>
         </div>
 
         <div class="table">
             <table>
-                <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-
                 {% for answer in answers %}
                     <tr>
-                        <td class="time">{{ answer.submission_time }}</td>
-                        <td><a href="/answer/{{ answer['id'] }}/edit">{{ answer['message'] }}</a></td>
-                        <td><button class="button" id="delete-button"\
-                        onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button></td>
-                        <td><img class="images" src={{ answer['image'] }}></td>
+                        <td class="time">{{ answer['submission_time'] }}</td>
+                        <td>{{ answer['message'] }}<br>
+                            <img class="images" src={{ answer['image'] }}></td>
+                        <tr><button class="button" id="delete-button"\
+                            onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button></tr>
                     </tr>
                 {% endfor%}
             </table>
