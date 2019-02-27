@@ -165,5 +165,21 @@ def add_comment(cursor, data: dict):
                       VALUES ( %(question_id)s, %(answer_id)s, %(message)s,
                        %(submission_time)s, %(edited_count)s)""", data)
 
+@db_connection.connection_handler
+def get_comment_by_id(cursor, _id: str):
+        cursor.execute("""SELECT * FROM comment 
+                        WHERE id =%s;""", _id)
+        comment = cursor.fetchall()
+        return comment
+
+@db_connection.connection_handler
+def edit_comment(cursor, data):
+    cursor.execute("""UPDATE comment
+                      SET message =%(message)s, 
+                      edited_count = +1,
+                      submission_time = %(submission_time)s
+                      WHERE id=%(id)s""", data)
+
+
 
 

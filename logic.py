@@ -139,9 +139,19 @@ def add_comment(message : str, question_id = None, answer_id = None):
 def delete_comment(comment_id):
     data_manager.delete_comment(comment_id)
 
-delete_comment('4')
+
+def get_comment_by_id(_id):
+    data = data_manager.get_comment_by_id(_id)
+    return data
 
 
+def edit_comment(_id: str, message: str):
+    data = {}
+    data['id'] = _id
+    data['message']= message
+    data['submission_time'] = date_generator()
+    print(data)
+    data_manager.edit_comment(data)
 
 
 
