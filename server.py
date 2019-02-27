@@ -70,7 +70,8 @@ def edit_question(question_id):
     new_data = request.form.to_dict()
     message = new_data["message"]
     title = new_data["title"]
-    logic.edit_question(question_id, message, title)
+    image = new_data["image"]
+    logic.edit_question(question_id, message, title, image)
 
     return redirect('/question/%s' % question_id)
 

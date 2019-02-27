@@ -31,10 +31,11 @@ def new_question_id():
     return last_id + 1
 
 
-def edit_question(_id, message, title):
+def edit_question(_id, message, title, image):
     item = get_question_by_id(_id)
     item['message'] = message  # Don't change
     item['title'] = title
+    item['image'] = image
     data_manager.edit_question(item)
 
 

@@ -108,7 +108,7 @@ def save_new_answer(cursor, answer_data: dict):
 @db_connection.connection_handler
 def edit_question(cursor, question_data: dict):
     cursor.execute("""UPDATE question
-                      SET message =%(message)s, title =%(title)s
+                      SET message = %(message)s, title = %(title)s, image = %(image)s
                       WHERE id=%(id)s""", question_data)
 
 

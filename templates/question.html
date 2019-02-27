@@ -16,19 +16,19 @@
                     onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>
         </div>
 
-        <div class="table">
-            <table>
-                {% for answer in answers %}
+        {% for answer in answers %}
+            <div class="table">
+                <table>
                     <tr>
                         <td class="time">{{ answer['submission_time'] }}</td>
                         <td>{{ answer['message'] }}<br>
                             <img class="images" src={{ answer['image'] }}></td>
-                        <tr><button class="button" id="delete-button"\
-                            onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button></tr>
+                        <td><button class="button" id="delete-button"\
+                            onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button></td>
                     </tr>
-                {% endfor%}
-            </table>
-        </div>
+                </table>
+            </div>
+        {% endfor%}
     </div>
 
     {% include 'footer.html' %}
