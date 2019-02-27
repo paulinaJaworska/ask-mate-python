@@ -9,10 +9,10 @@ app.static_folder = 'static'
 
 @app.route('/')
 def route_latest_questions():
-    # latest_questions = logic.get_latest_questions()
-    latest_questions = logic.get_questions()
+    latest_questions = logic.get_latest_questions()
     return render_template('list.html',
-                           questions=latest_questions)
+                           form_url=url_for('route_latest_questions'),
+                           latest_questions=latest_questions)
 
 
 @app.route('/list')
@@ -20,7 +20,26 @@ def index():
     questions = logic.get_questions()
 
     return render_template('list.html',
+                           form_url=url_for('index'),
                            questions=questions)
+
+
+@app.route("/add-question", methods=['GET'])
+def route_new_question():
+
+    return render_template('edit.html',
+                           form_url=url_for('route_new_question'),
+                           button_title='Add Question',
+                           )
+
+
+@app.route("/add-question", methods=['POST'])
+def new_question():
+    form = request.form.to_dict()
+    question = logic.new_question(form)
+    question_id = question['id']
+
+    return redirect('/question/%s' % question_id)
 
 
 @app.route('/question/<question_id>')
@@ -37,8 +56,11 @@ def question_page(question_id: str):
 def route_edit_question(question_id):
     question = logic.get_question_by_id(question_id)
 
-    return render_template('edit_question.html',
-                           question=question,
+    return render_template('edit.html',
+                           form_url=url_for('route_edit_question',
+                                            question_id=question_id),
+                           edit_question=question,
+                           button_title='Save Changes',
                            edition=True)
 
 
@@ -56,8 +78,11 @@ def edit_question(question_id):
 def route_edit_answer(answer_id):
     answer = logic.get_answer_by_id(answer_id)
 
-    return render_template('edit_answer.html',
-                           answer=answer,
+    return render_template('edit.html',
+                           form_url=url_for('route_edit_answer',
+                                            answer_id=answer_id),
+                           edit=answer,
+                           button_title='Save Changes',
                            edition=True)
 
 
@@ -72,25 +97,11 @@ def edit_answer(answer_id):
     return redirect('/question/%s' % question_id)
 
 
-@app.route("/add-question", methods=['GET'])
-def route_new_question():
-
-    return render_template('new_question.html')
-
-
-@app.route("/add-question", methods=['POST'])
-def new_question():
-    form = request.form.to_dict()
-    question = logic.new_question(form)
-    question_id = question['id']
-
-    return redirect("/question/%s" % question_id)
-
-
 @app.route("/<question_id>/new-answer", methods=['GET'])
 def route_new_answer(question_id: str):
     question = logic.get_question_by_id(question_id)
-    return render_template('new_answer.html',
+
+    return render_template('edit.html',
                            question=question)
 
 
@@ -133,9 +144,10 @@ def sorted_condition():
 @app.route("/search/", methods=['POST'])
 def search():
     phrase = request.form['phrase']
-    question_list = logic.search(phrase)
-    return render_template('list.html', questions = question_list)
+    question_search = logic.search(phrase)
 
+    return render_template('list.html',
+                           question_search=question_search)
 
 
 ### comment

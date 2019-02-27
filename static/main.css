@@ -52,6 +52,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+.edit-labels {
+    font-size: small;
+    color: rgba(114,114,114,1);
+}
+
+
 .button {
     display: inline-block;
     margin-top: 0.5rem;
@@ -102,10 +108,8 @@ h1, h2, h3, h4, h5, h6 {
     background: rgb(234, 158, 157);
 }
 
-.searchbar{
-    width: 900px;
-    float: left;
-    margin-left: 50px;
+.search-bar {
+    width: 300px;
 }
 
 input[type=text]{
@@ -113,7 +117,7 @@ input[type=text]{
     height: 35px;
     width: 700px;
     border-radius: 1px;
-    border:1px solid rgb(195, 195, 195);
+    border: 1px solid rgb(195, 195, 195);
     display: inline-block;
     margin-top: 0.5rem;
     padding: 0 1.5em;

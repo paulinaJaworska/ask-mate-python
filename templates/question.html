@@ -3,16 +3,16 @@
 {% block content %}
 
     <div class="card">
-        <h3 class="card-header"><a href="/question/{{ question.id }}/edit">{{ question.title }}</a></h3>
+        <h3 class="card-header"><a href="/question/{{ question['id'] }}/edit">{{ question['title'] }}</a></h3>
         <div class="card-body">
             <br>
-                <img src = {{ question['image'] }}>
-                <p class="time">{{ question.submission_time }}</p>
-            <p>{{ question.message }}</p>
+{#              <img src = {{ question['image'] }}>#}
+                <p class="time">{{ question['submission_time'] }}</p>
+            <p>{{ question['message'] }}</p>
             <button class="button"\
-                    onclick="window.location.href='/{{ question.id }}/new-answer';">add answer</button>
+                    onclick="window.location.href='/{{ question['id'] }}/new-answer';">add answer</button>
             <button class="button" id="delete-button"\
-                    onclick="window.location.href='/question/{{ question.id }}/delete';">delete question</button>
+                    onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>
         </div>
 
         <div class="table">
@@ -28,9 +28,9 @@
                 {% for answer in answers %}
                     <tr>
                         <td class="time">{{ answer.submission_time }}</td>
-                        <td><a href="/answer/{{ answer.id }}/edit">{{ answer.message }}</a></td>
+                        <td><a href="/answer/{{ answer['id'] }}/edit">{{ answer['message'] }}</a></td>
                         <td><button class="button" id="delete-button"\
-                        onclick="window.location.href='/answer/{{ answer.id }}/delete';">delete</button></td>
+                        onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button></td>
                         <td><img src = {{ answer['image'] }}></td>
                     </tr>
                 {% endfor%}
