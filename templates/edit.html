@@ -4,7 +4,7 @@
     <div class="form">
         <form action="{{ form_url }}" method="POST">
             {% if edit_question %}
-                <label for="title" class="edit-labels">Add New Question</label><br>
+                <label for="title" class="edit-labels">Question</label><br>
                 <textarea id="title" name="title" rows="2" cols="60" placeholder="Make it short and concrete!">
                     {{- edit_question['title'] -}}
                 </textarea>

@@ -29,6 +29,7 @@ def route_new_question():
 
     return render_template('edit.html',
                            form_url=url_for('route_new_question'),
+                           edit_question={'title': ''},
                            button_title='Add Question',
                            )
 
