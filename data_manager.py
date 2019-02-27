@@ -151,5 +151,19 @@ def search_in_answers(cursor, data):
     answers = cursor.fetchall()
     return answers
 
+# COMMENT
+@db_connection.connection_handler
+def delete_comment(cursor, comment_id):
+    cursor.execute("""DELETE FROM comment 
+                    WHERE id =%s;""", comment_id)
+
+
+@db_connection.connection_handler
+def add_comment(cursor, data: dict):
+    cursor.execute("""INSERT INTO comment
+                      ( question_id, answer_id, message, submission_time, edited_count)
+                      VALUES ( %(question_id)s, %(answer_id)s, %(message)s,
+                       %(submission_time)s, %(edited_count)s)""", data)
+
 
 

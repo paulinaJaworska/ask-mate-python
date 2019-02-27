@@ -123,6 +123,25 @@ def search(data: str):
         questions.append(get_question_by_id(answer_id))
     return questions
 
+# COMMENT
+
+def add_comment(message : str, question_id = None, answer_id = None):
+    comment = {}
+    comment['submission_time'] = date_generator()
+    comment['message'] = message
+    comment['question_id'] = question_id
+    comment['answer_id'] = answer_id
+    comment['vote_number'] = 0
+    comment['edited_count'] = 0
+    print(comment)
+    data_manager.add_comment(comment)
+
+def delete_comment(comment_id):
+    data_manager.delete_comment(comment_id)
+
+delete_comment('4')
+
+
 
 
 
