@@ -3,14 +3,15 @@
 {% block content %}
 
     <div class="card">
-        <h3 class="card-header"><a href="/question/{{ question['id'] }}/edit">{{ question['title'] }}</a></h3>
+        <h3 class="card-header">{{ question['title'] }}</h3>
         <div class="card-body">
-            <br>
-{#              <img src = {{ question['image'] }}>#}
-                <p class="time">{{ question['submission_time'] }}</p>
+            <img class="images" src={{ question['image'] }}>
             <p>{{ question['message'] }}</p>
+            <p class="time">{{ question['submission_time'] }}</p>
             <button class="button"\
                     onclick="window.location.href='/{{ question['id'] }}/new-answer';">add answer</button>
+            <button class="button"\
+                    onclick="window.location.href='/{{ question['id'] }}/edit';">edit question</button>
             <button class="button" id="delete-button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>
         </div>
@@ -31,7 +32,7 @@
                         <td><a href="/answer/{{ answer['id'] }}/edit">{{ answer['message'] }}</a></td>
                         <td><button class="button" id="delete-button"\
                         onclick="window.location.href='/answer/{{ answer['id'] }}/delete';">delete</button></td>
-                        <td><img src = {{ answer['image'] }}></td>
+                        <td><img class="images" src={{ answer['image'] }}></td>
                     </tr>
                 {% endfor%}
             </table>
