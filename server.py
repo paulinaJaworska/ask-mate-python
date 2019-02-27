@@ -150,14 +150,14 @@ def search():
                            question_search=question_search)
 
 
-### comment
+# COMMENTS
 
 @app.route('/question/<question_id>/new-comment', methods=['GET'])
 def route_new_question_comment():
     return render_template('question_new_comment.html')
 
 
-@app.route('/question/<question_id>/new-comment', methods = ['POST'])
+@app.route('/question/<question_id>/new-comment', methods=['POST'])
 def new_question_comment(question_id):
     comment = request.form.to_dict()
     logic.add_new_question_comment(comment, question_id)
@@ -169,7 +169,8 @@ def route_new_answer_comment():
 
     return render_template('answer_new_comment.html')
 
-@app.route('/answer/<answer_id>/new-comment', methods = ['POST'])
+
+@app.route('/answer/<answer_id>/new-comment', methods=['POST'])
 def new_answer_comment(answer_id):
     comment = request.form.to_dict()
     question_id = logic.get_question_id_by_answer_id(answer_id)
@@ -177,7 +178,8 @@ def new_answer_comment(answer_id):
 
     return redirect("/question/%s" % question_id)
 
-@app.route('/comments/<comment_id>/edit', methods= ['GET'])
+
+@app.route('/comments/<comment_id>/edit', methods=['GET'])
 def route_edit_comment(comment_id):
     comment = logic.get_comment_by_id(comment_id)
 
@@ -185,7 +187,7 @@ def route_edit_comment(comment_id):
                            comment=comment)
 
 
-@app.route('/comments/<comment_id>/edit', methods= ['POST'])
+@app.route('/comments/<comment_id>/edit', methods=['POST'])
 def edit_comment(comment_id):
     edited_count = logic.get_edited_count() + 1
 
@@ -196,6 +198,7 @@ def edit_comment(comment_id):
 
     return redirect("/question/%s" % question_id)
 
+
 # TAGS
 
 @app.route('/question/<question_id>/new-tag', methods=['GET'])
@@ -204,6 +207,7 @@ def route_new_tag(question_id):
 
     return render_template('new_tag.html',
                            tags=tags)
+
 
 @app.route('/question/<question_id>/new-tag', methods=['POST'])
 def new_tag(question_id):
@@ -218,6 +222,7 @@ def delete_question_tag(question_id):
     logic.delete_question_tag_by_question_id(question_id)
 
     return redirect("/question/%s" % question_id)
+
 
 if __name__ == "__main__":
     app.run(debug=True,
