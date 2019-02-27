@@ -103,7 +103,8 @@ def route_new_answer(question_id: str):
     question = logic.get_question_by_id(question_id)
 
     return render_template('edit.html',
-                           question=question)
+                           question=question,
+                           button_title='Add Answer')
 
 
 @app.route("/<question_id>/new-answer", methods=['POST'])
