@@ -91,8 +91,8 @@ def edit_answer(answer_id):
     new_data = request.form.to_dict()
     message = new_data["message"]
     question_id = logic.get_question_id_by_answer_id(answer_id)
-    # image = new_data["image"]  # can be enabled when image will be implemented in form
-    logic.edit_answer(answer_id, message)   # image
+    image = new_data["image"]
+    logic.edit_answer(answer_id, message, image)
 
     return redirect('/question/%s' % question_id)
 
