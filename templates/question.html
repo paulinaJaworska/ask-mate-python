@@ -7,7 +7,7 @@
             <div class="question-title">{{ question['title'] }}</div>
             <div class="time">{{ question['submission_time'] }}</div>
             <p>{{ question['message'] }}</p>
-            <img class="images" src={{ question['image'] }}><br>
+            <img class="images" src="{{ question['image'] }}"><br>
             {% if tags %}
                 {% for tag in tags %}
                     <div class="tag-button">
