@@ -4,14 +4,14 @@
     <div class="form">
         <form action="{{ form_url }}" method="POST">
             {% if edit_question %}
-                <label for="title" class="edit-labels">Question</label><br>
+                <label for="title" class="edit-labels">Title</label><br>
                 <textarea id="title" name="title" rows="2" cols="60" placeholder="Make it short and concrete!">
                     {{- edit_question['title'] -}}
                 </textarea>
                 <br><br>
             {% endif %}
 
-            <label for="message" class="edit-labels">Message</label><br>
+            <label for="message" class="edit-labels">Body</label><br>
             <textarea id="message" name="message" rows="5" cols="60" placeholder="Your message here">
                 {%- if edit_question -%}
                     {{ edit_question['message'] }}

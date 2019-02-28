@@ -7,16 +7,25 @@
             <div class="question-title">{{ question['title'] }}</div>
             <div class="time">{{ question['submission_time'] }}</div>
             <p>{{ question['message'] }}</p>
-            <img class="images" src="{{ question['image'] }}"><br>
-            {% if tags %}
-                {% for tag in tags %}
-                    <div class="tag-button">
-                        <div class="tag-button-text">{{ tag['name'] }}</div>
-                        <div><a onclick="window.location.href='/' +
-                                'question/{{ question['id'] }}/tag/{{ tag['id'] }}/delete';">x</a></div>
-                    </div>
-                {% endfor %}
-            {% endif %}
+            <img class="images" src='{{ question['image'] }}'><br>
+{#            <div class="tag-buttons">#}
+{#                {% if tags %}#}
+{#                    {% for tag in tags %}#}
+{#                        <div class="tag-button-text">{{ tag['name'] }}</div>#}
+{#                        <div class="tag-button-delete-sign"><a onclick="window.location.href='/' +#}
+{#                                'question/{{ question['id'] }}/tag/{{ tag['id'] }}/delete';">x</a></div>#}
+{#                    {% endfor %}#}
+{#                {% endif %}#}
+{#            </div>#}
+
+            <div class="tag-button">
+                <div class="tag-button-text">azure</div>
+                <div class="tag-button-delete-sign">x</div>
+
+                <div class="tag-button-text">python</div>
+                <div class="tag-button-delete-sign">x</div>
+            </div>
+
             <button class="button"\
                     onclick="window.location.href='/{{ question['id'] }}/new-answer';">add answer</button>
             <button class="button"\
@@ -58,20 +67,20 @@
                 <button class="button"\
                     onclick="window.location.href='/answer/{{ answer['id'] }}/new-comment';">add comment</button>
                 <br><br>
-                {% if comments %}
-                    {% for comment in comments %}
-                        <div class="table">
-                            <table>
-                                <tr>
-                                    <td class="time">{{ comment['submission_time'] }}</td>
-                                    <td>{{ comment['message'] }}</td>
-                                    <td><button class="button" id="delete-button"\
-                                            onclick="window.location.href='/question/{{ comment['id'] }}/delete';">delete</button></td>
-                                </tr>
-                            </table>
-                        </div>
-                    {% endfor%}
-                {% endif %}
+{#                {% if comments %}#}
+{#                    {% for comment in comments %}#}
+{#                        <div class="table">#}
+{#                            <table>#}
+{#                                <tr>#}
+{#                                    <td class="time">{{ comment['submission_time'] }}</td>#}
+{#                                    <td>{{ comment['message'] }}</td>#}
+{#                                    <td><button class="button" id="delete-button"\#}
+{#                                            onclick="window.location.href='/answer/{{ comment['id'] }}/delete';">delete</button></td>#}
+{#                                </tr>#}
+{#                            </table>#}
+{#                        </div>#}
+{#                    {% endfor%}#}
+{#                {% endif %}#}
             {% endfor%}
         </div>
     </div>

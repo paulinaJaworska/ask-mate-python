@@ -47,12 +47,16 @@ def new_question():
 def question_page(question_id: str):
     question = logic.get_question_by_id(question_id)
     answers = logic.get_answer_by_question_id(question_id)
-    tags = logic.get_question_tags_by_question_id(question_id)
+    q_comments = logic.get_comment_by_question_id(question_id)
+
+    # tags = logic.get_question_tags_by_question_id(question_id)
 
     return render_template('question.html',
                            question=question,
                            answers=answers,
-                           tags=tags)
+                           q_comments=q_comments,
+                            )
+                           # tags=tags)
 
 
 @app.route('/question/<question_id>/edit', methods=['GET'])
@@ -220,7 +224,10 @@ def route_new_tag(question_id):
     all_tags = logic.get_unique_tag_names()
 
     return render_template('edit.html',
-                           tags=all_tags)
+                           form_url=url_for('route_new_tag',
+                                            question_id=question_id),
+                           tags=all_tags,
+                           button_title='Add Tag')
 
 
 @app.route('/question/<question_id>/new-tag', methods=['POST'])
