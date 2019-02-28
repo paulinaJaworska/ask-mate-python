@@ -173,7 +173,7 @@ def route_add_comment_to_question(question_id: str):
 @app.route('/question/<question_id>/new-comment', methods=['POST'])
 def new_question_comment(question_id):
     comment = request.form.to_dict()
-    logic.add_comment_to_question(comment, question_id)
+    logic.add_comment(comment, question_id)
 
     return redirect("/question/%s" % question_id)
 
@@ -225,7 +225,7 @@ def route_new_tag(question_id):
 
 @app.route('/question/<question_id>/new-tag', methods=['POST'])
 def new_tag(question_id):
-    tag = request.form.to_dict()
+    tag = lowercase(request.form.to_dict())
     logic.add_new_tag(tag, question_id)
 
     return redirect("/question/%s" % question_id)

@@ -125,10 +125,10 @@ def search(data: str):
 
 # COMMENT
 
-def add_comment_to_answer(message : str, question_id = None, answer_id = None):
+def add_comment(message : dict, question_id = None, answer_id = None):
     comment = {}
     comment['submission_time'] = date_generator()
-    comment['message'] = message
+    comment['message'] = message['message']
     comment['question_id'] = question_id
     comment['answer_id'] = answer_id
     comment['vote_number'] = 0
