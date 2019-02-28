@@ -229,9 +229,6 @@ def get_tags_by_question_id(cursor, question_id):
 
 @db_connection.connection_handler
 def save_new_tag_and_question_tag(cursor, tag_data: dict, quest_id: str):
-    #question_id = {"question_id": quest_id}
-    #id = {'id': tag_data['id']}
-    #name = {'name': tag_data['name']}
     tag_data['question_id'] = quest_id
     cursor.execute(""" INSERT INTO tag (id, name)
                         VALUES (%(id)s, %(name)s);
