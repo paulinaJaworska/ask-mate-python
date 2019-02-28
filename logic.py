@@ -133,8 +133,8 @@ def add_comment_to_answer(message : str, question_id = None, answer_id = None):
     comment['answer_id'] = answer_id
     comment['vote_number'] = 0
     comment['edited_count'] = 0
-    print(comment)
     data_manager.add_comment(comment)
+
 
 def delete_comment(comment_id):
     data_manager.delete_comment(comment_id)
@@ -142,6 +142,16 @@ def delete_comment(comment_id):
 
 def get_comment_by_id(_id):
     data = data_manager.get_comment_by_id(_id)
+    return data
+
+
+def get_comment_by_question_id(_id):
+    data = data_manager.get_comment_by_question_id(_id)
+    return data
+
+
+def get_comment_by_answer_id(_id: str):
+    data = data_manager.get_comment_by_answer_id(_id)
     return data
 
 

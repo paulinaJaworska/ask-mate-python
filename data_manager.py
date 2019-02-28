@@ -173,6 +173,22 @@ def get_comment_by_id(cursor, _id: str):
         return comment
 
 @db_connection.connection_handler
+def get_comment_by_question_id(cursor, question_id):
+    cursor.execute("""SELECT * FROM comment 
+                    WHERE question_id =%s;""", question_id)
+    comment = cursor.fetchall()
+    return comment
+
+
+@db_connection.connection_handler
+def get_comment_by_answer_id(cursor, answer_id):
+    cursor.execute("""SELECT * FROM comment 
+                    WHERE answer_id =%s;""", answer_id)
+    comment = cursor.fetchall()
+    return comment
+
+
+@db_connection.connection_handler
 def edit_comment(cursor, data):
     cursor.execute("""UPDATE comment
                       SET message =%(message)s, 
