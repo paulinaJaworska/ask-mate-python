@@ -48,9 +48,7 @@ def question_page(question_id: str):
     question = logic.get_question_by_id(question_id)
     answers = logic.get_answer_by_question_id(question_id)
     q_comments = logic.get_comment_by_question_id(question_id)
-
-    tags = [{'id': 1, 'name': 'python'}, {'id': 1, 'name': 'azure'}]
-    # tags = logic.get_question_tags_by_question_id(question_id)
+    tags = logic.get_question_tags_by_question_id(question_id)
 
     return render_template('question.html',
                            question=question,
