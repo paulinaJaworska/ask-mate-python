@@ -107,7 +107,6 @@ def edit_answer(_id, message, image=None):
     item['message'] = message
     item['image'] = image
     data_manager.edit_answer(item)
-    #for i in item:
     item['message'] = message
     data_manager.edit_answer(item)
 
@@ -176,17 +175,22 @@ def get_tags_by_question_id(question_id):
     return tags_for_question
 
 def add_new_tag(form, question_id):
+    del form['image']
     tag_data = {}
     tag_data['id'] = new_tag_id()
+    print(tag_data)
     tag_names_dict = data_manager.get_unique_tag_names()
+    print(tag_names_dict)
 
     names = []
     for i in tag_names_dict:
         names.append(i['name'])
-    if form['name'] in names:
+    print(names)
+    print(form['message'])
+    if form['message'] in names:  ###
         data_manager.save_new_question_tag(question_id)
     else:
-        tag_data['name'] = form['name']
+        tag_data['name'] = form['message'].lower()  ###
         data_manager.save_new_tag_and_question_tag(tag_data, question_id)
 
 

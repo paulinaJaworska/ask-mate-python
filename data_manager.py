@@ -79,7 +79,7 @@ def get_answers_by_question_id(cursor, question_id: str):
 
 @db_connection.connection_handler
 def delete_question(cursor, question_id):
-    cursor.execute("""DELETE * FROM question
+    cursor.execute("""DELETE FROM question
                       WHERE id=%s""", question_id)
 
 
@@ -199,6 +199,8 @@ def edit_comment(cursor, data):
 
 
 ## TAGS
+
+
 @db_connection.connection_handler
 def last_tag_id(cursor):
     cursor.execute(""" SELECT MAX(id) FROM tag;""")
@@ -206,14 +208,14 @@ def last_tag_id(cursor):
     latest_id = latest_id_dict[0]['max']
     return latest_id
 
-# all existing tags
+
 @db_connection.connection_handler
 def get_unique_tag_names(cursor):
     cursor.execute("""SELECT DISTINCT(name) FROM tag;""")
     unique_tags_names_dict = cursor.fetchall()
     return unique_tags_names_dict
 
-# all tags belonging to a given question
+
 @db_connection.connection_handler
 def get_tags_by_question_id(cursor, question_id):
     question_id = {'question_id': question_id}
@@ -224,14 +226,15 @@ def get_tags_by_question_id(cursor, question_id):
 
     return tags_data
 
-# add new tag and it's number in question_tag table
+
 @db_connection.connection_handler
-def save_new_tag_and_question_tag(cursor, tag_data: dict, question_id):
-    cursor.execute(""" INSERT INTO question_tag (question_id, tag_id)
-                        VALUES (%(question_id)s, %(tag_id)s);
-                       INSERT INTO tag (id, name)
+def save_new_tag_and_question_tag(cursor, tag_data: dict, quest_id: str):
+    tag_data['question_id'] = quest_id
+    cursor.execute(""" INSERT INTO tag (id, name)
                         VALUES (%(id)s, %(name)s);
-                        """, question_id, tag_data)
+                        INSERT INTO question_tag (question_id, tag_id)
+                        VALUES (%(question_id)s, %(id)s);  
+                        """, tag_data)
 
 
 @db_connection.connection_handler
@@ -241,7 +244,7 @@ def save_new_question_tag(cursor, tag_data: dict, question_id):
                         """, question_id, tag_data)
 
 
-# delete from tag and question
+
 @db_connection.connection_handler
 def delete_question_tag(cursor, question_id, tag_id):
     cursor.execute("""DELETE FROM qestion_tag
