@@ -168,8 +168,8 @@ def new_tag_id():
     last_id = data_manager.last_tag_id()
     return last_id + 1
 
-def get_question_tags_by_question_id(question_id):
-    tags_for_question = data_manager.get_guestion_tags_by_question_id(question_id)
+def get_tags_by_question_id(question_id):
+    tags_for_question = data_manager.get_tags_by_question_id(question_id)
 
     return tags_for_question
 
