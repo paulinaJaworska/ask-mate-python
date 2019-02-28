@@ -78,6 +78,16 @@ def edit_question(question_id):
     return redirect('/question/%s' % question_id)
 
 
+@app.route('/question/<question_id>/delete')
+def delete_question(question_id):
+    logic.delete_question(question_id)
+
+    return redirect('/')
+
+
+# ANSWERS
+
+
 @app.route('/answer/<answer_id>/edit', methods=['GET'])
 def route_edit_answer(answer_id):
     answer = logic.get_answer_by_id(answer_id)
@@ -119,13 +129,6 @@ def new_answer(question_id):
     return redirect("/question/%s" % question_id)
 
 
-@app.route('/question/<question_id>/delete')
-def delete_question(question_id):
-    logic.delete_question(question_id)
-
-    return redirect('/')
-
-
 @app.route('/answer/<answer_id>/delete')
 def delete_answer(answer_id: str):
     question_id = logic.get_question_id_by_answer_id(answer_id)
@@ -156,6 +159,7 @@ def search():
 
 
 # COMMENTS
+
 
 @app.route('/question/<question_id>/new-comment', methods=['GET'])
 def route_add_comment_to_question(question_id: str):
@@ -215,7 +219,7 @@ def edit_comment(comment_id):
 def route_new_tag(question_id):
     all_tags = logic.get_unique_tag_names()
 
-    return render_template('new_tag.html',
+    return render_template('edit.html',
                            tags=all_tags)
 
 
