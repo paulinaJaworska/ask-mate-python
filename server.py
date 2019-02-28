@@ -52,7 +52,7 @@ def question_page(question_id: str):
     return render_template('question.html',
                            question=question,
                            answers=answers,
-                           q_comments=q_comments,
+                           # q_comments=q_comments,
                            tags=tags)
 
 
