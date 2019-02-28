@@ -11,6 +11,8 @@
             <button class="button"\
                     onclick="window.location.href='/{{ question['id'] }}/new-answer';">add answer</button>
             <button class="button"\
+                    onclick="window.location.href='/question/{{ question['id'] }}/new-comment';">add comment</button>
+            <button class="button"\
                     onclick="window.location.href='/{{ question['id'] }}/edit';">edit question</button>
             <button class="button" id="delete-button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>

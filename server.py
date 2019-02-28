@@ -155,28 +155,32 @@ def search():
 # COMMENTS
 
 @app.route('/question/<question_id>/new-comment', methods=['GET'])
-def route_new_question_comment():
-    return render_template('question_new_comment.html')
+def route_add_comment_to_question():
+    return render_template('edit.html',
+                           form_url=url_for('route_new_comment'),
+                           edit_comment = {'name': ''},
+                           button_title='Add comment',)
+
 
 
 @app.route('/question/<question_id>/new-comment', methods=['POST'])
-def new_question_comment(question_id):
+def add_comment_to_question(question_id):
     comment = request.form.to_dict()
-    logic.add_new_question_comment(comment, question_id)
+    logic.add_comment(comment, question_id)
     return redirect("/question/%s" % question_id)
 
 
 @app.route('/answer/<answer_id>/new-comment', methods=['GET'])
-def route_new_answer_comment():
+def route_add_comment_to_answer():
 
-    return render_template('answer_new_comment.html')
+    return render_template('edit.html')
 
 
 @app.route('/answer/<answer_id>/new-comment', methods=['POST'])
-def new_answer_comment(answer_id):
+def add_comment_to_answer(answer_id):
     comment = request.form.to_dict()
     question_id = logic.get_question_id_by_answer_id(answer_id)
-    logic.add_new_answer_comment(comment, answer_id, question_id)
+    logic.add_comment(comment,answer_id = answer_id)
 
     return redirect("/question/%s" % question_id)
 
@@ -185,14 +189,12 @@ def new_answer_comment(answer_id):
 def route_edit_comment(comment_id):
     comment = logic.get_comment_by_id(comment_id)
 
-    return render_template('edit_comment.html',
+    return render_template('edit.html',
                            comment=comment)
 
 
 @app.route('/comments/<comment_id>/edit', methods=['POST'])
 def edit_comment(comment_id):
-    edited_count = logic.get_edited_count() + 1
-
     new_comment = request.form.to_dict()
     answer_id = logic.get_comment_by_id(comment_id)['answer_id']  #
     question_id = logic.get_question_id_by_answer_id(answer_id)
