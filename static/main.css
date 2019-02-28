@@ -28,6 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 .question-title {
     font-size: 30px;
     font-weight: bold;
+    color: #505050;
 }
 
 
@@ -101,20 +102,27 @@ h1, h2, h3, h4, h5, h6 {
 .tag-button {
     display: inline-block;
     margin-top: 0.5rem;
-    padding: 0 1.5em;
-    font: 0.5em/1em 'Frank Ruhl Libre', Helvetica, sans-serif;
+    padding: 0.5em 1.5em;
+    font: 11px 'Frank Ruhl Libre', Helvetica, sans-serif;
     color: rgb(47, 78, 112);
     background: rgb(181, 229, 234);
+    border: #ebebeb;
 }
 
 
-.tag-button-delete-sign {
-    color: rgba(203, 6, 0, 0.7);
+#tag-button-delete-sign {
+    color: rgba(203, 6, 0, 0.4);
+    font-weight: bold;
 }
 
 
-.tag-button-delete-sign:hover {
-    color: rgba(203, 6, 0, 0.9);
+.tag-button:hover {
+    cursor: pointer;
+}
+
+.tag-button:hover #tag-button-delete-sign {
+    color: rgba(203, 6, 0, 0.91);
+    cursor: pointer;
 }
 
 

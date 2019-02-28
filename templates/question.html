@@ -8,35 +8,29 @@
             <div class="time">{{ question['submission_time'] }}</div>
             <p>{{ question['message'] }}</p>
             <img class="images" src='{{ question['image'] }}'><br>
-{#            <div class="tag-buttons">#}
-{#                {% if tags %}#}
-{#                    {% for tag in tags %}#}
-{#                        <div class="tag-button-text">{{ tag['name'] }}</div>#}
-{#                        <div class="tag-button-delete-sign"><a onclick="window.location.href='/' +#}
-{#                                'question/{{ question['id'] }}/tag/{{ tag['id'] }}/delete';">x</a></div>#}
-{#                    {% endfor %}#}
-{#                {% endif %}#}
-{#            </div>#}
 
-            <div class="tag-button">
-                <div class="tag-button-text">azure</div>
-                <div class="tag-button-delete-sign">x</div>
+                {% if tags %}
+                    {% for tag in tags %}
+                        <button class="tag-button">{{ tag['name'] }}
+                        <a id="tag-button-delete-sign" onclick="window.location.href='/' +
+                                'question/{{ question['id'] }}/tag/{{ tag['id'] }}/delete';">x</a></button>
+                    {% endfor %}
+                {% endif %}
 
-                <div class="tag-button-text">python</div>
-                <div class="tag-button-delete-sign">x</div>
-            </div>
+
+            <br>
 
             <button class="button"\
                     onclick="window.location.href='/{{ question['id'] }}/new-answer';">add answer</button>
             <button class="button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/new-comment';">add comment</button>
             <button class="button"\
-                    onclick="window.location.href='/question/{{ question['id'] }}/new-tag';">add tag</button>
+                    onclick="window.location.href='/question/{{ question['id'] }}/new-tag';">add tag</button><br>
             <button class="button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/edit';">edit question</button>
             <button class="button" id="delete-button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>
-            {% for comment in comments %}
+            {% for comment in q_comments %}
                 <div class="table">
                     <table>
                         <tr>
