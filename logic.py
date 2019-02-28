@@ -159,9 +159,9 @@ def new_tag_id():
     return last_id + 1
 
 def get_question_tags_by_question_id(question_id):
-    tags_data = data_manager.get_guestion_tags_by_question_id(question_id)
+    tags_for_question = data_manager.get_guestion_tags_by_question_id(question_id)
 
-    return tags_data
+    return tags_for_question
 
 def add_new_tag(form, question_id):
     tag_data = {}
@@ -181,3 +181,8 @@ def add_new_tag(form, question_id):
 def delete_question_tag_by_question_id(question_id, tag_id):
     data_manager.delete_question_tag(question_id, tag_id)
 
+
+def get_unique_tag_names():
+    unique_tag_names = data_manager.get_unique_tag_names()
+
+    return unique_tag_names
