@@ -52,6 +52,7 @@ def question_page(question_id: str):
     return render_template('question.html',
                            question=question,
                            answers=answers,
+                           q_comments=q_comments,
                            tags=tags)
 
 
@@ -220,7 +221,10 @@ def route_new_tag(question_id):
     all_tags = logic.get_unique_tag_names()
 
     return render_template('edit.html',
-                           tags=all_tags)
+                           form_url=url_for('route_new_tag',
+                                            question_id=question_id),
+                           tags=all_tags,
+                           button_title='Add Tag')
 
 
 @app.route('/question/<question_id>/new-tag', methods=['POST'])
