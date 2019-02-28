@@ -123,7 +123,9 @@ def search(data: str):
         questions.append(get_question_by_id(answer_id))
     return questions
 
+
 # COMMENT
+
 
 def add_comment(message : dict, question_id = None, answer_id = None):
     comment = {}
@@ -196,3 +198,37 @@ def get_unique_tag_names():
     unique_tag_names = data_manager.get_unique_tag_names()
 
     return unique_tag_names
+
+
+def get_tags_ids_reated_to_question(question_id):
+    ids = data_manager.get_tags_id_realted_to_question(question_id)
+    return ids
+
+
+def get_ids_related_to_question(question_id):
+    data ={}
+    answers_ids = []
+    comments_ids = []
+    comments_for_answers = []
+
+    a = get_answer_by_question_id(question_id)
+    for item in a:
+        answers_ids.append(item['id'])
+
+
+    c = get_comment_by_question_id(question_id)
+    for item in c:
+        comments_ids.append(item['id'])
+
+    for item in answers_ids:
+        for i in get_comment_by_answer_id(str(item)):
+            comments_for_answers.append(i['id'])
+
+    data['question_id'] = question_id
+    data['answer_id'] = answers_ids
+    data['comment_id'] = comments_ids
+    data['tag_id'] = get_tags_ids_reated_to_question(question_id)[0]
+    data['comments_for_answers'] = comments_for_answers
+    return data
+
+
