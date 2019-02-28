@@ -215,10 +215,11 @@ def get_unique_tag_names(cursor):
 
 # all tags belonging to a given question
 @db_connection.connection_handler
-def get_guestion_tags_by_question_id(cursor, question_id):
+def get_tags_by_question_id(cursor, question_id):
+    question_id = {'question_id': question_id}
     cursor.execute("""SELECT * FROM tag
-                    WHERE id IN (SELECT tag_id FROM question_tag
-                                  WHERE question_id = %(question_id)s);""", question_id)
+                      WHERE id IN (SELECT tag_id FROM question_tag
+                                    WHERE question_id = %(question_id)s);""", question_id)
     tags_data = cursor.fetchall()
 
     return tags_data
