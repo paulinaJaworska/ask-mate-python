@@ -70,7 +70,8 @@ def edit_question(question_id):
     new_data = request.form.to_dict()
     message = new_data["message"]
     title = new_data["title"]
-    logic.edit_question(question_id, message, title)
+    image = new_data["image"]
+    logic.edit_question(question_id, message, title, image)
 
     return redirect('/question/%s' % question_id)
 
@@ -128,7 +129,7 @@ def delete_answer(answer_id: str):
     question_id = logic.get_question_id_by_answer_id(answer_id)
     logic.delete_answer(answer_id)
 
-    return redirect('/question/%s'% question_id)
+    return redirect('/question/%s' % question_id)
 
 
 @app.route("/sorted/")
@@ -155,18 +156,19 @@ def search():
 # COMMENTS
 
 @app.route('/question/<question_id>/new-comment', methods=['GET'])
-def route_add_comment_to_question():
-    return render_template('edit.html',
-                           form_url=url_for('route_new_comment'),
-                           edit_comment = {'name': ''},
-                           button_title='Add comment',)
+def route_add_comment_to_question(question_id: str):
+    question = logic.get_question_by_id(question_id)
 
+    return render_template('edit.html',
+                           question=question,
+                           button_title='Add Comment')
 
 
 @app.route('/question/<question_id>/new-comment', methods=['POST'])
-def add_comment_to_question(question_id):
+def new_question_comment(question_id):
     comment = request.form.to_dict()
-    logic.add_comment(comment, question_id)
+    logic.add_comment_to_question(comment, question_id)
+
     return redirect("/question/%s" % question_id)
 
 
@@ -180,7 +182,7 @@ def route_add_comment_to_answer():
 def add_comment_to_answer(answer_id):
     comment = request.form.to_dict()
     question_id = logic.get_question_id_by_answer_id(answer_id)
-    logic.add_comment(comment,answer_id = answer_id)
+    logic.add_comment_to_answer(comment, answer_id, question_id)
 
     return redirect("/question/%s" % question_id)
 
@@ -190,11 +192,13 @@ def route_edit_comment(comment_id):
     comment = logic.get_comment_by_id(comment_id)
 
     return render_template('edit.html',
-                           comment=comment)
+                           edit_comment=comment)
 
 
 @app.route('/comments/<comment_id>/edit', methods=['POST'])
 def edit_comment(comment_id):
+    edited_count = logic.get_edited_count() + 1
+
     new_comment = request.form.to_dict()
     answer_id = logic.get_comment_by_id(comment_id)['answer_id']  #
     question_id = logic.get_question_id_by_answer_id(answer_id)
@@ -221,9 +225,9 @@ def new_tag(question_id):
     return redirect("/question/%s" % question_id)
 
 
-@app.route('/question/<question_id>/tag/<tag_id>/delete')
-def delete_question_tag(question_id):
-    logic.delete_question_tag_by_question_id(question_id)
+@app.route('/question/<question_id>/tag/<tag_id>/delete', methods=['POST'])
+def delete_question_tag(question_id, tag_id):
+    logic.delete_question_tag_by_question_id(question_id, tag_id)
 
     return redirect("/question/%s" % question_id)
 

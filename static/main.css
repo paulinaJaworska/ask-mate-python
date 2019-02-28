@@ -4,7 +4,6 @@ body {
     margin: 3rem;
     position: relative;
     padding-bottom: 6rem;
-    min-height: 100%;
 }
 
 
@@ -26,8 +25,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.card-header {
-    margin-top: 2rem;
+.question-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.answers-header {
+    font-size: 22px;
+    font-weight: bold;
 }
 
 
@@ -110,6 +116,11 @@ h1, h2, h3, h4, h5, h6 {
     font: 1em/2em 'Frank Ruhl Libre', Helvetica, sans-serif;
     color: rgba(114,114,114,1);
     background-color: #c0c0c0;
+}
+
+
+#footer:hover {
+    background: #dddddd;
 }
 
 

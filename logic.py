@@ -31,10 +31,11 @@ def new_question_id():
     return last_id + 1
 
 
-def edit_question(_id, message, title):
+def edit_question(_id, message, title, image):
     item = get_question_by_id(_id)
     item['message'] = message  # Don't change
     item['title'] = title
+    item['image'] = image
     data_manager.edit_question(item)
 
 
@@ -106,9 +107,9 @@ def edit_answer(_id, message, image=None):
     item['message'] = message
     item['image'] = image
     data_manager.edit_answer(item)
-    for i in item:
-        i['message'] = message
-    data_manager.edit_answer(i)
+    #for i in item:
+    item['message'] = message
+    data_manager.edit_answer(item)
 
 
 def search(data: str):
@@ -124,7 +125,7 @@ def search(data: str):
 
 # COMMENT
 
-def add_comment(message : str, question_id = None, answer_id = None):
+def add_comment_to_answer(message : str, question_id = None, answer_id = None):
     comment = {}
     comment['submission_time'] = date_generator()
     comment['message'] = message
@@ -152,6 +153,31 @@ def edit_comment(_id: str, message: str):
     print(data)
     data_manager.edit_comment(data)
 
+### TAGS
+def new_tag_id():
+    last_id = data_manager.last_tag_id()
+    return last_id + 1
+
+def get_question_tags_by_question_id(question_id):
+    tags_data = data_manager.get_guestion_tags_by_question_id(question_id)
+
+    return tags_data
+
+def add_new_tag(form, question_id):
+    tag_data = {}
+    tag_data['id'] = new_tag_id()
+    tag_names_dict = data_manager.get_unique_tag_names()
+
+    names = []
+    for i in tag_names_dict:
+        names.append(i['name'])
+    if form['name'] in names:
+        data_manager.save_new_question_tag(question_id)
+    else:
+        tag_data['name'] = form['name']
+        data_manager.save_new_tag_and_question_tag(tag_data, question_id)
 
 
+def delete_question_tag_by_question_id(question_id, tag_id):
+    data_manager.delete_question_tag(question_id, tag_id)
 

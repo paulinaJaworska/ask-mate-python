@@ -15,21 +15,25 @@
             <textarea id="message" name="message" rows="5" cols="60" placeholder="Your message here">
                 {%- if edit_question -%}
                     {{ edit_question['message'] }}
-                {%- elif edit -%}
-                    {{ edit['message'] }}
+                {%- elif edit_answer -%}
+                    {{ edit_answer['message'] }}
+                {%- elif edit_comment -%}
+                    {{ edit_comment['message'] }}
                 {%- endif -%}
             </textarea>
             <br><br>
 
-            <label for="image" class="edit-labels">Add link to the image (optional)</label><br>
-            <textarea id="image" name="image" rows="1" cols="60">
-                {%- if edit_question -%}
-                    {{ edit_question['image'] }}
-                {%- elif edit -%}
-                    {{ edit['image'] }}
-                {%- endif -%}
+            {% if not edit_comment %}
+                <label for="image" class="edit-labels">Add link to the image (optional)</label><br>
+                <textarea id="image" name="image" rows="1" cols="60">
+                    {%- if edit_question -%}
+                        {{ edit_question['image'] }}
+                    {%- elif edit_answer -%}
+                        {{ edit_answer['image'] }}
+                    {%- endif -%}
             </textarea>
             <br><br>
+            {% endif %}
 
             <button type="submit" class="button">{{ button_title }}</button>
         </form>
