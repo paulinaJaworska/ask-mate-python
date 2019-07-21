@@ -218,6 +218,13 @@ def edit_comment(comment_id: str):
 
     return redirect("/question/%s" % question_id)
 
+@app.route('/comment/<int:comment_id>/delete')
+def delete_comment(comment_id: str):
+    question_id = question.get_id_by_comment_id(comment_id)['question_id']
+    comment.delete(comment_id)
+
+    return redirect("/question/%s" % question_id)
+
 
 # TAGS
 

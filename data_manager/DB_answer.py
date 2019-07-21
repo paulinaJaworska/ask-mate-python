@@ -71,5 +71,6 @@ def edit(cursor, answer_data: dict):
 
 @db_connection.connection_handler
 def delete(cursor, _id: str):
+    id = {'id': _id}
     cursor.execute("""DELETE FROM answer
-                      WHERE id=%s""", _id)
+                      WHERE id=%(id)s""", id)

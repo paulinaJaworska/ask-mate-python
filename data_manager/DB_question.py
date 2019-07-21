@@ -72,10 +72,10 @@ def get_id_by_answer_id(cursor, answer_id):
 
 @db_connection.connection_handler
 def get_id_by_comment(cursor, comment_id):
-    comment_id = {'id': comment_id}
+    comm_id = {'id': comment_id}
     cursor.execute("""
                     SELECT question_id FROM comment
-                    WHERE id=%(id)s""", comment_id)
+                    WHERE id=%(id)s""", comm_id)
     question_id = cursor.fetchone()
     return question_id
 
@@ -114,7 +114,3 @@ def delete(cursor, question_id: dict):
                       DELETE from QUESTION
                       WHERE id = %(question_id)s;
                       """, question_id)
-# @db_connection.connection_handler
-# def delete(cursor, question_id):
-#     cursor.execute("""DELETE FROM question
-#                       WHERE id=%s""", question_id)

@@ -70,5 +70,6 @@ def edit(cursor, data):
 
 @db_connection.connection_handler
 def delete(cursor, comment_id):
+    comm_id = {'id':comment_id}
     cursor.execute("""DELETE FROM comment 
-                    WHERE id =%s;""", comment_id)
+                    WHERE id =%(id)s;""", comm_id)
