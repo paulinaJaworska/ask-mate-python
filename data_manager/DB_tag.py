@@ -1,5 +1,6 @@
 import db_connection
 
+
 # CREATE #
 
 @db_connection.connection_handler
@@ -46,6 +47,7 @@ def get_by_question_id(cursor, question_id):
 
     return tags_data
 
+
 @db_connection.connection_handler
 def get_id_by_question_id(cursor, question_id):
     cursor.execute("""SELECT tag_id FROM question_tag
@@ -57,7 +59,6 @@ def get_id_by_question_id(cursor, question_id):
 # UPDATE #
 
 
-
 # DELETE #
 
 @db_connection.connection_handler
@@ -65,10 +66,3 @@ def delete(cursor, question_id, tag_id):
     cursor.execute("""DELETE FROM question_tag
                       WHERE question_id = %(question_id)s 
                         AND tag_id = %(tag_id)s;""", question_id, tag_id)
-
-
-
-
-
-
-
