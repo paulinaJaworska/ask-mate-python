@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+        <h3 class="card-header">{{ question.title }}</h3>
+        <div class="card-body">
+            <p>{{ question.message }}</p>
+        </div>
+
+        <br>
+
+        <form action="/{{ question['id'] }}/new-answer", method="POST">
+            <textarea name="message" rows="5" cols="20">Your answer here...</textarea>
+            <br>
+            <p>link to image:</p>
+            <textarea name="image" rows="1"></textarea>
+            <input type="submit" value="Submit"></input>
+        </form>
+    </div>
+    <button class="button" type="submit" form="add_form" value="Submit">Add</button>
+
+    {% include 'footer.html' %}
+{% endblock %}

@@ -1,42 +1,72 @@
-<!DOCTYPE html>
-<html>
-<title>AskMate by DarPol</title>
-<body>
+{% extends "layout.html" %}
 
-<h1>AskMate</h1>
-<h2>by DarPol</h2>
+{% block content %}
 
-<form action="/add-question">
-    <button>Ask question</button>
-</form>
-    <div>
-        <form method="GET" action="/sorted/">
-            <label for="condition">Order by:</label>
-                <select name="condition">
-                        <option selected value="title">Title</option>
-                    <option value="submission_time">Time</option>
-                </select>
-                <select name= "order">
-                    <option selected value="desc">descending</option>
-                    <option value="asc">ascending</option>
-                </select>
-            <button type="submit">GO</button>
-        </form>
+    <div class="card">
+        <div class="card-body">
+            <button class="button" id="ask-button"\
+                    onclick="window.location.href='/add-question';">Ask Question</button>
+
+            <div class="search-bar">
+                <form action="/search/" method="POST">
+                    <input name="phrase" type="text" placeholder="search...">
+{#                    <input type="submit">#}
+                </form>
+            </div>
+
+            {% if questions %}
+                <form class="sorting-boxes" action="/sorted/" method="GET">
+                    <select id="sort_by" name="sort_by">
+                        <option value="submission_time">time</option>
+                        <option value="title">title</option>
+                        <option value="vote_number">votes</option>
+                        <option value="view_number">views</option>
+                    </select>
+                    <select id="order" name="order">
+                        <option value="False">ascending</option>
+                        <option value="True">descending</option>
+                    </select>
+                    <button class="button" type="submit" value="Submit">sort</button>
+                </form>
+            {% endif %}
+        </div>
+
+        <div class="table">
+            <table>
+                {% if latest_questions %}
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    {% for question in latest_questions %}
+                        <tr>
+                            <td class="time"><time>{{ question['submission_time'] }}</time></td>
+                            <td class="q_title"><a href="/question/{{ question['id'] }}">{{ question['title'] }}</a></td>
+                        </tr>
+                    {% endfor %}
+
+                {% elif question_search %}
+                    {% for question in question_search %}
+                        <tr>
+                            <td class="time">{{ question['submission_time'] }}</td>
+                            <td class="q_title"><a href="/question/{{ question['id'] }}">{{ question['title'] }}</a></td>
+                        </tr>
+                    {% endfor %}
+
+                {% elif questions %}
+                    {% for question in questions %}
+                        <tr>
+                            <td class="time">{{ question['submission_time'] }}</td>
+                            <td class="q_title"><a href="/question/{{ question['id'] }}">{{ question['title'] }}</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+            {%- if latest_questions -%}
+                <button class="button" onclick="window.location.href='/list';">full list</button>
+            {%- endif -%}
+        </div>
     </div>
-
-
-    
-    {% for item in questions %}
-<div id='question'>
-
-  <ul>
-    <br>
-    <li> 
-        <a href="{{ '/question/' + (item['id'] | string) }}">"{{item['title']}}</a>
-        </li>
-    <li>{{ item['message'] }}</li>
-  </ul>
-</div>
-{% endfor %}
-</body>
-</html>
+{% endblock %}
