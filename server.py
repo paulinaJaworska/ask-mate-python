@@ -44,7 +44,7 @@ def new_question():
 @app.route('/question/<int:question_id>')    # tworzyć też zabespieczenie typu zmiennnej na wysokości route int:question id
 def question_page(question_id):                                 # wprowadzić try: expect: np. na TypeError
     question = question.get_question_by_id(question_id)
-    answers = answer.get_answers_by_question_id(question_id)
+    answers = answer.get_by_question(question_id)
     tags = tag.get_tags_by_question_id(question_id)
     question_comments = comment.get_question_comments_by_question_id(question_id)
 
@@ -107,7 +107,7 @@ def edit_answer(answer_id):
     message = new_data["message"]
     question_id = question.get_question_id_by_answer_id(answer_id)
     image = new_data["image"]
-    answer.edit_answer(answer_id, message, image)
+    answer.edit(answer_id, message, image)
 
     return redirect('/question/%s' % question_id)
 
@@ -125,15 +125,15 @@ def route_new_answer(question_id: str):
 def new_answer(question_id):
     # save it to file
     form = request.form.to_dict()
-    answer.new_answer(form, question_id)
+    answer.add(form, question_id)
 
     return redirect("/question/%s" % question_id)
 
 
 @app.route('/answer/<answer_id>/delete')
 def delete_answer(answer_id: str):
-    question_id = answer.get_question_id_by_answer_id(answer_id)
-    answer.delete_answer(answer_id)
+    question_id = answer.get_by_answer(answer_id)
+    answer.delete(answer_id)
 
     return redirect('/question/%s' % question_id)
 
