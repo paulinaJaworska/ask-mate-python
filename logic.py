@@ -1,12 +1,12 @@
-import data_manager
-import time
+import time            # najpierw zewnętrzne
 import datetime
-
+                        # spacja
+import data_manager         # zewnętrzne  # atosować aliasy
 # questions
 
 
-def get_question_by_id(_id: str):
-    question = data_manager.get_question_by_id(_id)
+def get_question_by_id(_id: str):         # funkcje, które używany wielokrotnie w całym programie wydzielić w utility
+    question = data_manager.get_question_by_id(_id) # wyrzucić by_id - zwykle z defaultu szukamy po id w innych przypadkach by_...
     return question[0]
 
 
@@ -36,6 +36,7 @@ def edit_question(_id, message, title, image):
     item['message'] = message  # Don't change
     item['title'] = title
     item['image'] = image
+
     data_manager.edit_question(item)
 
 
@@ -63,7 +64,8 @@ def get_latest_questions():
     return latest_five_questions
 
 
-# ANSWERS
+# ANSWERS                              # podzielić logikę data manager na oddzielne pliki dla question, answer itd.
+                                    # dzięki temu możemy tworzyć nazwy metod typu question.delete
 
 
 def new_answer_id():
@@ -84,6 +86,7 @@ def new_answer(form, question_id: str, image=None):
     answer['question_id'] = question_id
     answer['vote_number'] = 0
     answer['image'] = form['image']
+                                             # oddzielać definicje zmiennych od metod
     data_manager.save_new_answer(answer)
 
 
@@ -169,10 +172,12 @@ def new_tag_id():
     last_id = data_manager.last_tag_id()
     return last_id + 1
 
+
 def get_tags_by_question_id(question_id):
     tags_for_question = data_manager.get_tags_by_question_id(question_id)
 
     return tags_for_question
+
 
 def add_new_tag(form, question_id):
     del form['image']

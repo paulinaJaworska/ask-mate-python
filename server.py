@@ -1,5 +1,4 @@
-from flask import Flask, flash, redirect, render_template, \
-     request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for
 import logic
 
 
@@ -25,10 +24,10 @@ def index():
 
 
 @app.route("/add-question", methods=['GET'])
-def route_new_question():
+def route_new_question():                              # zamiast route użyć show lub display
 
     return render_template('edit.html',
-                           form_url=url_for('route_new_question'),
+                           form_url=url_for('route_new_question'),            # takie rzeczy wrzycać w słownik w route
                            edit_question={'title': ''},
                            button_title='Add Question',
                            )
@@ -43,8 +42,8 @@ def new_question():
     return redirect('/question/%s' % question_id)
 
 
-@app.route('/question/<question_id>')
-def question_page(question_id: str):
+@app.route('/question/<int:question_id>')    # tworzyć też zabespieczenie typu zmiennnej na wysokości route
+def question_page(question_id):                                 # wprowadzić try: expect: np. na TypeError
     question = logic.get_question_by_id(question_id)
     answers = logic.get_answer_by_question_id(question_id)
     tags = logic.get_tags_by_question_id(question_id)
@@ -52,7 +51,7 @@ def question_page(question_id: str):
     return render_template('question.html',
                            question=question,
                            answers=answers,
-                           q_comments=q_comments,
+                           #q_comments=q_comments,
                            tags=tags)
 
 
@@ -74,6 +73,7 @@ def edit_question(question_id):
     message = new_data["message"]
     title = new_data["title"]
     image = new_data["image"]
+
     logic.edit_question(question_id, message, title, image)
 
     return redirect('/question/%s' % question_id)
