@@ -68,19 +68,8 @@ def get_latest_questions():
                                     # dzięki temu możemy tworzyć nazwy metod typu question.delete
 
 
-def new_answer_id():
-    last_id = data_manager.last_answer_id()
-    return last_id + 1
-
-
-def get_answer_by_id(_id):
-    answer = data_manager.get_answer_by_id(_id)
-    return answer[0]
-
-
 def new_answer(form, question_id: str, image=None):
     answer = {}
-    answer['id'] = new_answer_id()
     answer['submission_time'] = date_generator()
     answer['message'] = form['message']
     answer['question_id'] = question_id
@@ -167,10 +156,9 @@ def edit_comment(_id: str, message: str):
     print(data)
     data_manager.edit_comment(data)
 
-### TAGS
-def new_tag_id():
-    last_id = data_manager.last_tag_id()
-    return last_id + 1
+
+# TAGS
+
 
 
 def get_tags_by_question_id(question_id):
@@ -181,13 +169,14 @@ def get_tags_by_question_id(question_id):
 
 def add_new_tag(form, question_id):
     del form['image']
+
     tag_data = {}
-    tag_data['id'] = new_tag_id()
     print(tag_data)
     tag_names_dict = data_manager.get_unique_tag_names()
     print(tag_names_dict)
 
     names = []
+
     for i in tag_names_dict:
         names.append(i['name'])
     print(names)
@@ -209,7 +198,7 @@ def get_unique_tag_names():
     return unique_tag_names
 
 
-def get_tags_ids_reated_to_question(question_id):
+def get_tags_ids_related_to_question(question_id):
     ids = data_manager.get_tags_id_realted_to_question(question_id)
     return ids
 

@@ -51,7 +51,7 @@ def question_page(question_id):                                 # wprowadzić tr
     return render_template('question.html',
                            question=question,
                            answers=answers,
-                           #q_comments=q_comments,
+                           # q_comments=q_comments,
                            tags=tags)
 
 
@@ -124,8 +124,8 @@ def route_new_answer(question_id: str):
 @app.route("/<question_id>/new-answer", methods=['POST'])
 def new_answer(question_id):
     # save it to file
-    form = request.form.to_dict()
-    logic.new_answer(form, question_id)
+    new_data = request.form.to_dict()
+    logic.new_answer(new_data, question_id)
 
     return redirect("/question/%s" % question_id)
 
