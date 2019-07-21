@@ -20,6 +20,12 @@ def get_by_id(cursor, _id: str):
     comment = cursor.fetchall()
     return comment
 
+@db_connection.connection_handler
+def get_all(cursor):
+    cursor.execute("""SELECT * FROM comment""")
+    comments = cursor.fetchall()
+    return comments
+
 
 @db_connection.connection_handler
 def get_by_answer_id(cursor, answer_id):

@@ -47,11 +47,13 @@ def question_page(question_id):                                 # wprowadzić tr
     answers = answer.get_by_question(question_id) #answer.get_by_question_with_comments(question_id) #   !!!
     tags = tag.get_by_question(question_id)
     question_comments = comment.get_by_question(question_id)
+    all_comments = comment.get_all()
 
     return render_template('question.html',
                            question=quest,
                            answers=answers,
-                           question_comments=question_comments,
+                           #question_comments=question_comments,
+                           comments = all_comments,
                            tags=tags)
 
 
