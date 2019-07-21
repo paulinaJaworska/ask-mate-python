@@ -207,9 +207,9 @@ def edit_comment(comment_id):
     edited_count = comment.get_edited_count() + 1
 
     new_comment = request.form.to_dict()
-    answer_id = comment.get_comment_by_id(comment_id)['answer_id']  #
+    answer_id = comment.get_by_id(comment_id)['answer_id']  #
     question_id = question.get_question_id_by_answer_id(answer_id)
-    comment.edit_comment(comment_id, new_comment, edited_count)
+    comment.edit(comment_id, new_comment, edited_count)
 
     return redirect("/question/%s" % question_id)
 

@@ -45,12 +45,12 @@ def get_ids_related_to_question(question_id):
     for item in answers:
         answers_ids.append(item['id'])
 
-    comments = comment.get_comment_by_question_id(question_id)
+    comments = comment.get_by_question(question_id)
     for item in comments:
         comments_ids.append(item['id'])
 
     for item in answers_ids:
-        for i in comment.get_comment_by_answer_id(str(item)):
+        for i in comment.get_by_answer_id(str(item)):
             comments_for_answers.append(i['id'])
 
     data['question_id'] = question_id
