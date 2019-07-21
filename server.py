@@ -42,16 +42,17 @@ def new_question():
     return redirect('/question/%s' % question_id)
 
 
-@app.route('/question/<int:question_id>')    # tworzyć też zabespieczenie typu zmiennnej na wysokości route
+@app.route('/question/<int:question_id>')    # tworzyć też zabespieczenie typu zmiennnej na wysokości route int:question id
 def question_page(question_id):                                 # wprowadzić try: expect: np. na TypeError
     question = logic.get_question_by_id(question_id)
-    answers = logic.get_answer_by_question_id(question_id)
+    answers = logic.get_answers_by_question_id(question_id)
     tags = logic.get_tags_by_question_id(question_id)
+    question_comments = logic.get_question_comments_by_question_id(question_id)
 
     return render_template('question.html',
                            question=question,
                            answers=answers,
-                           # q_comments=q_comments,
+                           question_comments=question_comments,
                            tags=tags)
 
 
@@ -124,8 +125,8 @@ def route_new_answer(question_id: str):
 @app.route("/<question_id>/new-answer", methods=['POST'])
 def new_answer(question_id):
     # save it to file
-    new_data = request.form.to_dict()
-    logic.new_answer(new_data, question_id)
+    form = request.form.to_dict()
+    logic.new_answer(form, question_id)
 
     return redirect("/question/%s" % question_id)
 

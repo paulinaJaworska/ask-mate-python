@@ -68,8 +68,19 @@ def get_latest_questions():
                                     # dzięki temu możemy tworzyć nazwy metod typu question.delete
 
 
+def new_answer_id():
+    last_id = data_manager.last_answer_id()
+    return last_id + 1
+
+
+def get_answer_by_id(_id):
+    answer = data_manager.get_answer_by_id(_id)
+    return answer[0]
+
+
 def new_answer(form, question_id: str, image=None):
     answer = {}
+    answer['id'] = new_answer_id()
     answer['submission_time'] = date_generator()
     answer['message'] = form['message']
     answer['question_id'] = question_id
@@ -79,7 +90,7 @@ def new_answer(form, question_id: str, image=None):
     data_manager.save_new_answer(answer)
 
 
-def get_answer_by_question_id(question_id: str):
+def get_answers_by_question_id(question_id: str):
     answer = data_manager.get_answers_by_question_id(question_id)
     return answer
 
@@ -156,9 +167,14 @@ def edit_comment(_id: str, message: str):
     print(data)
     data_manager.edit_comment(data)
 
+def get_question_comments_by_question_id(question_id: str):
+    return data_manager.get_comments_by_question(question_id)
+### TAGS
 
-# TAGS
 
+def new_tag_id():
+    last_id = data_manager.last_tag_id()
+    return last_id + 1
 
 
 def get_tags_by_question_id(question_id):
@@ -171,6 +187,7 @@ def add_new_tag(form, question_id):
     del form['image']
 
     tag_data = {}
+    tag_data['id'] = new_tag_id()
     print(tag_data)
     tag_names_dict = data_manager.get_unique_tag_names()
     print(tag_names_dict)
@@ -209,7 +226,7 @@ def get_ids_related_to_question(question_id):
     comments_ids = []
     comments_for_answers = []
 
-    a = get_answer_by_question_id(question_id)
+    a = get_answers_by_question_id(question_id)
     for item in a:
         answers_ids.append(item['id'])
 
@@ -225,8 +242,6 @@ def get_ids_related_to_question(question_id):
     data['question_id'] = question_id
     data['answer_id'] = answers_ids
     data['comment_id'] = comments_ids
-    data['tag_id'] = get_tags_ids_reated_to_question(question_id)[0]
+    data['tag_id'] = get_tags_ids_related_to_question(question_id)[0]
     data['comments_for_answers'] = comments_for_answers
     return data
-
-
