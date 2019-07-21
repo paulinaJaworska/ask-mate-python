@@ -175,12 +175,12 @@ def get_question_comments_by_question_id(question_id: str):
 
 
 def new_tag_id():
-    last_id = DB_tag.last_tag_id()
+    last_id = DB_tag.get_last_id()
     return last_id + 1
 
 
 def get_tags_by_question_id(question_id):
-    tags_for_question = DB_tag.get_tags_by_question_id(question_id)
+    tags_for_question = DB_tag.get_by_question_id(question_id)
 
     return tags_for_question
 
@@ -191,7 +191,7 @@ def add_new_tag(form, question_id):
     tag_data = {}
     tag_data['id'] = new_tag_id()
     print(tag_data)
-    tag_names_dict = DB_tag.get_unique_tag_names()
+    tag_names_dict = DB_tag.get_unique_names()
     print(tag_names_dict)
 
     names = []
@@ -201,24 +201,24 @@ def add_new_tag(form, question_id):
     print(names)
     print(form['message'])
     if form['message'] in names:  ###
-        DB_tag.save_new_question_tag(question_id)
+        DB_tag.add(question_id)
     else:
         tag_data['name'] = form['message'].lower()  ###
-        DB_tag.save_new_tag_and_question_tag(tag_data, question_id)
+        DB_tag.add_to_question(tag_data, question_id)
 
 
 def delete_question_tag_by_question_id(question_id, tag_id):
-    DB_tag.delete_question_tag(question_id, tag_id)
+    DB_tag.delete(question_id, tag_id)
 
 
 def get_unique_tag_names():
-    unique_tag_names = DB_tag.get_unique_tag_names()
+    unique_tag_names = DB_tag.get_unique_names()
 
     return unique_tag_names
 
 
 def get_tags_ids_related_to_question(question_id):
-    ids = DB_tag.get_tags_id_realted_to_question(question_id)
+    ids = DB_tag.get_id_by_question_id(question_id)
     return ids
 
 
