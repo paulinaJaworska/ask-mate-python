@@ -38,18 +38,16 @@
 
         {% if question_comments %}
             <div class="answers-header">Comments</div>
-            {% for comment in question_comments %}
+            {% for comm in question_comments %}
                 <div class="table">
                     <table>
                         <tr>
-                            <td class="time">{{ comment['submission_time'] }}</td>
-                            <td>{{ comment['message'] }}</td>
-                            <td>
-                                <button class="button" id="delete-button" \
-                                        onclick="window.location.href='/' +
-                                                'question/{{ comment['id'] }}/delete';">delete
-                                </button>
-                            </td>
+                            <td class="time">{{ comm['submission_time'] }}</td>
+                            <td>{{ comm['message'] }}</td>
+                            <td><button class="button" id="delete-button"\
+                                        onclick="window.location.href='/comment/{{ comm['id'] }}/delete';">delete</button></td>
+                            <td><button class="button"\
+                                        onclick="window.location.href='/comment/{{ comm['id'] }}/edit';">edit</button></td>
                         </tr>
                     </table>
                 </div>

@@ -24,6 +24,7 @@ def get_sorted(sort_by, order):
 def get_latest_five():
     return DB_question.get_latest_five()
 
+
 def get_by_answer(answer_id):
     return DB_question.get_id_by_answer_id(answer_id)
 
@@ -63,3 +64,7 @@ def delete(_id: str):
 
 def get_new_id():
     return DB_question.get_last_id() + 1
+
+
+def get_id_by_comment_id(comment_id):
+    return DB_question.get_id_by_comment(comment_id)

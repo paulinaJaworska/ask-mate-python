@@ -51,6 +51,16 @@ def get_by_id(cursor, _id: str):
 
 
 @db_connection.connection_handler
+def get_by_answer_id(cursor, answer_id: str):
+    question_id = get_id_by_answer_id(answer_id)
+    cursor.execute("""
+                    SELECT * FROM question
+                     WHERE id=%s""", question_id)
+    questions = cursor.fetchall()
+    return questions
+
+
+@db_connection.connection_handler
 def get_id_by_answer_id(cursor, answer_id):
     answer_id = {'answer_id': answer_id}
     cursor.execute("""
@@ -61,13 +71,13 @@ def get_id_by_answer_id(cursor, answer_id):
 
 
 @db_connection.connection_handler
-def get_by_answer_id(cursor, answer_id: str):
-    question_id = get_id_by_answer_id(answer_id)
+def get_id_by_comment(cursor, comment_id):
+    comment_id = {'id': comment_id}
     cursor.execute("""
-                    SELECT * FROM question
-                     WHERE id=%s""", question_id)
-    questions = cursor.fetchall()
-    return questions
+                    SELECT question_id FROM comment
+                    WHERE id=%(id)s""", comment_id)
+    question_id = cursor.fetchone()
+    return question_id
 
 
 @db_connection.connection_handler
@@ -79,6 +89,8 @@ def get_latest_five(cursor):
     return latest_five_question
 
 
+# UPDATE #
+
 @db_connection.connection_handler
 def search_by_text(cursor, data):
     cursor.execute("""SELECT * FROM question
@@ -87,7 +99,7 @@ def search_by_text(cursor, data):
     return questions
 
 
-# UPDATE #
+# DELETE #
 
 @db_connection.connection_handler
 def edit(cursor, question_data: dict):
@@ -96,15 +108,12 @@ def edit(cursor, question_data: dict):
                       WHERE id=%(id)s""", question_data)
 
 
-# DELETE #
-
 @db_connection.connection_handler
 def delete(cursor, question_id: dict):
     cursor.execute("""
                       DELETE from QUESTION
                       WHERE id = %(question_id)s;
                       """, question_id)
-
 # @db_connection.connection_handler
 # def delete(cursor, question_id):
 #     cursor.execute("""DELETE FROM question

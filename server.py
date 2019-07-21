@@ -23,10 +23,10 @@ def index():
 
 
 @app.route("/add-question", methods=['GET'])
-def route_new_question():                              # zamiast route użyć show lub display
+def route_new_question():  # zamiast route użyć show lub display
 
     return render_template('edit.html',
-                           form_url=url_for('route_new_question'),            # takie rzeczy wrzycać w słownik w route
+                           form_url=url_for('route_new_question'),  # takie rzeczy wrzycać w słownik w route
                            edit_question={'title': ''},
                            button_title='Add Question',
                            )
@@ -42,21 +42,23 @@ def new_question():
 
 
 @app.route('/question/<int:question_id>')
-def question_page(question_id:str):                                 # wprowadzić try: expect: np. na TypeError
+def question_page(question_id: str):  # wprowadzić try: expect: np. na TypeError
     quest = question.get(question_id)
     answers = answer.get_by_question(question_id)
     tags = tag.get_by_question(question_id)
+    question_comments = comment.get_by_question(question_id)
     all_comments = comment.get_all()
 
     return render_template('question.html',
                            question=quest,
                            answers=answers,
-                           comments = all_comments,
+                           comments=all_comments,
+                           question_comments=question_comments,
                            tags=tags)
 
 
 @app.route('/question/<int:question_id>/edit', methods=['GET'])
-def route_edit_question(question_id:str):
+def route_edit_question(question_id: str):
     quest = question.get(question_id)
 
     return render_template('edit.html',
@@ -68,7 +70,7 @@ def route_edit_question(question_id:str):
 
 
 @app.route('/question/<int:question_id>/edit', methods=['POST'])
-def edit_question(question_id:str):
+def edit_question(question_id: str):
     new_data = request.form.to_dict()
     message = new_data["message"]
     title = new_data["title"]
@@ -80,7 +82,7 @@ def edit_question(question_id:str):
 
 
 @app.route('/question/<int:question_id>/delete')
-def delete_question(question_id:str):
+def delete_question(question_id: str):
     question.delete(question_id)
 
     return redirect('/')
@@ -90,7 +92,7 @@ def delete_question(question_id:str):
 
 
 @app.route('/answer/<int:answer_id>/edit', methods=['GET'])
-def route_edit_answer(answer_id:str):
+def route_edit_answer(answer_id: str):
     answ = answer.get(answer_id)
 
     return render_template('edit.html',
@@ -102,7 +104,7 @@ def route_edit_answer(answer_id:str):
 
 
 @app.route('/answer/<int:answer_id>/edit', methods=['POST'])
-def edit_answer(answer_id:str):
+def edit_answer(answer_id: str):
     new_data = request.form.to_dict()
     message = new_data["message"]
     question_id = question.get_by_answer(answer_id)
@@ -122,7 +124,7 @@ def route_new_answer(question_id: str):
 
 
 @app.route("/<int:question_id>/new-answer", methods=['POST'])
-def new_answer(question_id:str):
+def new_answer(question_id: str):
     form = request.form.to_dict()
     answer.add(form, question_id)
 
@@ -162,7 +164,7 @@ def search():
 
 
 @app.route('/question/<int:question_id>/new-comment', methods=['GET'])
-def route_add_comment_to_question(question_id:str):
+def route_add_comment_to_question(question_id: str):
     quest = question.get(question_id)
 
     return render_template('edit.html',
@@ -171,7 +173,7 @@ def route_add_comment_to_question(question_id:str):
 
 
 @app.route('/question/<int:question_id>/new-comment', methods=['POST'])
-def new_question_comment(question_id:str):
+def new_question_comment(question_id: str):
     comm = request.form.to_dict()
     comment.add(comm, question_id)
 
@@ -179,7 +181,7 @@ def new_question_comment(question_id:str):
 
 
 @app.route('/answer/<int:answer_id>/new-comment', methods=['GET'])
-def route_add_comment_to_answer(answer_id:str):
+def route_add_comment_to_answer(answer_id: str):
     button_title = "Add comment"
 
     return render_template('edit.html',
@@ -196,7 +198,7 @@ def add_comment_to_answer(answer_id: str):
 
 
 @app.route('/comment/<int:comment_id>/edit', methods=['GET'])
-def route_edit_comment(comment_id:str):
+def route_edit_comment(comment_id: str):
     comm = comment.get_by_id(comment_id)
     button_title = "edit comment"
 
@@ -206,12 +208,12 @@ def route_edit_comment(comment_id:str):
 
 
 @app.route('/comment/<int:comment_id>/edit', methods=['POST'])
-def edit_comment(comment_id:str):
-    edited_count = comment.get_edited_count(comment_id) + 1
+def edit_comment(comment_id: str):
+    edited_count = comment.get_edited_count(comment_id)
+    edited_count = edited_count['edited_count'] + 1
 
-    new_comment = request.form.to_dict()
-    answer_id = comment.get_by_id(comment_id)['answer_id']
-    question_id = question.get_id_by_answer(answer_id)
+    new_comment = request.form.to_dict()['message']
+    question_id = question.get_id_by_comment_id(comment_id)['question_id']
     comment.edit(comment_id, new_comment, edited_count)
 
     return redirect("/question/%s" % question_id)
@@ -220,7 +222,7 @@ def edit_comment(comment_id:str):
 # TAGS
 
 @app.route('/question/<int:question_id>/new-tag', methods=['GET'])
-def route_new_tag(question_id:str):
+def route_new_tag(question_id: str):
     all_tags = tag.get_unique_names()
 
     return render_template('edit.html',
@@ -231,7 +233,7 @@ def route_new_tag(question_id:str):
 
 
 @app.route('/question/<int:question_id>/new-tag', methods=['POST'])
-def new_tag(question_id:str):
+def new_tag(question_id: str):
     tag = request.form.to_dict()
     tag.add_new_tag(tag, question_id)
 
@@ -239,7 +241,7 @@ def new_tag(question_id:str):
 
 
 @app.route('/question/<int:question_id>/tag/<tag_id>/delete', methods=['POST'])
-def delete_question_tag(question_id:str, tag_id:str):
+def delete_question_tag(question_id: str, tag_id: str):
     tag.delete_by_id_and_question_id(question_id, tag_id)
 
     return redirect("/question/%s" % question_id)

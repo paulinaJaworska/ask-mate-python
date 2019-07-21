@@ -14,12 +14,13 @@ def add(cursor, data: dict):
 # READ #
 
 @db_connection.connection_handler
-def get_by_id(cursor, _id:str):
+def get_by_id(cursor, _id: str):
     comment_id = {'id': _id}
     cursor.execute("""SELECT * FROM comment 
                         WHERE id =%(id)s;""", comment_id)
-    comment = cursor.fetchall()
+    comment = cursor.fetchone()
     return comment
+
 
 @db_connection.connection_handler
 def get_all(cursor):
@@ -46,9 +47,10 @@ def get_by_question_id(cursor, question_id: str):
 
 
 @db_connection.connection_handler
-def get_edited_count(cursor, comment_id):
+def get_edited_count(cursor, comment_id: str):
+    comm_id = {'id': comment_id}
     cursor.execute("""SELECT edited_count FROM comment
-                    WHERE id=%s;""", comment_id)
+                    WHERE id=%(id)s;""", comm_id)
     edited_count = cursor.fetchone()
     return edited_count
 
@@ -59,7 +61,7 @@ def get_edited_count(cursor, comment_id):
 def edit(cursor, data):
     cursor.execute("""UPDATE comment
                       SET message = %(message)s, 
-                      edited_count = +1,
+                      edited_count = %(edited_count)s,
                       submission_time = %(submission_time)s
                       WHERE id=%(id)s""", data)
 

@@ -9,7 +9,7 @@ def add(message: dict, question_id=None, answer_id=None):
 
 
 def get_by_id(_id):
-    return DB_comment.get_by_id(_id)
+    return DB_comment.get_by_id(_id)['answer_id']
 
 
 def get_all():
