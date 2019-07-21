@@ -1,5 +1,5 @@
 from controller import utils
-from data_manager import DB_answer, DB_question  # project modules
+from data_manager import DB_answer, DB_question
 
 
 def add(form: dict):

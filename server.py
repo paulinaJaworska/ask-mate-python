@@ -45,7 +45,7 @@ def new_question():
 def question_page(question_id):                                 # wprowadzić try: expect: np. na TypeError
     question = question.get_question_by_id(question_id)
     answers = answer.get_by_question(question_id)
-    tags = tag.get_tags_by_question_id(question_id)
+    tags = tag.get_by_question(question_id)
     question_comments = comment.get_question_comments_by_question_id(question_id)
 
     return render_template('question.html',
@@ -218,7 +218,7 @@ def edit_comment(comment_id):
 
 @app.route('/question/<question_id>/new-tag', methods=['GET'])
 def route_new_tag(question_id):
-    all_tags = tag.get_unique_tag_names()
+    all_tags = tag.get_unique_names()
 
     return render_template('edit.html',
                            form_url=url_for('route_new_tag',
@@ -237,7 +237,7 @@ def new_tag(question_id):
 
 @app.route('/question/<question_id>/tag/<tag_id>/delete', methods=['POST'])
 def delete_question_tag(question_id, tag_id):
-    tag.delete_question_tag_by_question_id(question_id, tag_id)
+    tag.delete_by_id_and_question_id(question_id, tag_id)
 
     return redirect("/question/%s" % question_id)
 

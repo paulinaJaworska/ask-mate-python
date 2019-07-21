@@ -1,11 +1,12 @@
 from controller import utils
-from data_manager import DB_answer, DB_question
+from data_manager import DB_answer
+
 
 def add(form, question_id: str, image=None):
     answer = {'id': get_new_id(), 'submission_time': utils.date_generator(), 'message': form['message'],
               'question_id': question_id, 'vote_number': 0, 'image': form['image']}
 
-    DB_answer.add(answer) # put an empty line between variables declaration and methods
+    DB_answer.add(answer)  # put an empty line between variables declaration and methods
 
 
 def get(_id):
