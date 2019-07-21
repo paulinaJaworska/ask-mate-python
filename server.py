@@ -1,6 +1,5 @@
-from flask import Flask, flash, redirect, render_template, request, url_for
-import logic
-
+from flask import Flask, redirect, render_template, request, url_for
+from controller import logic
 
 app = Flask(__name__)
 app.static_folder = 'static'
