@@ -8,28 +8,28 @@ from data_manager import DB_answer, DB_comment, DB_question, DB_tag
 
 
 def get_question_by_id(_id: str):         # funkcje, które używany wielokrotnie w całym programie wydzielić w utility
-    question = DB_question.get_question_by_id(_id) # wyrzucić by_id - zwykle z defaultu szukamy po id w innych przypadkach by_...
+    question = DB_question.get_by_id(_id) # wyrzucić by_id - zwykle z defaultu szukamy po id w innych przypadkach by_...
     return question[0]
 
 
 def delete_question(_id: str):
     _id = str(_id)
     dicified_id = {'question_id': _id}
-    DB_question.delete_question(dicified_id)
+    DB_question.delete(dicified_id)
 
 
 def sort_questions(sort_by, order):
-    question_data = DB_question.sort_questions(sort_by, order)
+    question_data = DB_question.sort(sort_by, order)
     return question_data
 
 
 def get_questions():
-    questions = DB_question.get_question_data()
+    questions = DB_question.get_all()
     return questions
 
 
 def new_question_id():
-    last_id = DB_question.last_question_id()
+    last_id = DB_question.get_last_id()
     return last_id + 1
 
 
@@ -39,7 +39,7 @@ def edit_question(_id, message, title, image):
     item['title'] = title
     item['image'] = image
 
-    DB_question.edit_question(item)
+    DB_question.edit(item)
 
 
 def date_generator():
@@ -57,12 +57,12 @@ def new_question(form: dict):
     question['image'] = form['image']
     question['view_number'] = 0
     question['vote_number'] = 0
-    DB_question.save_new_question(question)
+    DB_question.add(question)
     return question
 
 
 def get_latest_questions():
-    latest_five_questions = DB_question.get_latest_five_questions()
+    latest_five_questions = DB_question.get_latest_five()
     return latest_five_questions
 
 
@@ -102,7 +102,7 @@ def delete_answer(_id):
 
 
 def get_question_id_by_answer_id(answer_id):
-    question_id_dict = DB_question.get_question_id_by_answer_id(answer_id)
+    question_id_dict = DB_question.get_by_answer_id(answer_id)
     question_id = question_id_dict[0]['question_id']
     return question_id
 
@@ -118,7 +118,7 @@ def edit_answer(_id, message, image=None):
 
 def search(data: str):
     questions = []
-    q = (DB_question.search_in_questions(data))
+    q = (DB_question.search_by_text(data))
     for i in q:
         questions.append(i)
     answers = DB_answer.search_by_text(data)
