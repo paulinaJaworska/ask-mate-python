@@ -22,10 +22,11 @@ def get_last_id(cursor):
 
 
 @db_connection.connection_handler
-def get_by_id(cursor, _id: str):
+def get_by_id(cursor, _id:str):
+    answer_id = {'id': _id}
     cursor.execute("""
                        SELECT * FROM answer
-                       WHERE id=%s""", _id)
+                       WHERE id=%(id)s""", answer_id)
     answer = cursor.fetchall()
     return answer
 

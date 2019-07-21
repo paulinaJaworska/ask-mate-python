@@ -14,9 +14,10 @@ def add(cursor, data: dict):
 # READ #
 
 @db_connection.connection_handler
-def get_by_id(cursor, _id: str):
+def get_by_id(cursor, _id:str):
+    comment_id = {'id': _id}
     cursor.execute("""SELECT * FROM comment 
-                        WHERE id =%s;""", _id)
+                        WHERE id =%(id)s;""", comment_id)
     comment = cursor.fetchall()
     return comment
 

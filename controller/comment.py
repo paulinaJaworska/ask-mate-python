@@ -11,15 +11,14 @@ def add(message: dict, question_id=None, answer_id=None):
 def get_by_id(_id):
     return DB_comment.get_by_id(_id)
 
+
 def get_all():
     return DB_comment.get_all()
+
 
 def get_by_question(_id):
     return DB_comment.get_by_question_id(_id)
 
-
-def get_by_answer_id(_id: str):
-    return DB_comment.get_by_answer_id(_id)
 
 def get_edited_count(_id):
     return DB_comment.get_edited_count(_id)
