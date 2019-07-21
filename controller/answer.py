@@ -16,6 +16,9 @@ def get(_id):
 def get_by_question(question_id: str):
     return DB_answer.get_by_question_id(question_id)
 
+def get_by_question_with_comments(question_id):
+    return DB_answer.get_by_question_with_comments(question_id)
+
 
 def edit(_id, message, image=None):
     item = get(_id)

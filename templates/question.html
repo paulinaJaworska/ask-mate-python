@@ -64,6 +64,7 @@
                             onclick="window.location.href='/answer/{{ answer['id'] }}/new-comment';">add comment</button>
                     <br><br>
                     {% if answers_comments %}
+                        <div class="answers-header">Comments</div>
                         {% for comment in answers_comments %}
                             <div class="table">
                                 <table>

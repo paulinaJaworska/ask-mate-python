@@ -38,6 +38,14 @@ def get_by_question_id(cursor, question_id: str):
     return comments
 
 
+@db_connection.connection_handler
+def get_edited_count(cursor, comment_id):
+    cursor.execute("""SELECT edited_count FROM comment
+                    WHERE id=%s;""", comment_id)
+    edited_count = cursor.fetchone()
+    return edited_count
+
+
 # UPDATE #
 
 @db_connection.connection_handler

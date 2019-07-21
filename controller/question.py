@@ -24,10 +24,13 @@ def get_sorted(sort_by, order):
 def get_latest_five():
     return DB_question.get_latest_five()
 
+def get_by_answer(answer_id):
+    return DB_question.get_id_by_answer_id(answer_id)
+
 
 def get_id_by_answer(answer_id):
-    question_id_dict = DB_question.get_by_answer_id(answer_id)
-    return question_id_dict[0]['question_id']
+    question_id_dict = DB_question.get_id_by_answer_id(answer_id)
+    return question_id_dict['question_id']
 
 
 def search(data: str):

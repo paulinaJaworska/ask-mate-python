@@ -51,12 +51,23 @@ def get_by_id(cursor, _id: str):
 
 
 @db_connection.connection_handler
-def get_by_answer_id(cursor, answer_id: str):
+def get_id_by_answer_id(cursor, answer_id):
+    answer_id = {'answer_id': answer_id}
     cursor.execute("""
                     SELECT question_id FROM answer
-                     WHERE id=%s""", answer_id)
-    question_id = cursor.fetchall()
+                     WHERE id=%(answer_id)s""", answer_id)
+    question_id = cursor.fetchone()
     return question_id
+
+
+@db_connection.connection_handler
+def get_by_answer_id(cursor, answer_id: str):
+    question_id = get_id_by_answer_id(answer_id)
+    cursor.execute("""
+                    SELECT * FROM question
+                     WHERE id=%s""", question_id)
+    questions = cursor.fetchall()
+    return questions
 
 
 @db_connection.connection_handler

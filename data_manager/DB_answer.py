@@ -41,6 +41,15 @@ def get_by_question_id(cursor, question_id: str):
 
 
 @db_connection.connection_handler
+def get_by_question_with_comments(cursor, question_id: str):
+    quest_id = {'question_id': question_id}
+    cursor.execute("""SELECT * FROM answer a LEFT JOIN comment c on a.id = c.answer_id
+                    WHERE a.question_id=%(question_id)s""", quest_id)
+    answers_with_comments = cursor.fetchall()
+    return answers_with_comments
+
+
+@db_connection.connection_handler
 def search_by_text(cursor, data):
     cursor.execute("""SELECT * FROM answer
                     WHERE message ILIKE """ + "'%" + data + "%';")
