@@ -90,7 +90,7 @@ def new_answer(form, question_id: str, image=None):
     data_manager.save_new_answer(answer)
 
 
-def get_answer_by_question_id(question_id: str):
+def get_answers_by_question_id(question_id: str):
     answer = data_manager.get_answers_by_question_id(question_id)
     return answer
 
@@ -167,7 +167,11 @@ def edit_comment(_id: str, message: str):
     print(data)
     data_manager.edit_comment(data)
 
+def get_question_comments_by_question_id(question_id: str):
+    return data_manager.get_comments_by_question(question_id)
 ### TAGS
+
+
 def new_tag_id():
     last_id = data_manager.last_tag_id()
     return last_id + 1
@@ -220,7 +224,7 @@ def get_ids_related_to_question(question_id):
     comments_ids = []
     comments_for_answers = []
 
-    a = get_answer_by_question_id(question_id)
+    a = get_answers_by_question_id(question_id)
     for item in a:
         answers_ids.append(item['id'])
 
@@ -239,5 +243,3 @@ def get_ids_related_to_question(question_id):
     data['tag_id'] = get_tags_ids_reated_to_question(question_id)[0]
     data['comments_for_answers'] = comments_for_answers
     return data
-
-

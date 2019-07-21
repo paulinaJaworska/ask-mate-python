@@ -173,14 +173,6 @@ def get_comment_by_id(cursor, _id: str):
         return comment
 
 @db_connection.connection_handler
-def get_comment_by_question_id(cursor, question_id):
-    cursor.execute("""SELECT * FROM comment 
-                    WHERE question_id =%s;""", question_id)
-    comment = cursor.fetchall()
-    return comment
-
-
-@db_connection.connection_handler
 def get_comment_by_answer_id(cursor, answer_id):
     cursor.execute("""SELECT * FROM comment 
                     WHERE answer_id =%s;""", answer_id)
@@ -191,11 +183,18 @@ def get_comment_by_answer_id(cursor, answer_id):
 @db_connection.connection_handler
 def edit_comment(cursor, data):
     cursor.execute("""UPDATE comment
-                      SET message =%(message)s, 
+                      SET message = %(message)s, 
                       edited_count = +1,
                       submission_time = %(submission_time)s
                       WHERE id=%(id)s""", data)
 
+@db_connection.connection_handler
+def get_comments_by_question(cursor, question_id: str):
+    quest_id = {'question_id': question_id}
+    cursor.execute("""SELECT * FROM comment 
+                    WHERE question_id = %(question_id)s;""", quest_id)
+    comments = cursor.fetchall()
+    return comments
 
 
 ## TAGS
@@ -247,7 +246,7 @@ def save_new_question_tag(cursor, tag_data: dict, question_id):
 
 @db_connection.connection_handler
 def delete_question_tag(cursor, question_id, tag_id):
-    cursor.execute("""DELETE FROM qestion_tag
+    cursor.execute("""DELETE FROM question_tag
                       WHERE question_id = %(question_id)s 
                         AND tag_id = %(tag_id)s;""", question_id, tag_id)
 
@@ -267,3 +266,4 @@ def get_ids_related_to_question(cursor, question_id):
     WHERE answer.question_id =%s""", question_id)
     data = cursor.fetchall()
     return data
+

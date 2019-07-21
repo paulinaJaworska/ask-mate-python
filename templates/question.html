@@ -29,8 +29,10 @@
                     onclick="window.location.href='/question/{{ question['id'] }}/edit';">edit question</button>
             <button class="button" id="delete-button"\
                     onclick="window.location.href='/question/{{ question['id'] }}/delete';">delete question</button>
+
             {% if question_comments %}
-                {% for comment in q_comments %}
+                <div class="answers-header">Comments</div>
+                {% for comment in question_comments %}
                     <div class="table">
                         <table>
                             <tr>
