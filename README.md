@@ -2,18 +2,18 @@
 
 Ask mate is a stack overflow like website.
 
-##Features
+## Features
 - you can perform CRUD operations on questions, answers and comments
 - you can add and delete tags
 - you can add images
 - MVC was pattern used 
 
-##Tech stack 
+## Tech stack 
 - Flask
 - PostgreSQL
 - HTML & CSS 
 
-##Clean code
+## Clean code
 All the modules have been named according to clean code rules.
 Modules are named like that:
 ![moodule_division](static/readme/module_division.png)
