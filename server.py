@@ -241,8 +241,8 @@ def route_new_tag(question_id: str):
 
 @app.route('/question/<int:question_id>/new-tag', methods=['POST'])
 def new_tag(question_id: str):
-    tag = request.form.to_dict()
-    tag.add_new_tag(tag, question_id)
+    tag_name = request.form.to_dict()
+    tag.add(tag_name, question_id)
 
     return redirect("/question/%s" % question_id)
 

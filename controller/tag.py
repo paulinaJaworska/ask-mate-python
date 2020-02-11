@@ -3,7 +3,7 @@ from controller import answer, comment
 
 
 def add(form, question_id):
-    del form['image']
+    #del form['image']
 
     tag_data = {'id': new_tag_id()}
     tag_names_dict = DB_tag.get_unique_names()
@@ -13,7 +13,7 @@ def add(form, question_id):
     for i in tag_names_dict:
         names.append(i['name'])
     if form['message'] in names:
-        DB_tag.add(question_id)
+        DB_tag.add(tag_data, question_id)
     else:
         tag_data['name'] = form['message'].lower()
         DB_tag.add_to_question(tag_data, question_id)
